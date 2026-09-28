@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Book a Stay | Zo Hotel</title>
+  <meta name="description" content="Choose your suite, set up your room, and tell us who's coming — book your Zo Hotel stay online." />
+  <link rel="icon" href="zo-hotel-logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:opsz,wght@9..40,100..1000&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=9" />
+</head>
+<body>
+
+  <a class="skip-link" href="#top">Skip to content</a>
+
+  <!-- ============ HEADER ============ -->
+  <header class="site-header">
+    <nav class="nav shell-wide" aria-label="Main navigation">
+      <a class="brand" href="index.html" aria-label="Zo Hotel home">
+        <span class="brand-logo" aria-hidden="true"><img src="zo-hotel-logo.png" alt="" /></span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html#options">Stay options</a>
+        <a href="index.html#confidence">Policies</a>
+        <a href="book-stay.html" aria-current="page">Book a stay</a>
+        <a href="my-booking.html">My bookings</a>
+        <a href="index.html#support">Support</a>
+      </div>
+      <a class="button button-teal nav-cta" href="my-booking.html">Manage booking</a>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open navigation menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+    <div class="mobile-menu" id="mobile-menu">
+      <div class="shell-wide">
+        <a href="index.html#options">Stay options <span>01</span></a>
+        <a href="index.html#confidence">Policies <span>02</span></a>
+        <a href="book-stay.html">Book a stay <span>03</span></a>
+        <a href="my-booking.html">My bookings <span>04</span></a>
+        <a href="index.html#support">Support <span>05</span></a>
+        <a class="button button-aqua mobile-manage" href="my-booking.html">Manage my booking →</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- ============ PAGE INTRO ============ -->
+    <section class="page-hero" aria-labelledby="page-title">
+      <div class="shell split-heading">
+        <div>
+          <p class="eyebrow">BOOK A STAY</p>
+          <h1 id="page-title">Plan your stay,<br />your way.</h1>
+        </div>
+        <p>Choose your suite, set up the room the way you like it, and tell us who’s coming. You’ll see the full price before you confirm.</p>
+      </div>
+    </section>
+
+    <!-- ============ BOOKING FORM + SUMMARY ============ -->
+    <section class="bookings-section" aria-label="Book your stay">
+      <div class="shell book-layout" id="bookLayout">
+
+        <form id="bookForm" class="book-form" novalidate>
+
+          <!-- Step 1: stay -->
+          <section class="book-step" aria-labelledby="step-stay">
+            <h2 id="step-stay"><span>01</span>Your stay</h2>
+            <div class="drawer-form">
+              <label><span>Destination</span>
+                <select name="destination">
+                  <option>Zo Hotel Goa</option>
+                  <option>Zo Hotel Mumbai</option>
+                </select>
+              </label>
+              <div class="form-row">
+                <label><span>Check-in</span><input type="date" name="checkIn" required /></label>
+                <label><span>Check-out</span><input type="date" name="checkOut" required /></label>
+              </div>
+            </div>
+          </section>
+
+          <!-- Step 2: suite -->
+          <section class="book-step" aria-labelledby="step-suite">
+            <h2 id="step-suite"><span>02</span>Choose your suite</h2>
+            <div class="suite-cards" id="suiteCards" role="radiogroup" aria-label="Suite">
+              <!-- Suite cards rendered by book.js -->
+            </div>
+          </section>
+
+          <!-- Step 3: room setup -->
+          <section class="book-step" aria-labelledby="step-setup">
+            <h2 id="step-setup"><span>03</span>Set up your room</h2>
+            <div class="drawer-form">
+              <label class="check-line">
+                <input type="checkbox" name="extraBed" />
+                <span class="check-text"><strong>Add an extra bed</strong><small>₹1,200 per night — ideal for a third adult or an older child</small></span>
+              </label>
+              <div class="form-row">
+                <label><span>Room preference</span>
+                  <select name="specialization">
+                    <option>No preference</option>
+                    <option>Sea-facing side</option>
+                    <option>High floor</option>
+                    <option>Quiet wing</option>
+                    <option>Near the elevator</option>
+                    <option>Wheelchair accessible</option>
+                    <option>Anniversary / honeymoon setup</option>
+                  </select>
+                </label>
+                <label><span>Choice of food</span>
+                  <select name="food">
+                    <option>Vegetarian</option>
+                    <option>Non-vegetarian</option>
+                    <option>Vegan</option>
+                    <option>Jain meals</option>
+                    <option>Breakfast only</option>
+                    <option>No meal plan</option>
+                  </select>
+                </label>
+              </div>
+              <p class="form-hint hint-left">Meal plans cost ₹450 per guest per night. “Breakfast only” and “No meal plan” are free.</p>
+            </div>
+          </section>
+
+          <!-- Step 4: guests -->
+          <section class="book-step" aria-labelledby="step-guests">
+            <h2 id="step-guests"><span>04</span>Who’s coming?</h2>
+            <div class="drawer-form">
+              <div class="form-row">
+                <label><span>Adults</span>
+                  <select name="adults" id="adultsCount">
+                    <option value="1">1 adult</option>
+                    <option value="2" selected>2 adults</option>
+                    <option value="3">3 adults</option>
+                    <option value="4">4 adults</option>
+                  </select>
+                </label>
+                <label><span>Children</span>
+                  <select name="children" id="childrenCount">
+                    <option value="0" selected>No children</option>
+                    <option value="1">1 child</option>
+                    <option value="2">2 children</option>
+                    <option value="3">3 children</option>
+                  </select>
+                </label>
+              </div>
+            </div>
+            <div id="guestForms" class="guest-forms">
+              <!-- One details card per adult and child, rendered by book.js -->
+            </div>
+          </section>
+
+          <button class="button button-teal book-submit" type="submit">Confirm booking <span aria-hidden="true">→</span></button>
+          <p class="form-hint hint-left">This is a demo — details stay in your browser and are never sent anywhere.</p>
+        </form>
+
+        <!-- Live summary -->
+        <aside class="book-summary" aria-label="Booking summary" aria-live="polite">
+          <p class="eyebrow">YOUR SUMMARY</p>
+          <h2 class="summary-title">Your stay so far</h2>
+          <div class="booking-card">
+            <div class="booking-row"><span>Hotel</span><strong id="sumHotel">—</strong></div>
+            <div class="booking-row"><span>Dates</span><strong id="sumDates">Pick your dates</strong></div>
+            <div class="booking-row"><span>Suite</span><strong id="sumSuite">—</strong></div>
+            <div class="booking-row"><span>Extra bed</span><strong id="sumBed">No</strong></div>
+            <div class="booking-row"><span>Preference</span><strong id="sumSpec">No preference</strong></div>
+            <div class="booking-row"><span>Food</span><strong id="sumFood">—</strong></div>
+            <div class="booking-row"><span>Guests</span><strong id="sumGuests">—</strong></div>
+            <div class="booking-row total"><span>Total</span><strong id="sumTotal">—</strong></div>
+          </div>
+          <p class="drawer-note">Free date changes and free cancellation until 48 hours before check-in.</p>
+        </aside>
+
+        <!-- Confirmation (replaces the form after booking) -->
+        <section class="book-done" id="bookDone" hidden>
+          <div class="done-icon" aria-hidden="true">✓</div>
+          <h2 id="doneHeading" tabindex="-1">Your stay is booked!</h2>
+          <p class="drawer-note" id="doneSummary"></p>
+          <div class="done-actions">
+            <a class="button button-teal" href="my-booking.html">View in My bookings <span aria-hidden="true">→</span></a>
+            <a class="button button-ghost-dark" href="book-stay.html">Book another stay</a>
+          </div>
+        </section>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer id="support">
+    <div class="shell-wide footer-grid">
+      <div>
+        <a class="brand footer-brand" href="index.html" aria-label="Zo Hotel home"><span class="brand-logo" aria-hidden="true"><img src="zo-hotel-logo.png" alt="" /></span></a>
+        <p>Thoughtful stays. Flexible plans.</p>
+      </div>
+      <div>
+        <strong>Stay</strong>
+        <a href="book-stay.html">Book a stay</a>
+        <a href="index.html#options">Flexible options</a>
+        <a href="index.html#confidence">Booking policies</a>
+      </div>
+      <div>
+        <strong>Contact</strong>
+        <a href="my-booking.html">Manage a booking online</a>
+        <a href="tel:+912240001234">+91 22 4000 1234</a>
+        <a href="https://unsplash.com/photos/tropical-resort-with-pool-beside-a-calm-ocean-bVNB68XJwqk" target="_blank" rel="noreferrer">Photography: Unsplash</a>
+      </div>
+    </div>
+    <div class="shell-wide footer-bottom">
+      <span>© 2026 Zo Hotel</span>
+      <a href="index.html">Back to home ↑</a>
+    </div>
+  </footer>
+
+  <script src="book.js?v=7"></script>
+</body>
+</html>

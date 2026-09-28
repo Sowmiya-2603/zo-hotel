@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Zo Hotel | Flexible stays, thoughtfully managed</title>
+  <meta name="description" content="Adjust your Zo Hotel stay, understand your booking conditions, and explore helpful options before cancelling." />
+  <link rel="icon" href="zo-hotel-logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:opsz,wght@9..40,100..1000&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=9" />
+</head>
+<body>
+
+  <a class="skip-link" href="#top">Skip to content</a>
+
+  <!-- ============ HEADER ============ -->
+  <header class="site-header">
+    <nav class="nav shell-wide" aria-label="Main navigation">
+      <a class="brand" href="#top" aria-label="Zo Hotel home">
+        <span class="brand-logo" aria-hidden="true"><img src="zo-hotel-logo.png" alt="" /></span>
+      </a>
+      <div class="nav-links">
+        <a href="#options">Stay options</a>
+        <a href="#confidence">Policies</a>
+        <a href="#questions">Questions</a>
+        <a href="book-stay.html">Book a stay</a>
+        <a href="my-booking.html">My bookings</a>
+        <a href="#support">Support</a>
+      </div>
+      <a class="button button-teal nav-cta" href="#booking-tools">Manage booking</a>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open navigation menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+    <div class="mobile-menu" id="mobile-menu">
+      <div class="shell-wide">
+        <a href="#options">Stay options <span>01</span></a>
+        <a href="#confidence">Policies <span>02</span></a>
+        <a href="#questions">Questions <span>03</span></a>
+        <a href="#support">Support <span>04</span></a>
+        <a href="book-stay.html">Book a stay <span>05</span></a>
+        <a href="my-booking.html">My bookings <span>06</span></a>
+        <a class="button button-aqua mobile-manage" href="#booking-tools">Manage my booking →</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- ============ HERO ============ -->
+    <section class="hero" aria-labelledby="hero-title">
+      <img class="hero-bg" src="zo-coastal-resort.jpg" alt="A tropical coastal hotel with an infinity pool, palm trees, and ocean views" />
+      <div class="hero-shade" aria-hidden="true"></div>
+      <div class="hero-content shell-wide">
+        <div class="hero-copy">
+          <p class="eyebrow light">MUMBAI · GOA</p>
+          <h1 id="hero-title">Travel plans change.<br /><em>Your booking can too.</em></h1>
+          <p>Adjust your stay, understand your conditions, and explore helpful options before you decide to cancel.</p>
+          <div class="hero-actions">
+            <a class="button button-aqua" href="book-stay.html">Book a stay <span aria-hidden="true">→</span></a>
+            <a class="button button-ghost-light" href="my-booking.html">Manage my booking <span aria-hidden="true">→</span></a>
+          </div>
+          <span class="flex-note"><i aria-hidden="true">✓</i> Flexible options shown before you confirm</span>
+        </div>
+
+      </div>
+      <a class="scroll-cue" href="#options" aria-label="Scroll to flexible options"><span>SCROLL</span><i aria-hidden="true">↓</i></a>
+    </section>
+
+    <!-- ============ FLEXIBLE OPTIONS ============ -->
+    <section class="options-section" id="options" aria-labelledby="options-title">
+      <div class="shell">
+        <div class="split-heading">
+          <div>
+            <p class="eyebrow">FLEXIBLE BOOKING</p>
+            <h2 id="options-title">Before you cancel,<br />see what you can change.</h2>
+          </div>
+          <p>A booking problem doesn’t always need to end in a cancellation. Choose what changed and we’ll point you to the most useful next step.</p>
+        </div>
+
+        <div class="concern-tabs" id="concernTabs" role="tablist" aria-label="Reason for changing booking">
+          <button type="button" role="tab" aria-selected="true" class="concern-tab selected" data-concern="0">
+            <span class="tab-index">01</span><span class="tab-icon" aria-hidden="true">↗</span>
+            <span><small>Dates</small><strong>My travel dates changed</strong></span>
+          </button>
+          <button type="button" role="tab" aria-selected="false" class="concern-tab" data-concern="1">
+            <span class="tab-index">02</span><span class="tab-icon" aria-hidden="true">₹</span>
+            <span><small>Price</small><strong>I found a different price</strong></span>
+          </button>
+          <button type="button" role="tab" aria-selected="false" class="concern-tab" data-concern="2">
+            <span class="tab-index">03</span><span class="tab-icon" aria-hidden="true">⌂</span>
+            <span><small>Room</small><strong>My room requirements changed</strong></span>
+          </button>
+          <button type="button" role="tab" aria-selected="false" class="concern-tab" data-concern="3">
+            <span class="tab-index">04</span><span class="tab-icon" aria-hidden="true">?</span>
+            <span><small>Unsure</small><strong>I’m not sure about my trip yet</strong></span>
+          </button>
+        </div>
+
+        <article class="option-detail" role="tabpanel" aria-live="polite">
+          <div class="option-main">
+            <p class="eyebrow">YOUR OPTION</p>
+            <h3 id="optionSolution">Move your stay to another available date without creating a new reservation.</h3>
+            <p id="optionProblem">Your original travel dates no longer work.</p>
+          </div>
+          <div class="option-proof"><span aria-hidden="true">✓</span><p id="optionDetail">Most flexible bookings can be moved in under two minutes.</p></div>
+          <a class="button button-teal" id="optionCta" href="my-booking.html?action=dates">Change Dates <span aria-hidden="true">→</span></a>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ STORY ============ -->
+    <section class="story-section" aria-labelledby="story-title">
+      <div class="story-image"><img src="zo-hotel-room.jpg" alt="Elegant hotel room with crisp bedding and warm wood details" /></div>
+      <div class="story-copy">
+        <p class="eyebrow">MORE THAN A ROOM</p>
+        <h2 id="story-title">Keep the stay.<br />Change the details.</h2>
+        <p class="story-lead">Different dates. A room that fits better. A little more time to decide.</p>
+        <p>We designed booking management around real travel changes, so you can understand your options without starting over.</p>
+        <div class="story-facts">
+          <span><b>01</b>Dates can be moved where availability allows.</span>
+          <span><b>02</b>Price differences are shown before confirmation.</span>
+          <span><b>03</b>Your cancellation option always remains available.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONFIDENCE ============ -->
+    <section class="confidence-section" id="confidence" aria-labelledby="confidence-title">
+      <div class="shell confidence-grid">
+        <div class="confidence-heading">
+          <p class="eyebrow light">BOOK WITH CONFIDENCE</p>
+          <h2 id="confidence-title">Clarity from booking<br />to check-out.</h2>
+          <p>Travel is easier when you know exactly what to expect.</p>
+        </div>
+        <div class="trust-list">
+          <article class="trust-item">
+            <span>01</span><div><h3>Clear booking information</h3><p>Important stay details and conditions appear in plain language.</p></div>
+          </article>
+          <article class="trust-item">
+            <span>02</span><div><h3>Easy booking management</h3><p>Review your reservation and available options from one place.</p></div>
+          </article>
+          <article class="trust-item">
+            <span>03</span><div><h3>Transparent policies</h3><p>See modification, cancellation, and payment conditions before changing anything.</p></div>
+          </article>
+          <article class="trust-item">
+            <span>04</span><div><h3>Support when you need it</h3><p>Our stay team can help you understand the options for your reservation.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FAQ ============ -->
+    <section class="faq-section" id="questions" aria-labelledby="questions-title">
+      <div class="shell faq-grid">
+        <div class="faq-intro">
+          <p class="eyebrow">GOOD TO KNOW</p>
+          <h2 id="questions-title">Questions guests ask us.</h2>
+          <p>Clear answers before you make a change.</p>
+        </div>
+        <div class="faq-list" id="faqList">
+          <article class="faq-item open">
+            <button type="button" aria-expanded="true"><span>Can I change my dates instead of cancelling?</span><i aria-hidden="true">−</i></button>
+            <div class="faq-answer"><p>Usually, yes. Flexible bookings can be moved to available dates. Any rate difference is shown before you confirm the change.</p></div>
+          </article>
+          <article class="faq-item">
+            <button type="button" aria-expanded="false"><span>Will I pay a fee to modify my booking?</span><i aria-hidden="true">+</i></button>
+            <div class="faq-answer"><p>Your booking conditions will show whether a modification fee applies. We always display the full amount before you make a change.</p></div>
+          </article>
+          <article class="faq-item">
+            <button type="button" aria-expanded="false"><span>When does a refund reach me?</span><i aria-hidden="true">+</i></button>
+            <div class="faq-answer"><p>Eligible refunds are released after cancellation and generally appear within 5–10 business days, depending on your payment provider.</p></div>
+          </article>
+          <article class="faq-item">
+            <button type="button" aria-expanded="false"><span>Can I choose another room type?</span><i aria-hidden="true">+</i></button>
+            <div class="faq-answer"><p>If another room is available for your dates, you can switch room type and review the price difference before confirming.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ BOOKING MENU ============ -->
+    <section class="manage-section" id="booking-tools" aria-labelledby="manage-title">
+      <div class="shell manage-card">
+        <div>
+          <p class="eyebrow light">YOUR BOOKING, YOUR CHOICE</p>
+          <h2 id="manage-title">Manage your<br />booking here.</h2>
+          <p class="manage-sub">Pick what you’d like to do. Every option shows its price and conditions before you confirm anything.</p>
+        </div>
+        <nav class="manage-menu" aria-label="Booking management menu">
+          <a class="manage-item" href="book-stay.html">
+            <b aria-hidden="true">+</b><span><strong>Book a new stay</strong><small>Choose a suite, guests, and meals</small></span><i aria-hidden="true">→</i>
+          </a>
+          <a class="manage-item" href="my-booking.html">
+            <b aria-hidden="true">≡</b><span><strong>My bookings</strong><small>See and manage all of your stays</small></span><i aria-hidden="true">→</i>
+          </a>
+          <a class="manage-item" href="my-booking.html?action=dates">
+            <b aria-hidden="true">↗</b><span><strong>Change dates</strong><small>Move your stay to new dates</small></span><i aria-hidden="true">→</i>
+          </a>
+          <a class="manage-item" href="my-booking.html?action=rooms">
+            <b aria-hidden="true">⌂</b><span><strong>Change room</strong><small>Switch to another room type</small></span><i aria-hidden="true">→</i>
+          </a>
+          <a class="manage-item" href="my-booking.html?action=price">
+            <b aria-hidden="true">₹</b><span><strong>Rate options</strong><small>Compare available rate plans</small></span><i aria-hidden="true">→</i>
+          </a>
+          <button class="manage-item danger" id="cancelTrigger" type="button">
+            <b aria-hidden="true">×</b><span><strong>Cancel booking</strong><small>See refund details first</small></span><i aria-hidden="true">→</i>
+          </button>
+        </nav>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer id="support">
+    <div class="shell-wide footer-grid">
+      <div>
+        <a class="brand footer-brand" href="#top" aria-label="Zo Hotel home"><span class="brand-logo" aria-hidden="true"><img src="zo-hotel-logo.png" alt="" /></span></a>
+        <p>Thoughtful stays. Flexible plans.</p>
+      </div>
+      <div>
+        <strong>Stay</strong>
+        <a href="book-stay.html">Book a stay</a>
+        <a href="#options">Flexible options</a>
+        <a href="#confidence">Booking policies</a>
+        <a href="#questions">Guest questions</a>
+      </div>
+      <div>
+        <strong>Contact</strong>
+        <a href="my-booking.html">Manage a booking online</a>
+        <a href="tel:+912240001234">+91 22 4000 1234</a>
+        <a href="https://unsplash.com/photos/tropical-resort-with-pool-beside-a-calm-ocean-bVNB68XJwqk" target="_blank" rel="noreferrer">Photography: Unsplash</a>
+      </div>
+    </div>
+    <div class="shell-wide footer-bottom">
+      <span>© 2026 Zo Hotel</span>
+      <a href="#top">Back to top ↑</a>
+    </div>
+  </footer>
+
+  <!-- ============ CANCELLATION MODAL ============ -->
+  <div class="modal-backdrop" id="modalBackdrop" role="presentation" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-description">
+      <button class="modal-close" id="modalClose" type="button" aria-label="Close cancellation options">×</button>
+      <span class="modal-symbol" aria-hidden="true">↗</span>
+      <p class="eyebrow">FLEXIBLE STAY</p>
+      <h2 id="modal-title">Plans changed?<br />Your stay doesn’t have to.</h2>
+      <p id="modal-description">Need different dates? You may not have to cancel. Change your stay dates and keep your trip planned without starting over.</p>
+      <button class="button button-teal modal-primary" id="changeDates" type="button">Change my dates <span aria-hidden="true">→</span></button>
+      <button class="continue-link" id="continueCancel" type="button">Continue cancellation</button>
+      <small>You can continue cancelling at any time.</small>
+    </div>
+  </div>
+
+  <script src="script.js?v=9"></script>
+</body>
+</html>

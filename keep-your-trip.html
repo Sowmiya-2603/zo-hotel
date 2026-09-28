@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Zo Hotel | Before you cancel</title>
+  <meta name="description" content="The five reasons guests cancel — and what Zo Hotel does about each one. Free date moves, price matching, credit holds, and a cancellation policy in plain language." />
+  <link rel="icon" href="zo-hotel-logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=DM+Sans:opsz,wght@9..40,100..1000&display=swap" rel="stylesheet" />
+  <style>
+    /* ============================================
+       Zo Hotel — keep-your-trip.html
+       Retention page: why guests cancel, and the
+       answer to each reason. Shares the site's
+       coastal tokens (see styles.css).
+       ============================================ */
+    :root {
+      --cream: #f3efe6;
+      --paper: #fbf9f3;
+      --ink: #172d32;
+      --muted: #657174;
+      --teal: #085366;
+      --deep: #073b48;
+      --aqua: #17a8bd;
+      --gold: #b3905b;
+      --sand: #f2c98c;
+      --mint: #7fd6c9;
+      --line: #d9d4c9;
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'DM Sans', sans-serif;
+      --section-pad: clamp(72px, 11vw, 120px);
+      --header-h: 72px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; overflow-x: hidden; background: var(--paper); color: var(--ink); font-family: var(--font-sans); line-height: 1.55; -webkit-font-smoothing: antialiased; }
+    section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    img { max-width: 100%; }
+    h1, h2, h3 { font-family: var(--font-display); font-weight: 500; letter-spacing: -.02em; }
+    h1, h2 { text-wrap: balance; }
+    .shell { width: min(1120px, calc(100% - 40px)); margin-inline: auto; }
+    .shell-wide { width: min(1280px, calc(100% - 40px)); margin-inline: auto; }
+    .eyebrow { margin: 0 0 18px; color: var(--teal); font-size: 10px; font-weight: 800; letter-spacing: .27em; text-transform: uppercase; }
+    .eyebrow.light { color: #c8e5e8; }
+    a:focus-visible, button:focus-visible { outline: 3px solid rgba(23,168,189,.4); outline-offset: 3px; }
+
+    /* Scroll reveal (disabled when reduced motion) */
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity .55s ease, transform .55s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      html { scroll-behavior: auto; }
+      .reveal { opacity: 1; transform: none; }
+    }
+
+    /* ---------- Header ---------- */
+    .site-header { position: sticky; inset: 0 0 auto; z-index: 50; background: rgba(251,249,243,.94); border-bottom: 1px solid rgba(217,212,201,.8); backdrop-filter: blur(16px); }
+    .nav { height: var(--header-h); display: flex; align-items: center; gap: 36px; }
+    .brand-logo { position: relative; width: 104px; height: 56px; display: block; overflow: hidden; }
+    .brand-logo img { position: absolute; width: 104px; height: 104px; left: 0; top: -24px; object-fit: contain; }
+    .nav-links { display: flex; gap: 30px; margin-left: auto; color: #596568; font-size: 13px; }
+    .nav-links a { position: relative; padding-block: 8px; white-space: nowrap; }
+    .nav-links a::after { content: ""; position: absolute; left: 0; right: 100%; bottom: 0; height: 1px; background: var(--teal); transition: right .25s ease; }
+    .nav-links a:hover::after, .nav-links a:focus-visible::after { right: 0; }
+    .menu-toggle { width: 44px; height: 44px; display: none; flex-direction: column; align-items: center; justify-content: center; gap: 5px; padding: 0; border: 1px solid var(--line); border-radius: 2px; background: transparent; cursor: pointer; }
+    .menu-toggle span { width: 18px; height: 1px; display: block; background: var(--ink); transition: transform .25s ease, opacity .25s ease; }
+    .menu-toggle.open span:first-child { transform: translateY(6px) rotate(45deg); }
+    .menu-toggle.open span:nth-child(2) { opacity: 0; }
+    .menu-toggle.open span:last-child { transform: translateY(-6px) rotate(-45deg); }
+    .mobile-menu { position: absolute; left: 0; right: 0; top: 100%; display: grid; grid-template-rows: 0fr; overflow: hidden; background: var(--paper); border-bottom: 1px solid transparent; box-shadow: 0 20px 40px rgba(7,59,72,.08); transition: grid-template-rows .3s ease, border-color .3s ease; }
+    .mobile-menu.open { grid-template-rows: 1fr; border-bottom-color: var(--line); }
+    .mobile-menu > div { min-height: 0; overflow: hidden; }
+    .mobile-menu a:not(.button) { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid var(--line); font-family: var(--font-display); font-size: 20px; }
+    .mobile-menu a span { color: #8b9495; font-family: var(--font-sans); font-size: 9px; letter-spacing: .15em; }
+    .mobile-menu .button { width: 100%; margin: 18px 0 22px; }
+
+    /* ---------- Buttons ---------- */
+    .button { min-height: 46px; display: inline-flex; align-items: center; justify-content: center; gap: 12px; padding: 13px 22px; border: 1px solid transparent; border-radius: 2px; font-weight: 700; font-size: 13px; line-height: 1; cursor: pointer; transition: transform .2s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease; }
+    .button:hover { transform: translateY(-2px); }
+    .button-teal { color: #fff; background: var(--teal); }
+    .button-teal:hover { background: var(--deep); box-shadow: 0 10px 26px rgba(7,59,72,.2); }
+    .button-aqua { color: #fff; background: var(--aqua); box-shadow: 0 10px 24px rgba(0,0,0,.14); }
+    .button-aqua:hover { background: #1195aa; }
+    .button-ghost { color: #fff; border-color: rgba(255,255,255,.5); background: rgba(4,38,47,.18); backdrop-filter: blur(2px); }
+    .button-ghost:hover { border-color: #fff; background: rgba(255,255,255,.1); }
+    @media (max-width: 860px) {
+      .nav { gap: 16px; }
+      .nav-links, .nav > .button { display: none; }
+      .menu-toggle { display: flex; margin-left: auto; }
+    }
+
+    /* ---------- Section headers ---------- */
+    .section-head { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, .75fr); align-items: end; gap: clamp(20px, 5vw, 80px); margin-bottom: clamp(34px, 5vw, 56px); }
+    .section-head h2 { margin: 0; font-size: clamp(38px, 4.8vw, 62px); line-height: 1.02; }
+    .section-head > p { max-width: 46ch; margin: 0 0 6px; color: var(--muted); font-size: 14px; line-height: 1.8; }
+    @media (max-width: 860px) { .section-head { grid-template-columns: 1fr; align-items: start; } }
+
+    /* ---------- Hero ---------- */
+    .hero { position: relative; min-height: clamp(560px, 86vh, 760px); display: grid; align-items: center; color: #fff; overflow: hidden; }
+    .hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .hero-shade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(4,38,47,.92) 0%, rgba(4,38,47,.66) 40%, rgba(4,38,47,.2) 74%, rgba(4,38,47,.08) 100%), linear-gradient(0deg, rgba(2,28,35,.55), transparent 45%); }
+    .hero-content { position: relative; z-index: 2; padding: clamp(72px, 10vw, 104px) 0; }
+    .hero-copy { max-width: 640px; animation: revealUp .75s ease both; }
+    .hero h1 { margin: 0; font-size: clamp(44px, 7.2vw, 84px); line-height: .96; }
+    .hero h1 em { color: var(--sand); font-style: italic; }
+    .hero-copy > p:not(.eyebrow) { max-width: 56ch; margin: 24px 0 30px; color: #e0e9e8; font-size: clamp(14.5px, 1.6vw, 16px); line-height: 1.75; }
+    .hero-actions { display: flex; align-items: center; gap: 14px 18px; flex-wrap: wrap; }
+    .hero-chips { display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: 32px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.22); max-width: 560px; color: #d8e5e4; font-size: 11px; letter-spacing: .04em; }
+    .hero-chips span { display: inline-flex; align-items: center; gap: 8px; }
+    .hero-chips i { flex: 0 0 auto; width: 17px; height: 17px; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.55); border-radius: 50%; font-size: 9px; font-style: normal; }
+    @keyframes revealUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+    @media (max-width: 560px) {
+      .hero-actions .button { width: 100%; }
+      .hero-chips { flex-direction: column; gap: 10px; }
+    }
+
+    /* ---------- Reasons ledger ---------- */
+    .reasons-section { padding: var(--section-pad) 0; }
+    .ledger { border-top: 1px solid var(--line); }
+    .ledger-row { display: grid; grid-template-columns: 140px minmax(0, 1.05fr) minmax(0, 1fr) auto; gap: clamp(20px, 3.5vw, 44px); align-items: center; padding: clamp(28px, 4vw, 42px) 0; border-bottom: 1px solid var(--line); }
+    .ledger-share { display: flex; flex-direction: column; gap: 6px; }
+    .ledger-share strong { font-family: var(--font-display); font-size: clamp(36px, 4vw, 46px); font-weight: 500; line-height: 1; color: var(--teal); font-variant-numeric: tabular-nums; }
+    .ledger-share small { color: #8b9495; font-size: 9px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; }
+    .share-bar { width: 100%; max-width: 120px; height: 3px; background: var(--cream); }
+    .share-bar b { display: block; height: 100%; background: var(--aqua); }
+    .ledger-problem h3 { margin: 0 0 8px; font-size: clamp(22px, 2.6vw, 27px); line-height: 1.12; }
+    .ledger-problem p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.7; max-width: 36ch; }
+    .ledger-solution { position: relative; padding-left: 24px; font-size: 13.5px; line-height: 1.75; }
+    .ledger-solution::before { content: ""; position: absolute; left: 0; top: 4px; bottom: 4px; width: 2px; background: var(--gold); }
+    .ledger-solution strong { display: block; margin-bottom: 4px; font-size: 10px; font-weight: 800; letter-spacing: .22em; text-transform: uppercase; color: var(--teal); }
+    .ledger-solution p { margin: 0; max-width: 52ch; }
+    .ledger-cta { justify-self: end; display: inline-flex; align-items: center; gap: 9px; padding: 9px 0; border-bottom: 1px solid var(--ink); font-size: 12px; font-weight: 700; white-space: nowrap; }
+    .ledger-cta span { transition: transform .2s ease; }
+    .ledger-cta:hover span { transform: translateX(4px); }
+    .ledger-note { margin: 20px 0 0; color: #8b9495; font-size: 11px; }
+    @media (max-width: 1020px) {
+      .ledger-row { grid-template-columns: 110px minmax(0, 1fr); align-items: start; }
+      .ledger-share { position: sticky; top: calc(var(--header-h) + 16px); }
+      .ledger-solution { grid-column: 2; }
+      .ledger-cta { grid-column: 2; justify-self: start; }
+    }
+    @media (max-width: 560px) {
+      .ledger-row { grid-template-columns: 1fr; }
+      .ledger-share { position: static; flex-direction: row; align-items: baseline; gap: 12px; }
+      .share-bar { display: none; }
+      .ledger-solution, .ledger-cta { grid-column: 1; }
+    }
+
+    /* ---------- Room interlude ---------- */
+    .interlude { display: grid; grid-template-columns: 1fr 1fr; background: var(--cream); }
+    .interlude-image { min-height: 100%; }
+    .interlude-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .interlude-copy { display: flex; flex-direction: column; justify-content: center; padding: clamp(56px, 8vw, 96px) clamp(24px, 8vw, 110px); }
+    .interlude-copy h2 { margin: 0 0 18px; font-size: clamp(32px, 4vw, 52px); line-height: 1.04; }
+    .interlude-copy p { max-width: 48ch; margin: 0; color: var(--muted); font-size: 14px; line-height: 1.85; }
+    .interlude-copy p + p { margin-top: 16px; }
+    @media (max-width: 860px) {
+      .interlude { grid-template-columns: 1fr; }
+      .interlude-image { min-height: 0; aspect-ratio: 3 / 2; }
+    }
+
+    /* ---------- Trust ---------- */
+    .trust-section { padding: var(--section-pad) 0; color: #eef5f4; background: var(--deep); }
+    .trust-section .section-head h2 { color: #fff; }
+    .trust-section .section-head > p { color: #b9cfd2; }
+    .trust-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(40px, 5vw, 60px) clamp(40px, 6vw, 72px); }
+    .trust-col > h3 { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; margin: 0 0 24px; padding-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,.18); font-size: clamp(22px, 2.4vw, 25px); color: #fff; }
+    .trust-col > h3 small { font-family: var(--font-sans); color: #8fb3b9; font-size: 9px; font-weight: 800; letter-spacing: .2em; white-space: nowrap; }
+    .stat-list { display: grid; gap: 22px; }
+    .stat-list article { display: grid; grid-template-columns: minmax(118px, auto) 1fr; align-items: baseline; gap: 16px; }
+    .stat-list article strong { font-family: var(--font-display); font-size: clamp(32px, 3.4vw, 40px); font-weight: 500; line-height: 1; color: var(--sand); font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .stat-list article p { margin: 0; color: #b9cfd2; font-size: 12.5px; line-height: 1.65; }
+    .trust-col-wide { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); gap: clamp(28px, 4vw, 56px); align-items: start; }
+    .trust-col-wide > h3 { grid-column: 1 / -1; }
+    .fee-table-wrap { overflow-x: auto; }
+    .fee-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .fee-table caption { caption-side: bottom; padding-top: 14px; color: #8fb3b9; font-size: 11px; text-align: left; }
+    .fee-table th, .fee-table td { padding: 12px 4px; border-bottom: 1px solid rgba(255,255,255,.14); text-align: left; }
+    .fee-table th { color: #8fb3b9; font-size: 9px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; }
+    .fee-table td:last-child { text-align: right; font-weight: 700; color: #fff; white-space: nowrap; font-variant-numeric: tabular-nums; }
+    .fee-table td:last-child.free { color: var(--mint); }
+    .policy-quote { margin: 0; padding: 22px 24px; border-left: 2px solid var(--gold); background: rgba(255,255,255,.05); font-size: 13px; line-height: 1.85; color: #d5e3e2; }
+    .policy-quote em { display: block; margin-bottom: 6px; font-family: var(--font-display); font-style: italic; font-size: 16px; color: #fff; }
+    @media (max-width: 860px) {
+      .trust-grid { grid-template-columns: 1fr; }
+      .trust-col-wide { grid-template-columns: 1fr; grid-column: auto; }
+    }
+
+    /* ---------- Final CTA ---------- */
+    .final-section { padding: var(--section-pad) 0; }
+    .final-card { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); align-items: center; gap: clamp(26px, 5vw, 56px); padding: clamp(36px, 6vw, 70px) clamp(24px, 6vw, 76px); background: var(--cream); border: 1px solid var(--line); }
+    .final-card h2 { margin: 0; font-size: clamp(32px, 4.4vw, 56px); line-height: 1.04; }
+    .final-copy p { margin: 0 0 26px; color: var(--muted); font-size: 14px; line-height: 1.8; max-width: 46ch; }
+    .final-actions { display: flex; flex-wrap: wrap; gap: 14px 18px; align-items: center; }
+    .quiet-link { color: var(--muted); font-size: 12.5px; border-bottom: 1px solid var(--line); padding-bottom: 3px; }
+    .quiet-link:hover { color: var(--ink); border-color: var(--ink); }
+    @media (max-width: 860px) { .final-card { grid-template-columns: 1fr; } }
+    @media (max-width: 560px) { .final-actions .button { width: 100%; } }
+
+    /* ---------- Footer ---------- */
+    footer { padding: 38px 0 44px; border-top: 1px solid var(--line); }
+    .footer-row { display: flex; flex-wrap: wrap; gap: 16px 40px; align-items: center; justify-content: space-between; color: var(--muted); font-size: 12px; }
+    .footer-row nav { display: flex; flex-wrap: wrap; gap: 12px 26px; }
+    .footer-row a:hover { color: var(--ink); }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <nav class="nav shell-wide" aria-label="Main navigation">
+      <a class="brand" href="index.html" aria-label="Zo Hotel home">
+        <span class="brand-logo" aria-hidden="true"><img src="zo-hotel-logo.png" alt="" /></span>
+      </a>
+      <div class="nav-links">
+        <a href="#reasons">Why guests cancel</a>
+        <a href="#trust">Our promises</a>
+        <a href="index.html#questions">Questions</a>
+      </div>
+      <a class="button button-teal" href="index.html#booking-tools">Manage booking</a>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open navigation menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+    <div class="mobile-menu" id="mobile-menu">
+      <div class="shell-wide">
+        <a href="#reasons">Why guests cancel <span>01</span></a>
+        <a href="#trust">Our promises <span>02</span></a>
+        <a href="index.html#questions">Questions <span>03</span></a>
+        <a class="button button-aqua" href="index.html#booking-tools">Manage my booking →</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============ HERO ============ -->
+    <section class="hero" aria-labelledby="hero-title">
+      <img class="hero-bg" src="zo-coastal-resort.jpg" alt="Zo Hotel's coastal resort at dusk, with an infinity pool and lantern-lit terraces" />
+      <div class="hero-shade" aria-hidden="true"></div>
+      <div class="hero-content shell-wide">
+        <div class="hero-copy">
+          <p class="eyebrow light">ZO HOTEL · MUMBAI · GOA</p>
+          <h1 id="hero-title">Plans fall through.<br /><em>Your money never should.</em></h1>
+          <p>The biggest worry behind every cancellation is losing what you paid. At Zo, you won't: move your dates for free, hold the full value as credit for a year, or cancel up to 48 hours out and get every rupee back.</p>
+          <div class="hero-actions">
+            <a class="button button-aqua" href="#reasons">See how it works <span aria-hidden="true">→</span></a>
+            <a class="button button-ghost" href="index.html#booking-tools">Manage my booking</a>
+          </div>
+          <div class="hero-chips" role="list">
+            <span role="listitem"><i aria-hidden="true">✓</i> ₹0 date changes</span>
+            <span role="listitem"><i aria-hidden="true">✓</i> 12-month credit holds</span>
+            <span role="listitem"><i aria-hidden="true">✓</i> Refunds in 5 business days</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PROBLEM / SOLUTION ============ -->
+    <section class="reasons-section" id="reasons" aria-labelledby="reasons-title">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow">PROBLEM → SOLUTION</p>
+            <h2 id="reasons-title">Why guests cancel —<br />and what we do about it.</h2>
+          </div>
+          <p>We asked every guest who cancelled last year why they did. Five reasons covered nearly all of them, so we redesigned our booking around those five.</p>
+        </div>
+
+        <div class="ledger">
+          <article class="ledger-row reveal">
+            <div class="ledger-share">
+              <strong>42%</strong>
+              <span class="share-bar" aria-hidden="true"><b style="width:100%"></b></span>
+              <small>of cancellations</small>
+            </div>
+            <div class="ledger-problem">
+              <h3>“My dates stopped working.”</h3>
+              <p>Leave gets moved, a meeting lands on your check-in day, a wedding shifts a week.</p>
+            </div>
+            <div class="ledger-solution">
+              <strong>Our answer</strong>
+              <p>Move your stay to any available date, as many times as you need, free until 48 hours before check-in. Same room, same rate where available — no rebooking, no fees.</p>
+            </div>
+            <a class="ledger-cta" href="index.html#booking-tools">Change dates <span aria-hidden="true">→</span></a>
+          </article>
+
+          <article class="ledger-row reveal">
+            <div class="ledger-share">
+              <strong>23%</strong>
+              <span class="share-bar" aria-hidden="true"><b style="width:55%"></b></span>
+              <small>of cancellations</small>
+            </div>
+            <div class="ledger-problem">
+              <h3>“I found a lower price.”</h3>
+              <p>The same room shows up cheaper on a booking site a week later.</p>
+            </div>
+            <div class="ledger-solution">
+              <strong>Our answer</strong>
+              <p>Send us the lower rate for the same room and dates and we'll match it, then take a further 5% off. Booking direct should never cost you more.</p>
+            </div>
+            <a class="ledger-cta" href="mailto:bookings@zohotel.example?subject=Price%20match%20request">Request a match <span aria-hidden="true">→</span></a>
+          </article>
+
+          <article class="ledger-row reveal">
+            <div class="ledger-share">
+              <strong>17%</strong>
+              <span class="share-bar" aria-hidden="true"><b style="width:40%"></b></span>
+              <small>of cancellations</small>
+            </div>
+            <div class="ledger-problem">
+              <h3>“I'm just not sure anymore.”</h3>
+              <p>The trip might still happen — you just can't commit to when.</p>
+            </div>
+            <div class="ledger-solution">
+              <strong>Our answer</strong>
+              <p>Pause instead of cancel. Hold the full value of your booking as Zo Credit for 12 months and use it on any room, any dates, either property. No questions asked.</p>
+            </div>
+            <a class="ledger-cta" href="index.html#booking-tools">Hold as credit <span aria-hidden="true">→</span></a>
+          </article>
+
+          <article class="ledger-row reveal">
+            <div class="ledger-share">
+              <strong>11%</strong>
+              <span class="share-bar" aria-hidden="true"><b style="width:26%"></b></span>
+              <small>of cancellations</small>
+            </div>
+            <div class="ledger-problem">
+              <h3>“The room no longer fits.”</h3>
+              <p>Now it's four of you, not two — or the sea view matters after all.</p>
+            </div>
+            <div class="ledger-solution">
+              <strong>Our answer</strong>
+              <p>Switch to any available room type and pay only the difference — or receive it back. You'll see the exact amount before you confirm anything.</p>
+            </div>
+            <a class="ledger-cta" href="index.html#booking-tools">Switch rooms <span aria-hidden="true">→</span></a>
+          </article>
+
+          <article class="ledger-row reveal">
+            <div class="ledger-share">
+              <strong>7%</strong>
+              <span class="share-bar" aria-hidden="true"><b style="width:17%"></b></span>
+              <small>of cancellations</small>
+            </div>
+            <div class="ledger-problem">
+              <h3>“I made a mistake booking.”</h3>
+              <p>Wrong dates, wrong property, double-booked in a hurry.</p>
+            </div>
+            <div class="ledger-solution">
+              <strong>Our answer</strong>
+              <p>Every booking — including non-refundable rates — can be cancelled free within 24 hours of being made. Mistakes shouldn't cost a night's stay.</p>
+            </div>
+            <a class="ledger-cta" href="index.html#booking-tools">Fix my booking <span aria-hidden="true">→</span></a>
+          </article>
+        </div>
+        <p class="ledger-note">Shares are from Zo Hotel's 2025 guest cancellation survey (1,180 responses across Mumbai and Goa).</p>
+      </div>
+    </section>
+
+    <!-- ============ INTERLUDE ============ -->
+    <section class="interlude" aria-labelledby="interlude-title">
+      <div class="interlude-image">
+        <img src="zo-hotel-room.jpg" alt="A Zo Hotel room with crisp white bedding, warm wood, and soft evening light" loading="lazy" />
+      </div>
+      <div class="interlude-copy reveal">
+        <p class="eyebrow">THE POINT OF ALL THIS</p>
+        <h2 id="interlude-title">We'd rather move your stay than lose it.</h2>
+        <p>A cancelled trip helps no one — you lose the holiday, we lose the chance to host you. So every policy on this page is built to give your plans room to breathe instead of forcing a yes-or-no decision weeks in advance.</p>
+        <p>And if cancelling really is the right call, we make that easy too. The option is always there, in plain sight, with no retention hoops.</p>
+      </div>
+    </section>
+
+    <!-- ============ TRUST ============ -->
+    <section class="trust-section" id="trust" aria-labelledby="trust-title">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow light">WHY GUESTS TRUST US</p>
+            <h2 id="trust-title">Promises are easy.<br />Here's our record.</h2>
+          </div>
+          <p>Flexibility only matters if we actually deliver it. These are our numbers, our response times, and our full cancellation policy — the same one that appears at checkout, unabridged.</p>
+        </div>
+        <div class="trust-grid">
+          <div class="trust-col reveal">
+            <h3>Credibility <small>THE RECORD</small></h3>
+            <div class="stat-list">
+              <article><strong>4.8 / 5</strong><p>Average rating from 12,400+ verified guest reviews since 2016.</p></article>
+              <article><strong>96%</strong><p>of guests who changed a booking last year said they'd book with us again.</p></article>
+              <article><strong>2 in 3</strong><p>guests who held their stay as credit completed the trip within six months.</p></article>
+            </div>
+          </div>
+          <div class="trust-col reveal">
+            <h3>Reliability <small>WHEN IT COUNTS</small></h3>
+            <div class="stat-list">
+              <article><strong>&lt; 2 min</strong><p>Typical time to move dates or switch rooms online — 92% of changes finish in one sitting.</p></article>
+              <article><strong>5 days</strong><p>Refunds are released same-day and reach most banks within five business days. We email you at every step.</p></article>
+              <article><strong>24 / 7</strong><p>A human stay team in Mumbai and Goa — phone, chat, or email — with a 4-minute median first response.</p></article>
+            </div>
+          </div>
+          <div class="trust-col trust-col-wide reveal">
+            <h3>Transparency <small>NO FINE PRINT</small></h3>
+            <div class="fee-table-wrap">
+              <table class="fee-table">
+                <caption>Every fee we could ever charge on a booking change. There are no others.</caption>
+                <thead><tr><th scope="col">Change</th><th scope="col">Fee</th></tr></thead>
+                <tbody>
+                  <tr><td>Date change (up to 48h before check-in)</td><td class="free">₹0</td></tr>
+                  <tr><td>Room switch</td><td class="free">₹0 + rate difference</td></tr>
+                  <tr><td>Hold as Zo Credit (12 months)</td><td class="free">₹0</td></tr>
+                  <tr><td>Cancel — more than 48h before check-in</td><td class="free">₹0, full refund</td></tr>
+                  <tr><td>Cancel — within 48h of check-in</td><td>First night only</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <blockquote class="policy-quote">
+              <em>The whole policy, in one breath:</em> change anything free until 48 hours before check-in; inside 48 hours we keep the first night and refund the rest; every mistake gets a free 24-hour undo.
+            </blockquote>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FINAL CTA ============ -->
+    <section class="final-section" aria-labelledby="final-title">
+      <div class="shell final-card reveal">
+        <h2 id="final-title">Before you press cancel, see what your booking can do.</h2>
+        <div class="final-copy">
+          <p>Open your booking and you'll see every option — new dates, a different room, a credit hold, or a full cancellation — with the exact cost of each shown before you confirm.</p>
+          <div class="final-actions">
+            <a class="button button-teal" href="index.html#booking-tools">Manage my booking <span aria-hidden="true">→</span></a>
+            <a class="quiet-link" href="tel:+912240001234">or talk to the stay team — +91 22 4000 1234</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="shell-wide footer-row">
+      <span>© 2026 Zo Hotel · Thoughtful stays. Flexible plans.</span>
+      <nav aria-label="Footer">
+        <a href="index.html">Home</a>
+        <a href="#reasons">Why guests cancel</a>
+        <a href="#trust">Our promises</a>
+        <a href="mailto:support@zohotel.example">support@zohotel.example</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var toggle = document.getElementById('menuToggle');
+      var menu = document.getElementById('mobile-menu');
+      toggle.addEventListener('click', function () {
+        var open = menu.classList.toggle('open');
+        toggle.classList.toggle('open', open);
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        toggle.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+      });
+      menu.addEventListener('click', function (e) {
+        if (e.target.closest('a')) {
+          menu.classList.remove('open');
+          toggle.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var items = document.querySelectorAll('.reveal');
+      if (reduced || !('IntersectionObserver' in window)) {
+        items.forEach(function (el) { el.classList.add('in'); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) { entry.target.classList.add('in'); io.unobserve(entry.target); }
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+      items.forEach(function (el) { io.observe(el); });
+    })();
+  </script>
+</body>
+</html>

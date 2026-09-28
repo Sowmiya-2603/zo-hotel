@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>My Bookings | Zo Hotel</title>
+  <meta name="description" content="Select one of your Zo Hotel bookings to change dates, switch rooms, compare rates, or cancel." />
+  <link rel="icon" href="zo-hotel-logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:opsz,wght@9..40,100..1000&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=9" />
+</head>
+<body>
+
+  <a class="skip-link" href="#top">Skip to content</a>
+
+  <!-- ============ HEADER ============ -->
+  <header class="site-header">
+    <nav class="nav shell-wide" aria-label="Main navigation">
+      <a class="brand" href="index.html" aria-label="Zo Hotel home">
+        <span class="brand-logo" aria-hidden="true"><img src="zo-hotel-logo.png" alt="" /></span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html#options">Stay options</a>
+        <a href="index.html#confidence">Policies</a>
+        <a href="index.html#questions">Questions</a>
+        <a href="book-stay.html">Book a stay</a>
+        <a href="my-booking.html" aria-current="page">My bookings</a>
+        <a href="index.html#support">Support</a>
+      </div>
+      <a class="button button-teal nav-cta" href="book-stay.html">Book a stay</a>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open navigation menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+    <div class="mobile-menu" id="mobile-menu">
+      <div class="shell-wide">
+        <a href="index.html#options">Stay options <span>01</span></a>
+        <a href="index.html#confidence">Policies <span>02</span></a>
+        <a href="index.html#questions">Questions <span>03</span></a>
+        <a href="index.html#support">Support <span>04</span></a>
+        <a class="button button-aqua mobile-manage" href="book-stay.html">Book a stay →</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- ============ PAGE INTRO ============ -->
+    <section class="page-hero" aria-labelledby="page-title">
+      <div class="shell split-heading">
+        <div>
+          <p class="eyebrow">MY BOOKINGS</p>
+          <h1 id="page-title">Select a stay<br />to manage.</h1>
+        </div>
+        <p>Choose a booking below to change dates, switch rooms, compare rates, or cancel. Every change shows its price before you confirm.</p>
+      </div>
+    </section>
+
+    <!-- ============ BOOKINGS + MANAGE PANEL ============ -->
+    <section class="bookings-section" aria-label="Manage your bookings">
+      <div class="shell bookings-layout">
+
+        <aside class="bookings-list" id="bookingsList" aria-label="Your bookings">
+          <!-- Booking cards are rendered by manage.js -->
+        </aside>
+
+        <section class="manage-panel" aria-live="polite">
+          <div class="panel-placeholder" id="panelPlaceholder">
+            <span aria-hidden="true">↗</span>
+            <p>Select a booking to see what you can change.</p>
+          </div>
+
+          <div id="panelContent" hidden>
+            <header class="panel-head">
+              <div>
+                <p class="eyebrow">MANAGE BOOKING</p>
+                <h2 id="panelTitle" tabindex="-1">Your booking</h2>
+              </div>
+            </header>
+
+            <!-- View: booking overview -->
+            <section class="drawer-view" data-view="booking">
+              <div class="booking-card">
+                <div class="panel-photo"><img id="bkPhoto" src="zo-coastal-resort.jpg" alt="" /></div>
+                <div class="booking-row"><span>Booking ref</span><strong id="bkRef"></strong></div>
+                <div class="booking-row"><span>Hotel</span><strong id="bkHotel"></strong></div>
+                <div class="booking-row"><span>Room</span><strong id="bkRoom"></strong></div>
+                <div class="booking-row"><span>Dates</span><strong id="bkDates"></strong></div>
+                <div class="booking-row"><span>Guests</span><strong id="bkGuests"></strong></div>
+                <div class="booking-row"><span>Rate plan</span><strong id="bkRate"></strong></div>
+                <div class="booking-row total"><span>Total</span><strong id="bkTotal"></strong></div>
+                <p class="booking-status" id="bkStatus"></p>
+              </div>
+              <p class="drawer-note" id="bkPolicy">Free date changes and free cancellation until 48 hours before check-in.</p>
+              <div class="drawer-actions" id="bookingActions">
+                <button class="drawer-action" type="button" data-open-view="dates">
+                  <b aria-hidden="true">↗</b><span><strong>Change dates</strong><small>Move your stay to new dates</small></span>
+                </button>
+                <button class="drawer-action" type="button" data-open-view="rooms">
+                  <b aria-hidden="true">⌂</b><span><strong>Change room</strong><small>Switch to another room type</small></span>
+                </button>
+                <button class="drawer-action" type="button" data-open-view="price">
+                  <b aria-hidden="true">₹</b><span><strong>Review rate options</strong><small>Compare available rate plans</small></span>
+                </button>
+                <button class="drawer-action danger" type="button" data-open-view="cancel">
+                  <b aria-hidden="true">×</b><span><strong>Cancel booking</strong><small>See refund details first</small></span>
+                </button>
+              </div>
+              <div id="restoreWrap" hidden>
+                <button class="button button-teal" id="restoreBooking" type="button">Restore this booking</button>
+              </div>
+            </section>
+
+            <!-- View: change dates -->
+            <section class="drawer-view" data-view="dates" hidden>
+              <button class="drawer-back" type="button">← Back to booking</button>
+              <h3>Pick your new dates</h3>
+              <p class="drawer-note">Current stay: <strong id="datesCurrent"></strong></p>
+              <form id="datesForm" class="drawer-form">
+                <div class="form-row">
+                  <label><span>New check-in</span><input type="date" name="newIn" required /></label>
+                  <label><span>New check-out</span><input type="date" name="newOut" required /></label>
+                </div>
+                <label><span>Guests</span>
+                  <select name="guests">
+                    <option value="1">1 guest</option>
+                    <option value="2">2 guests</option>
+                    <option value="3">3 guests</option>
+                    <option value="4">4 guests</option>
+                  </select>
+                </label>
+                <p class="calc" id="datesCalc" hidden></p>
+                <button class="button button-teal" type="submit">Confirm changes <span aria-hidden="true">→</span></button>
+              </form>
+            </section>
+
+            <!-- View: change room -->
+            <section class="drawer-view" data-view="rooms" hidden>
+              <button class="drawer-back" type="button">← Back to booking</button>
+              <h3>Choose a different room</h3>
+              <p class="drawer-note">Prices are per night for your current dates.</p>
+              <div class="choice-list" id="roomList"></div>
+            </section>
+
+            <!-- View: rate options -->
+            <section class="drawer-view" data-view="price" hidden>
+              <button class="drawer-back" type="button">← Back to booking</button>
+              <h3>Compare rate options</h3>
+              <p class="drawer-note">Switching a rate keeps your room and dates.</p>
+              <div class="choice-list" id="rateList"></div>
+            </section>
+
+            <!-- View: cancellation -->
+            <section class="drawer-view" data-view="cancel" hidden>
+              <button class="drawer-back" type="button">← Back to booking</button>
+              <h3>Cancel this booking</h3>
+              <div class="refund-box" id="refundSummary"></div>
+              <form id="cancelForm" class="drawer-form">
+                <label><span>Reason (optional)</span>
+                  <select name="reason">
+                    <option value="">Prefer not to say</option>
+                    <option>My travel dates changed</option>
+                    <option>I found a different price</option>
+                    <option>My room requirements changed</option>
+                    <option>My plans are uncertain</option>
+                  </select>
+                </label>
+                <button class="button button-teal" type="button" data-open-view="dates">Change dates instead <span aria-hidden="true">→</span></button>
+                <button class="button button-red" type="submit">Confirm cancellation</button>
+                <small class="form-hint">You can restore a cancelled booking any time before check-in.</small>
+              </form>
+            </section>
+
+            <!-- View: confirmation -->
+            <section class="drawer-view" data-view="done" hidden>
+              <div class="done-icon" aria-hidden="true">✓</div>
+              <h3 id="doneTitle"></h3>
+              <p class="drawer-note" id="doneText"></p>
+              <button class="button button-teal" type="button" data-open-view="booking">Back to my booking</button>
+            </section>
+          </div>
+        </section>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer id="support">
+    <div class="shell-wide footer-grid">
+      <div>
+        <a class="brand footer-brand" href="index.html" aria-label="Zo Hotel home"><span class="brand-logo" aria-hidden="true"><img src="zo-hotel-logo.png" alt="" /></span></a>
+        <p>Thoughtful stays. Flexible plans.</p>
+      </div>
+      <div>
+        <strong>Stay</strong>
+        <a href="book-stay.html">Book a stay</a>
+        <a href="index.html#options">Flexible options</a>
+        <a href="index.html#confidence">Booking policies</a>
+        <a href="index.html#questions">Guest questions</a>
+      </div>
+      <div>
+        <strong>Contact</strong>
+        <a href="my-booking.html">Manage a booking online</a>
+        <a href="tel:+912240001234">+91 22 4000 1234</a>
+        <a href="https://unsplash.com/photos/tropical-resort-with-pool-beside-a-calm-ocean-bVNB68XJwqk" target="_blank" rel="noreferrer">Photography: Unsplash</a>
+      </div>
+    </div>
+    <div class="shell-wide footer-bottom">
+      <span>© 2026 Zo Hotel</span>
+      <a href="index.html">Back to home ↑</a>
+    </div>
+  </footer>
+
+  <script src="manage.js?v=5"></script>
+</body>
+</html>
