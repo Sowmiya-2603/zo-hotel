@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:opsz,wght@9..40,100..1000&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=9" />
+  <link rel="stylesheet" href="styles.css?v=10" />
 </head>
 <body>
 
@@ -47,23 +47,25 @@
 
   <main id="top">
 
-    <!-- ============ HERO ============ -->
-    <section class="hero" aria-labelledby="hero-title">
-      <img class="hero-bg" src="zo-hotel-room.jpg" alt="Elegant Zo Hotel room with crisp bedding, warm wood, and soft evening light" />
-      <div class="hero-shade" aria-hidden="true"></div>
-      <div class="hero-content shell-wide">
-        <div class="hero-copy">
-          <p class="eyebrow light">ZO HOTEL · MUMBAI &amp; GOA</p>
-          <h1 id="hero-title">Your stay, ready<br /><em>when you are.</em></h1>
-          <p>Move your dates, switch your room, or rethink the trip entirely — every detail of your booking can be changed in minutes, with the price shown before you confirm.</p>
-          <div class="hero-actions">
-            <a class="button button-aqua" href="my-booking.html">Manage my stay <span aria-hidden="true">→</span></a>
-          </div>
-          <span class="flex-note"><i aria-hidden="true">✓</i> Free changes until 48 hours before check-in</span>
+    <!-- ============ HERO (split layout) ============ -->
+    <section class="hero-split" aria-labelledby="hero-title">
+      <div class="hero-panel">
+        <p class="eyebrow">ZO HOTEL · MUMBAI &amp; GOA</p>
+        <h1 id="hero-title">Your stay, ready<br /><em>when you are.</em></h1>
+        <p class="hero-lead">Move your dates, switch your room, or rethink the trip entirely — every detail of your booking can be changed in minutes, with the price shown before you confirm.</p>
+        <div class="hero-actions">
+          <a class="button button-teal" href="my-booking.html">Manage my stay <span aria-hidden="true">→</span></a>
+          <a class="ghost-link ghost-link-dark" href="#options">See what you can change <span aria-hidden="true">↘</span></a>
         </div>
-
+        <div class="hero-facts">
+          <span><b>48h</b>Free changes until 48 hours before check-in</span>
+          <span><b>₹0</b>No fee to move dates on flexible rates</span>
+        </div>
       </div>
-      <a class="scroll-cue" href="#options" aria-label="Scroll to flexible options"><span>SCROLL</span><i aria-hidden="true">↓</i></a>
+      <div class="hero-media">
+        <img src="zo-coastal-resort.jpg" alt="A tropical coastal hotel with an infinity pool, palm trees, and ocean views" />
+        <a class="scroll-cue" href="#options" aria-label="Scroll to flexible options"><span>SCROLL</span><i aria-hidden="true">↓</i></a>
+      </div>
     </section>
 
     <!-- ============ FLEXIBLE OPTIONS ============ -->
