@@ -2,18 +2,18 @@
 <html lang="en">
 <!--
   LANDING PAGE LOGIC (for evaluation)
-  Audience:   Families visiting Madurai for the Meenakshi Amman Temple who already
-              booked ZO Hotel (reached via their booking-confirmation email or a
-              retargeting link) and are now second-guessing the choice.
+  Audience:   Families who booked a beach holiday at ZO Hotel Goa (reached via
+              their booking-confirmation email or a retargeting link) and are
+              now second-guessing the choice.
   Their worries:
-    1. "Is the hotel actually close to the temple?"          -> Hero + concern 1
-    2. "We wanted a gopuram view."                            -> Concern 2 (honest: we can't
-       provide it; compensation = quiet garden side + 6-min access)
+    1. "Is the hotel actually close to the beach?"            -> Hero + concern 1
+    2. "We wanted a sea-view room."                           -> Concern 2 (honest: we can't
+       provide it; compensation = quiet garden side + 3-min walk to the sand)
     3. "Will it work for kids and grandparents?"              -> Concern 3 + What's included
     4. "Another hotel is cheaper."                            -> Concern 4 (value inside the
        price, not a 'best hotel' claim)
-  Hero addresses the #1 concern (temple proximity) and states the value
-  proposition (close to the darshan, calm for the family) in one line.
+  Hero addresses the guest's purpose (the beach) and the #1 concern (proximity),
+  and states the value proposition in one line.
   The page never mentions cancellation: it gives useful information that builds
   confidence. The exit prompt (Part A) lives in the cancellation flow on
   my-booking.html, where it responds at the moment of leaving.
@@ -21,8 +21,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ZO Hotel Madurai | Six minutes from the temple</title>
-  <meta name="description" content="ZO Hotel Madurai — a 6-minute walk from the Meenakshi Amman Temple, with early darshan breakfasts, family rooms, and Jain & veg meals." />
+  <title>ZO Hotel Goa | Three minutes from the beach</title>
+  <meta name="description" content="ZO Hotel Goa — a 3-minute walk from the beach, with late breakfasts, family rooms, and veg & Jain meals." />
   <link rel="icon" href="zo-hotel-logo.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -65,21 +65,21 @@
 
     <!-- ============ HERO ============ -->
     <section class="hero" aria-labelledby="hero-title">
-      <img class="hero-bg" src="zo-hotel-room.jpg" alt="Calm ZO Hotel room with crisp bedding and warm evening light" />
+      <img class="hero-bg" src="zo-coastal-resort.jpg" alt="ZO Hotel Goa by the coast, with palms and calm water" />
       <div class="hero-shade" aria-hidden="true"></div>
       <div class="hero-content shell-wide">
         <div class="hero-copy">
-          <p class="eyebrow light">ZO HOTEL · MADURAI · NEAR MEENAKSHI AMMAN TEMPLE</p>
-          <h1 id="hero-title">Here for the darshan?<br /><em>Your stay is built around it.</em></h1>
-          <p>Six minutes from the East Gate. Breakfast before sunrise. Rest after the crowds.</p>
+          <p class="eyebrow light">ZO HOTEL · GOA · 3 MINUTES FROM THE BEACH</p>
+          <h1 id="hero-title">Here for the beach?<br /><em>Your stay is built around it.</em></h1>
+          <p>Three minutes from the sand. Breakfast till noon. Quiet nights after sunny days.</p>
           <div class="hero-actions">
             <a class="button button-aqua" href="my-booking.html">View my booking <span aria-hidden="true">→</span></a>
             <a class="ghost-link" href="#concerns">Your questions, answered <span aria-hidden="true">↘</span></a>
           </div>
           <div class="hero-badges">
-            <span><i aria-hidden="true">✓</i> 6-min walk to Meenakshi Amman</span>
-            <span><i aria-hidden="true">✓</i> Breakfast from 4:30 AM on darshan days</span>
-            <span><i aria-hidden="true">✓</i> Family rooms · Jain &amp; veg kitchen</span>
+            <span><i aria-hidden="true">✓</i> 3-min walk to the beach</span>
+            <span><i aria-hidden="true">✓</i> Breakfast until 12 noon</span>
+            <span><i aria-hidden="true">✓</i> Family rooms · veg &amp; Jain kitchen</span>
           </div>
         </div>
       </div>
@@ -99,16 +99,16 @@
 
         <div class="concern-grid">
           <article class="concern-card">
-            <h3>“How close to the temple?”</h3>
-            <p>A 6-minute walk. Free drop-offs for early darshan.</p>
+            <h3>“How close to the beach?”</h3>
+            <p>A 3-minute walk. Towels, mats, and a rinse shower at the gate.</p>
           </article>
           <article class="concern-card">
-            <h3>“Do the rooms face the gopuram?”</h3>
-            <p>No — that’s why nights are quiet. The real thing is 6 minutes away.</p>
+            <h3>“Do the rooms face the sea?”</h3>
+            <p>No — that’s why nights are quiet. The waves are 3 minutes away.</p>
           </article>
           <article class="concern-card">
             <h3>“Kids and grandparents?”</h3>
-            <p>Family rooms, lift access, Jain &amp; veg meals, doctor on call.</p>
+            <p>Family rooms, lift access, veg &amp; Jain meals, doctor on call.</p>
           </article>
           <article class="concern-card">
             <h3>“Found a lower price?”</h3>
@@ -130,10 +130,10 @@
           <p>Nothing added at checkout.</p>
         </div>
         <ul class="included-grid">
-          <li><i aria-hidden="true">✓</i> Breakfast from 4:30 AM</li>
-          <li><i aria-hidden="true">✓</i> Temple drop-offs</li>
+          <li><i aria-hidden="true">✓</i> Breakfast until noon</li>
+          <li><i aria-hidden="true">✓</i> Beach kit &amp; rinse shower</li>
           <li><i aria-hidden="true">✓</i> Family rooms &amp; extra beds</li>
-          <li><i aria-hidden="true">✓</i> Jain &amp; veg kitchen</li>
+          <li><i aria-hidden="true">✓</i> Veg &amp; Jain kitchen</li>
           <li><i aria-hidden="true">✓</i> Lift &amp; wheelchair access</li>
           <li><i aria-hidden="true">✓</i> 24-hour front desk</li>
         </ul>
@@ -151,15 +151,15 @@
         </div>
         <div class="quote-grid">
           <blockquote class="quote-card">
-            <p>“5 AM darshan, zero rush. The desk arranged everything.”</p>
+            <p>“Sunrise swim, breakfast at eleven. Nobody rushed us.”</p>
             <footer>Lakshmi · family of five</footer>
           </blockquote>
           <blockquote class="quote-card">
-            <p>“No temple view — but the quiet room was what we needed.”</p>
+            <p>“No sea view — but the quiet room was what we needed.”</p>
             <footer>Arvind · visiting with parents</footer>
           </blockquote>
           <blockquote class="quote-card">
-            <p>“Idlis before sunrise. Kids and grandma equally happy.”</p>
+            <p>“Sand toys at the desk, extra bed ready. Kids and grandma equally happy.”</p>
             <footer>Priya · two kids, one grandmother</footer>
           </blockquote>
         </div>
@@ -175,7 +175,7 @@
     <section class="manage-section" id="booking-tools" aria-labelledby="manage-title">
       <div class="shell manage-card manage-card-simple">
         <div>
-          <p class="eyebrow light">YOUR MADURAI STAY</p>
+          <p class="eyebrow light">YOUR GOA STAY</p>
           <h2 id="manage-title">Everything's ready<br />when you are.</h2>
         </div>
         <div class="manage-copy-simple">
@@ -192,7 +192,7 @@
     <div class="shell-wide footer-grid">
       <div>
         <a class="brand footer-brand" href="#top" aria-label="ZO Hotel home"><span class="brand-logo" aria-hidden="true"><img src="zo-hotel-logo.png" alt="" /></span></a>
-        <p>ZO Hotel Madurai · 6 minutes from Meenakshi Amman Temple</p>
+        <p>ZO Hotel · Goa &amp; Mumbai</p>
       </div>
       <div>
         <strong>Your stay</strong>
@@ -202,7 +202,7 @@
       </div>
       <div>
         <strong>Contact</strong>
-        <a href="tel:+914524000123">+91 452 400 0123</a>
+        <a href="tel:+918324000123">+91 832 400 0123</a>
         <a href="https://unsplash.com" target="_blank" rel="noreferrer">Photography: Unsplash</a>
       </div>
     </div>

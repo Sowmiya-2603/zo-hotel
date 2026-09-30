@@ -8,50 +8,50 @@
 
 /* ---------- Rooms and rate plans available to switch to ---------- */
 const rooms = [
-  { name: "Deluxe Room", perNight: 4800, blurb: "Quiet garden-side room for two, with lift access." },
-  { name: "Family Room", perNight: 6400, blurb: "Sleeps four comfortably; an extra bed fits easily." },
-  { name: "ZO Suite", perNight: 9500, blurb: "Separate living space for larger families." },
+  { name: "Deluxe Garden Room", perNight: 7800, blurb: "Quiet garden-side room for two, with lift access." },
+  { name: "Family Room", perNight: 9200, blurb: "Sleeps four comfortably; an extra bed fits easily." },
+  { name: "ZO Suite", perNight: 13500, blurb: "Separate living space for larger families." },
 ];
 
 const ratePlans = [
-  { name: "Flexible", perNight: 6400, blurb: "Free date changes until 48 hours before check-in." },
-  { name: "Saver", perNight: 5600, blurb: "Date changes allowed. A one-night fee applies if you cancel." },
-  { name: "Member", perNight: 6000, blurb: "Free changes, plus early darshan breakfast for the family." },
+  { name: "Flexible", perNight: 9200, blurb: "Free date changes until 48 hours before check-in." },
+  { name: "Saver", perNight: 8100, blurb: "Date changes allowed. A one-night fee applies if you cancel." },
+  { name: "Member", perNight: 8700, blurb: "Free changes, plus breakfast for the whole family." },
 ];
 
 /* ---------- Sample bookings (kept in localStorage) ---------- */
 const defaultBookings = [
   {
     ref: "ZH-48215",
-    hotel: "ZO Hotel Madurai",
+    hotel: "ZO Hotel Goa",
     room: "Family Room",
     checkIn: "2026-10-16",
     checkOut: "2026-10-18",
     guests: 4,
     ratePlan: "Flexible",
-    perNight: 6400,
+    perNight: 9200,
     status: "confirmed",
   },
   {
     ref: "ZH-46102",
-    hotel: "ZO Hotel Madurai",
-    room: "Deluxe Room",
+    hotel: "ZO Hotel Mumbai",
+    room: "Deluxe Garden Room",
     checkIn: "2026-11-02",
     checkOut: "2026-11-04",
     guests: 2,
     ratePlan: "Saver",
-    perNight: 4800,
+    perNight: 7800,
     status: "confirmed",
   },
   {
     ref: "ZH-43877",
-    hotel: "ZO Hotel Madurai",
+    hotel: "ZO Hotel Goa",
     room: "ZO Suite",
     checkIn: "2026-08-14",
     checkOut: "2026-08-16",
     guests: 5,
     ratePlan: "Member",
-    perNight: 9500,
+    perNight: 13500,
     status: "completed",
   },
 ];
@@ -97,7 +97,7 @@ const statusLabels = { confirmed: "Confirmed", cancelled: "Cancelled", completed
 
 /* Photo shown for each booking */
 function imageFor(booking) {
-  return booking.room.includes("Suite") ? "zo-coastal-resort.jpg" : "zo-hotel-room.jpg";
+  return booking.hotel.includes("Goa") ? "zo-coastal-resort.jpg" : "zo-hotel-room.jpg";
 }
 
 /* ---------- Mobile menu ---------- */
