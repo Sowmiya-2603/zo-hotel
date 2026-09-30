@@ -8,50 +8,50 @@
 
 /* ---------- Rooms and rate plans available to switch to ---------- */
 const rooms = [
-  { name: "Deluxe Garden View", perNight: 7800, blurb: "Ground floor, opens to the garden courtyard." },
-  { name: "Deluxe Sea View", perNight: 9200, blurb: "Upper floor with a private sea-facing balcony." },
-  { name: "Zo Suite", perNight: 13500, blurb: "Separate living area, bathtub, and lounge access." },
+  { name: "Deluxe Room", perNight: 4800, blurb: "Quiet garden-side room for two, with lift access." },
+  { name: "Family Room", perNight: 6400, blurb: "Sleeps four comfortably; an extra bed fits easily." },
+  { name: "ZO Suite", perNight: 9500, blurb: "Separate living space for larger families." },
 ];
 
 const ratePlans = [
-  { name: "Flexible", perNight: 9200, blurb: "Free date changes. Free cancellation until 48 hours before check-in." },
-  { name: "Saver", perNight: 8100, blurb: "Date changes allowed. A one-night fee applies if you cancel." },
-  { name: "Member", perNight: 8700, blurb: "Free changes and cancellation, plus breakfast for two." },
+  { name: "Flexible", perNight: 6400, blurb: "Free date changes until 48 hours before check-in." },
+  { name: "Saver", perNight: 5600, blurb: "Date changes allowed. A one-night fee applies if you cancel." },
+  { name: "Member", perNight: 6000, blurb: "Free changes, plus early darshan breakfast for the family." },
 ];
 
 /* ---------- Sample bookings (kept in localStorage) ---------- */
 const defaultBookings = [
   {
     ref: "ZH-48215",
-    hotel: "Zo Hotel Goa",
-    room: "Deluxe Sea View",
-    checkIn: "2026-09-18",
-    checkOut: "2026-09-21",
-    guests: 2,
+    hotel: "ZO Hotel Madurai",
+    room: "Family Room",
+    checkIn: "2026-10-16",
+    checkOut: "2026-10-18",
+    guests: 4,
     ratePlan: "Flexible",
-    perNight: 9200,
+    perNight: 6400,
     status: "confirmed",
   },
   {
     ref: "ZH-46102",
-    hotel: "Zo Hotel Mumbai",
-    room: "Deluxe Garden View",
-    checkIn: "2026-10-05",
-    checkOut: "2026-10-08",
-    guests: 1,
+    hotel: "ZO Hotel Madurai",
+    room: "Deluxe Room",
+    checkIn: "2026-11-02",
+    checkOut: "2026-11-04",
+    guests: 2,
     ratePlan: "Saver",
-    perNight: 8100,
+    perNight: 4800,
     status: "confirmed",
   },
   {
     ref: "ZH-43877",
-    hotel: "Zo Hotel Goa",
-    room: "Zo Suite",
+    hotel: "ZO Hotel Madurai",
+    room: "ZO Suite",
     checkIn: "2026-08-14",
     checkOut: "2026-08-16",
-    guests: 2,
+    guests: 5,
     ratePlan: "Member",
-    perNight: 13500,
+    perNight: 9500,
     status: "completed",
   },
 ];
@@ -95,9 +95,9 @@ function totalFor(booking) {
 
 const statusLabels = { confirmed: "Confirmed", cancelled: "Cancelled", completed: "Completed" };
 
-/* Photo shown for each hotel */
+/* Photo shown for each booking */
 function imageFor(booking) {
-  return booking.hotel.includes("Goa") ? "zo-coastal-resort.jpg" : "zo-hotel-room.jpg";
+  return booking.room.includes("Suite") ? "zo-coastal-resort.jpg" : "zo-hotel-room.jpg";
 }
 
 /* ---------- Mobile menu ---------- */
@@ -184,11 +184,49 @@ function showView(name) {
   if (name === "cancel") renderRefund();
 }
 
-/* In-panel navigation (back links and action buttons) */
+/* In-panel navigation (back links and action buttons).
+   Starting a cancellation first shows the exit prompt (Part A):
+   an alternative is offered before the cancellation view opens. */
 panelContent.addEventListener("click", (event) => {
   const viewButton = event.target.closest("[data-open-view]");
-  if (viewButton) showView(viewButton.dataset.openView);
+  if (viewButton) {
+    if (viewButton.dataset.openView === "cancel" && viewButton.closest(".drawer-actions")) {
+      openExitPrompt();
+      return;
+    }
+    showView(viewButton.dataset.openView);
+  }
   if (event.target.closest(".drawer-back")) showView("booking");
+});
+
+/* ---------- Exit prompt ---------- */
+const exitPrompt = document.getElementById("exitPrompt");
+
+function openExitPrompt() {
+  exitPrompt.hidden = false;
+  document.body.style.overflow = "hidden";
+  document.getElementById("exitChange").focus();
+}
+
+function closeExitPrompt() {
+  exitPrompt.hidden = true;
+  document.body.style.overflow = "";
+}
+
+document.getElementById("exitClose").addEventListener("click", closeExitPrompt);
+document.getElementById("exitChange").addEventListener("click", () => {
+  closeExitPrompt();
+  showView("dates");
+});
+document.getElementById("exitContinue").addEventListener("click", () => {
+  closeExitPrompt();
+  showView("cancel");
+});
+exitPrompt.addEventListener("mousedown", (event) => {
+  if (event.target === exitPrompt) closeExitPrompt();
+});
+document.addEventListener("keydown", (event) => {
+  if (!exitPrompt.hidden && event.key === "Escape") closeExitPrompt();
 });
 
 function showDone(title, text) {

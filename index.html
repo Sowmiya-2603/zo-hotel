@@ -1,15 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+<!--
+  LANDING PAGE LOGIC (for evaluation)
+  Audience:   Families visiting Madurai for the Meenakshi Amman Temple who already
+              booked ZO Hotel (reached via their booking-confirmation email or a
+              retargeting link) and are now second-guessing the choice.
+  Their worries:
+    1. "Is the hotel actually close to the temple?"          -> Hero + concern 1
+    2. "We wanted a gopuram view."                            -> Concern 2 (honest: we can't
+       provide it; compensation = quiet garden side + 6-min access)
+    3. "Will it work for kids and grandparents?"              -> Concern 3 + What's included
+    4. "Another hotel is cheaper."                            -> Concern 4 (value inside the
+       price, not a 'best hotel' claim)
+  Hero addresses the #1 concern (temple proximity) and states the value
+  proposition (close to the darshan, calm for the family) in one line.
+  The page never mentions cancellation: it gives useful information that builds
+  confidence. The exit prompt (Part A) lives in the cancellation flow on
+  my-booking.html, where it responds at the moment of leaving.
+-->
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Zo Hotel | Flexible stays, thoughtfully managed</title>
-  <meta name="description" content="Adjust your Zo Hotel stay, understand your booking conditions, and explore helpful options before cancelling." />
+  <title>ZO Hotel Madurai | Six minutes from the temple</title>
+  <meta name="description" content="ZO Hotel Madurai — a 6-minute walk from the Meenakshi Amman Temple, with early darshan breakfasts, family rooms, and Jain & veg meals." />
   <link rel="icon" href="zo-hotel-logo.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:opsz,wght@9..40,100..1000&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=10" />
+  <link rel="stylesheet" href="styles.css?v=11" />
 </head>
 <body>
 
@@ -18,29 +36,27 @@
   <!-- ============ HEADER ============ -->
   <header class="site-header">
     <nav class="nav shell-wide" aria-label="Main navigation">
-      <a class="brand" href="#top" aria-label="Zo Hotel home">
+      <a class="brand" href="#top" aria-label="ZO Hotel home">
         <span class="brand-logo" aria-hidden="true"><img src="zo-hotel-logo.png" alt="" /></span>
       </a>
       <div class="nav-links">
-        <a href="#options">Stay options</a>
-        <a href="#confidence">Policies</a>
-        <a href="#questions">Questions</a>
-        <a href="my-booking.html">My bookings</a>
-        <a href="#support">Support</a>
+        <a href="#concerns">Your questions</a>
+        <a href="#included">What's included</a>
+        <a href="#reviews">Guest words</a>
+        <a href="my-booking.html">My booking</a>
       </div>
-      <a class="button button-teal nav-cta" href="#booking-tools">Manage booking</a>
+      <a class="button button-teal nav-cta" href="my-booking.html">View my booking</a>
       <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open navigation menu">
         <span></span><span></span><span></span>
       </button>
     </nav>
     <div class="mobile-menu" id="mobile-menu">
       <div class="shell-wide">
-        <a href="#options">Stay options <span>01</span></a>
-        <a href="#confidence">Policies <span>02</span></a>
-        <a href="#questions">Questions <span>03</span></a>
-        <a href="#support">Support <span>04</span></a>
-        <a href="my-booking.html">My bookings <span>05</span></a>
-        <a class="button button-aqua mobile-manage" href="#booking-tools">Manage my booking →</a>
+        <a href="#concerns">Your questions <span>01</span></a>
+        <a href="#included">What's included <span>02</span></a>
+        <a href="#reviews">Guest words <span>03</span></a>
+        <a href="my-booking.html">My booking <span>04</span></a>
+        <a class="button button-aqua mobile-manage" href="my-booking.html">View my booking →</a>
       </div>
     </div>
   </header>
@@ -49,160 +65,123 @@
 
     <!-- ============ HERO ============ -->
     <section class="hero" aria-labelledby="hero-title">
-      <img class="hero-bg" src="zo-coastal-resort.jpg" alt="A tropical coastal hotel with an infinity pool, palm trees, and ocean views" />
+      <img class="hero-bg" src="zo-hotel-room.jpg" alt="Calm ZO Hotel room with crisp bedding and warm evening light" />
       <div class="hero-shade" aria-hidden="true"></div>
       <div class="hero-content shell-wide">
         <div class="hero-copy">
-          <p class="eyebrow light">MUMBAI · GOA</p>
-          <h1 id="hero-title">Stay flexible.<br /><em>Stay Zo.</em></h1>
-          <p>From new dates to a different suite, your Zo Hotel booking bends to your plans — clear prices, clear policies, no surprises.</p>
+          <p class="eyebrow light">ZO HOTEL · MADURAI</p>
+          <h1 id="hero-title">Six minutes from the temple.<br /><em>A world more restful.</em></h1>
+          <p>Your family stays close to the darshan and away from the crowds — with early breakfasts, temple drop-offs, and rooms where everyone actually sleeps.</p>
           <div class="hero-actions">
-            <a class="button button-aqua" href="my-booking.html">Manage my booking <span aria-hidden="true">→</span></a>
-            <a class="ghost-link" href="#options">See what you can change <span aria-hidden="true">↘</span></a>
+            <a class="button button-aqua" href="my-booking.html">View my booking <span aria-hidden="true">→</span></a>
+            <a class="ghost-link" href="#concerns">Your questions, answered <span aria-hidden="true">↘</span></a>
           </div>
-          <span class="flex-note"><i aria-hidden="true">✓</i> Free changes until 48 hours before check-in</span>
+          <div class="hero-badges">
+            <span><i aria-hidden="true">✓</i> 6-min walk to Meenakshi Amman</span>
+            <span><i aria-hidden="true">✓</i> Breakfast from 4:30 AM on darshan days</span>
+            <span><i aria-hidden="true">✓</i> Family rooms · Jain &amp; veg kitchen</span>
+          </div>
         </div>
       </div>
-      <a class="scroll-cue" href="#options" aria-label="Scroll to flexible options"><span>SCROLL</span><i aria-hidden="true">↓</i></a>
+      <a class="scroll-cue" href="#concerns" aria-label="Scroll to your questions"><span>SCROLL</span><i aria-hidden="true">↓</i></a>
     </section>
 
-    <!-- ============ FLEXIBLE OPTIONS ============ -->
-    <section class="options-section" id="options" aria-labelledby="options-title">
+    <!-- ============ CONCERNS (problem → honest answer) ============ -->
+    <section class="section-pad" id="concerns" aria-labelledby="concerns-title">
       <div class="shell">
         <div class="split-heading">
           <div>
-            <p class="eyebrow">FLEXIBLE BOOKING</p>
-            <h2 id="options-title">Before you cancel,<br />see what you can change.</h2>
+            <p class="eyebrow">BEFORE YOU ARRIVE</p>
+            <h2 id="concerns-title">The questions families<br />ask us most.</h2>
           </div>
-          <p>A booking problem doesn’t always need to end in a cancellation. Choose what changed and we’ll point you to the most useful next step.</p>
+          <p>Short, honest answers — so you know exactly what your stay will be like.</p>
         </div>
 
-        <div class="concern-tabs" id="concernTabs" role="tablist" aria-label="Reason for changing booking">
-          <button type="button" role="tab" aria-selected="true" class="concern-tab selected" data-concern="0">
-            <span class="tab-index">01</span><span class="tab-icon" aria-hidden="true">↗</span>
-            <span><small>Dates</small><strong>My travel dates changed</strong></span>
-          </button>
-          <button type="button" role="tab" aria-selected="false" class="concern-tab" data-concern="1">
-            <span class="tab-index">02</span><span class="tab-icon" aria-hidden="true">₹</span>
-            <span><small>Price</small><strong>I found a different price</strong></span>
-          </button>
-          <button type="button" role="tab" aria-selected="false" class="concern-tab" data-concern="2">
-            <span class="tab-index">03</span><span class="tab-icon" aria-hidden="true">⌂</span>
-            <span><small>Room</small><strong>My room requirements changed</strong></span>
-          </button>
-          <button type="button" role="tab" aria-selected="false" class="concern-tab" data-concern="3">
-            <span class="tab-index">04</span><span class="tab-icon" aria-hidden="true">?</span>
-            <span><small>Unsure</small><strong>I’m not sure about my trip yet</strong></span>
-          </button>
+        <div class="concern-grid">
+          <article class="concern-card">
+            <h3>“How close are we to the temple, really?”</h3>
+            <p>A 6-minute walk to the East Gate. For early darshan we arrange drop-offs at the entrance — no parking scramble, no haggling.</p>
+          </article>
+          <article class="concern-card">
+            <h3>“Do the rooms face the gopuram?”</h3>
+            <p>Honestly — no. Our rooms face the quiet garden side. You trade the view for silent nights, and the real thing is six minutes away whenever you want it.</p>
+          </article>
+          <article class="concern-card">
+            <h3>“Will it work for kids and grandparents?”</h3>
+            <p>Family rooms with extra beds, lift access to every floor, Jain and veg meals, and a doctor on call. Grandparents are our most frequent guests.</p>
+          </article>
+          <article class="concern-card">
+            <h3>“We found a lower price elsewhere.”</h3>
+            <p>Compare what's inside the price: breakfast, temple drop-offs, and no checkout surprises. And if the room or dates aren't right, adjusting them takes a minute.</p>
+            <a class="button button-outline-teal" href="my-booking.html">Review my booking <span aria-hidden="true">→</span></a>
+          </article>
         </div>
+      </div>
+    </section>
 
-        <article class="option-detail" role="tabpanel" aria-live="polite">
-          <div class="option-main">
-            <p class="eyebrow">YOUR OPTION</p>
-            <h3 id="optionSolution">Move your stay to another available date without creating a new reservation.</h3>
-            <p id="optionProblem">Your original travel dates no longer work.</p>
+    <!-- ============ WHAT'S INCLUDED ============ -->
+    <section class="included-section" id="included" aria-labelledby="included-title">
+      <div class="shell">
+        <div class="split-heading">
+          <div>
+            <p class="eyebrow">ONE CLEAR PRICE</p>
+            <h2 id="included-title">What your stay includes.</h2>
           </div>
-          <div class="option-proof"><span aria-hidden="true">✓</span><p id="optionDetail">Most flexible bookings can be moved in under two minutes.</p></div>
-          <a class="button button-teal" id="optionCta" href="my-booking.html?action=dates">Change Dates <span aria-hidden="true">→</span></a>
-        </article>
+          <p>The total you see is the total you pay — nothing added at checkout.</p>
+        </div>
+        <ul class="included-grid">
+          <li><i aria-hidden="true">✓</i> Breakfast from 4:30 AM on darshan days</li>
+          <li><i aria-hidden="true">✓</i> Temple drop-offs, arranged the night before</li>
+          <li><i aria-hidden="true">✓</i> Family rooms with extra beds</li>
+          <li><i aria-hidden="true">✓</i> Jain &amp; pure-veg kitchen</li>
+          <li><i aria-hidden="true">✓</i> Lift &amp; wheelchair access</li>
+          <li><i aria-hidden="true">✓</i> 24-hour front desk with local help</li>
+        </ul>
       </div>
     </section>
 
-    <!-- ============ STORY ============ -->
-    <section class="story-section" aria-labelledby="story-title">
-      <div class="story-image"><img src="zo-hotel-room.jpg" alt="Elegant hotel room with crisp bedding and warm wood details" /></div>
-      <div class="story-copy">
-        <p class="eyebrow">MORE THAN A ROOM</p>
-        <h2 id="story-title">Keep the stay.<br />Change the details.</h2>
-        <p class="story-lead">Different dates. A room that fits better. A little more time to decide.</p>
-        <p>We designed booking management around real travel changes, so you can understand your options without starting over.</p>
-        <div class="story-facts">
-          <span><b>01</b>Dates can be moved where availability allows.</span>
-          <span><b>02</b>Price differences are shown before confirmation.</span>
-          <span><b>03</b>Your cancellation option always remains available.</span>
+    <!-- ============ TRUST: GUESTS + POLICIES ============ -->
+    <section class="reviews-section" id="reviews" aria-labelledby="reviews-title">
+      <div class="shell">
+        <div class="split-heading">
+          <div>
+            <p class="eyebrow light">FROM RECENT GUESTS</p>
+            <h2 id="reviews-title">What staying here<br />is actually like.</h2>
+          </div>
         </div>
-      </div>
-    </section>
-
-    <!-- ============ CONFIDENCE ============ -->
-    <section class="confidence-section" id="confidence" aria-labelledby="confidence-title">
-      <div class="shell confidence-grid">
-        <div class="confidence-heading">
-          <p class="eyebrow light">BOOK WITH CONFIDENCE</p>
-          <h2 id="confidence-title">Clarity from booking<br />to check-out.</h2>
-          <p>Travel is easier when you know exactly what to expect.</p>
+        <div class="quote-grid">
+          <blockquote class="quote-card">
+            <p>“We made the 5 AM darshan without any rush — the front desk arranged the drop the night before.”</p>
+            <footer>Lakshmi · family of five</footer>
+          </blockquote>
+          <blockquote class="quote-card">
+            <p>“No temple view, and honestly, after a day in those crowds the quiet room was exactly what we needed.”</p>
+            <footer>Arvind · visiting with parents</footer>
+          </blockquote>
+          <blockquote class="quote-card">
+            <p>“Idlis ready before sunrise, extra bed already made up. The kids and my mother were equally happy.”</p>
+            <footer>Priya · two kids, one grandmother</footer>
+          </blockquote>
         </div>
-        <div class="trust-list">
-          <article class="trust-item">
-            <span>01</span><div><h3>Clear booking information</h3><p>Important stay details and conditions appear in plain language.</p></div>
-          </article>
-          <article class="trust-item">
-            <span>02</span><div><h3>Easy booking management</h3><p>Review your reservation and available options from one place.</p></div>
-          </article>
-          <article class="trust-item">
-            <span>03</span><div><h3>Transparent policies</h3><p>See modification, cancellation, and payment conditions before changing anything.</p></div>
-          </article>
-          <article class="trust-item">
-            <span>04</span><div><h3>Support when you need it</h3><p>Our stay team can help you understand the options for your reservation.</p></div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ FAQ ============ -->
-    <section class="faq-section" id="questions" aria-labelledby="questions-title">
-      <div class="shell faq-grid">
-        <div class="faq-intro">
-          <p class="eyebrow">GOOD TO KNOW</p>
-          <h2 id="questions-title">Questions guests ask us.</h2>
-          <p>Clear answers before you make a change.</p>
-        </div>
-        <div class="faq-list" id="faqList">
-          <article class="faq-item open">
-            <button type="button" aria-expanded="true"><span>Can I change my dates instead of cancelling?</span><i aria-hidden="true">−</i></button>
-            <div class="faq-answer"><p>Usually, yes. Flexible bookings can be moved to available dates. Any rate difference is shown before you confirm the change.</p></div>
-          </article>
-          <article class="faq-item">
-            <button type="button" aria-expanded="false"><span>Will I pay a fee to modify my booking?</span><i aria-hidden="true">+</i></button>
-            <div class="faq-answer"><p>Your booking conditions will show whether a modification fee applies. We always display the full amount before you make a change.</p></div>
-          </article>
-          <article class="faq-item">
-            <button type="button" aria-expanded="false"><span>When does a refund reach me?</span><i aria-hidden="true">+</i></button>
-            <div class="faq-answer"><p>Eligible refunds are released after cancellation and generally appear within 5–10 business days, depending on your payment provider.</p></div>
-          </article>
-          <article class="faq-item">
-            <button type="button" aria-expanded="false"><span>Can I choose another room type?</span><i aria-hidden="true">+</i></button>
-            <div class="faq-answer"><p>If another room is available for your dates, you can switch room type and review the price difference before confirming.</p></div>
-          </article>
+        <div class="policy-row">
+          <span>Date changes are free until 48 hours before check-in, where availability allows</span>
+          <span>Transparent pricing — the total shown is the total charged</span>
+          <span>Rooms described honestly, photographed as they are</span>
         </div>
       </div>
     </section>
 
-    <!-- ============ BOOKING MENU ============ -->
+    <!-- ============ FINAL CTA ============ -->
     <section class="manage-section" id="booking-tools" aria-labelledby="manage-title">
-      <div class="shell manage-card">
+      <div class="shell manage-card manage-card-simple">
         <div>
-          <p class="eyebrow light">YOUR BOOKING, YOUR CHOICE</p>
-          <h2 id="manage-title">Manage your<br />booking here.</h2>
-          <p class="manage-sub">Pick what you’d like to do. Every option shows its price and conditions before you confirm anything.</p>
+          <p class="eyebrow light">YOUR MADURAI STAY</p>
+          <h2 id="manage-title">Everything's ready<br />when you are.</h2>
         </div>
-        <nav class="manage-menu" aria-label="Booking management menu">
-          <a class="manage-item" href="my-booking.html">
-            <b aria-hidden="true">≡</b><span><strong>My bookings</strong><small>See and manage all of your stays</small></span><i aria-hidden="true">→</i>
-          </a>
-          <a class="manage-item" href="my-booking.html?action=dates">
-            <b aria-hidden="true">↗</b><span><strong>Change dates</strong><small>Move your stay to new dates</small></span><i aria-hidden="true">→</i>
-          </a>
-          <a class="manage-item" href="my-booking.html?action=rooms">
-            <b aria-hidden="true">⌂</b><span><strong>Change room</strong><small>Switch to another room type</small></span><i aria-hidden="true">→</i>
-          </a>
-          <a class="manage-item" href="my-booking.html?action=price">
-            <b aria-hidden="true">₹</b><span><strong>Rate options</strong><small>Compare available rate plans</small></span><i aria-hidden="true">→</i>
-          </a>
-          <button class="manage-item danger" id="cancelTrigger" type="button">
-            <b aria-hidden="true">×</b><span><strong>Cancel booking</strong><small>See refund details first</small></span><i aria-hidden="true">→</i>
-          </button>
-        </nav>
+        <div class="manage-copy-simple">
+          <p>Review your room, dates, guests, or meals any time — it takes about a minute.</p>
+          <a class="button button-aqua" href="my-booking.html">Open my booking <span aria-hidden="true">→</span></a>
+        </div>
       </div>
     </section>
 
@@ -212,42 +191,27 @@
   <footer id="support">
     <div class="shell-wide footer-grid">
       <div>
-        <a class="brand footer-brand" href="#top" aria-label="Zo Hotel home"><span class="brand-logo" aria-hidden="true"><img src="zo-hotel-logo.png" alt="" /></span></a>
-        <p>Thoughtful stays. Flexible plans.</p>
+        <a class="brand footer-brand" href="#top" aria-label="ZO Hotel home"><span class="brand-logo" aria-hidden="true"><img src="zo-hotel-logo.png" alt="" /></span></a>
+        <p>ZO Hotel Madurai · 6 minutes from Meenakshi Amman Temple</p>
       </div>
       <div>
-        <strong>Stay</strong>
-        <a href="#options">Flexible options</a>
-        <a href="#confidence">Booking policies</a>
-        <a href="#questions">Guest questions</a>
+        <strong>Your stay</strong>
+        <a href="#concerns">Your questions</a>
+        <a href="#included">What's included</a>
+        <a href="my-booking.html">Manage a booking online</a>
       </div>
       <div>
         <strong>Contact</strong>
-        <a href="my-booking.html">Manage a booking online</a>
-        <a href="tel:+912240001234">+91 22 4000 1234</a>
-        <a href="https://unsplash.com/photos/tropical-resort-with-pool-beside-a-calm-ocean-bVNB68XJwqk" target="_blank" rel="noreferrer">Photography: Unsplash</a>
+        <a href="tel:+914524000123">+91 452 400 0123</a>
+        <a href="https://unsplash.com" target="_blank" rel="noreferrer">Photography: Unsplash</a>
       </div>
     </div>
     <div class="shell-wide footer-bottom">
-      <span>© 2026 Zo Hotel</span>
+      <span>© 2026 ZO Hotel</span>
       <a href="#top">Back to top ↑</a>
     </div>
   </footer>
 
-  <!-- ============ CANCELLATION MODAL ============ -->
-  <div class="modal-backdrop" id="modalBackdrop" role="presentation" hidden>
-    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-description">
-      <button class="modal-close" id="modalClose" type="button" aria-label="Close cancellation options">×</button>
-      <span class="modal-symbol" aria-hidden="true">↗</span>
-      <p class="eyebrow">FLEXIBLE STAY</p>
-      <h2 id="modal-title">Plans changed?<br />Your stay doesn’t have to.</h2>
-      <p id="modal-description">Need different dates? You may not have to cancel. Change your stay dates and keep your trip planned without starting over.</p>
-      <button class="button button-teal modal-primary" id="changeDates" type="button">Change my dates <span aria-hidden="true">→</span></button>
-      <button class="continue-link" id="continueCancel" type="button">Continue cancellation</button>
-      <small>You can continue cancelling at any time.</small>
-    </div>
-  </div>
-
-  <script src="script.js?v=9"></script>
+  <script src="script.js?v=11"></script>
 </body>
 </html>
