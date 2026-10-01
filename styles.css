@@ -107,6 +107,23 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 500; letter-spacing:
 .manage-card-simple { align-items: center; }
 .manage-copy-simple > p { margin: 0 0 24px; color: #c6dde0; line-height: 1.75; }
 
+/* ---------- Reference-style manage flow ---------- */
+.panel-question { margin: 20px 0 0; color: var(--muted); font-size: 13.5px; font-weight: 700; letter-spacing: .02em; }
+.panel-question[hidden] { display: none; }
+.modify-choices { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 14px 0 20px; }
+.modify-choices label { display: flex; align-items: center; gap: 11px; padding: 13px 15px; border: 1px solid var(--line); background: #fff; cursor: pointer; font-size: 13.5px; transition: border-color .2s ease, box-shadow .2s ease; }
+.modify-choices label:hover { border-color: var(--teal); }
+.modify-choices label:has(input:checked) { border-color: var(--teal); box-shadow: inset 3px 0 0 var(--teal); }
+.modify-choices input { width: 17px; height: 17px; accent-color: var(--teal); flex: 0 0 auto; }
+.booking-field[hidden] { display: none; }
+.confirm-actions { display: grid; gap: 12px; margin-top: 18px; }
+.booking-toast { position: fixed; left: 50%; bottom: 28px; transform: translateX(-50%); z-index: 140; max-width: calc(100% - 32px); padding: 14px 24px; color: #fff; background: var(--deep); font-size: 13px; font-weight: 600; box-shadow: 0 16px 40px rgba(0,0,0,.3); animation: revealUp .25s ease both; }
+.booking-toast[hidden] { display: none; }
+
+@media (max-width: 520px) {
+  .modify-choices { grid-template-columns: 1fr; }
+}
+
 @media (max-width: 900px) {
   .concern-grid { grid-template-columns: 1fr; }
   .included-grid { grid-template-columns: 1fr 1fr; }

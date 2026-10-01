@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:opsz,wght@9..40,100..1000&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=11" />
+  <link rel="stylesheet" href="styles.css?v=12" />
 </head>
 <body>
 
@@ -91,18 +91,13 @@
                 <p class="booking-status" id="bkStatus"></p>
               </div>
               <p class="drawer-note" id="bkPolicy">Free date changes and free cancellation until 48 hours before check-in.</p>
+              <p class="panel-question">What would you like to do with your booking?</p>
               <div class="drawer-actions" id="bookingActions">
-                <button class="drawer-action" type="button" data-open-view="dates">
-                  <b aria-hidden="true">↗</b><span><strong>Change dates</strong><small>Move your stay to new dates</small></span>
+                <button class="drawer-action" type="button" data-open-view="modify">
+                  <b aria-hidden="true">✎</b><span><strong>Modify details</strong><small>Dates, guests, room type, or rate plan</small></span>
                 </button>
-                <button class="drawer-action" type="button" data-open-view="rooms">
-                  <b aria-hidden="true">⌂</b><span><strong>Change room</strong><small>Switch to another room type</small></span>
-                </button>
-                <button class="drawer-action" type="button" data-open-view="price">
-                  <b aria-hidden="true">₹</b><span><strong>Review rate options</strong><small>Compare available rate plans</small></span>
-                </button>
-                <button class="drawer-action danger" type="button" data-open-view="cancel">
-                  <b aria-hidden="true">×</b><span><strong>Cancel booking</strong><small>See refund details first</small></span>
+                <button class="drawer-action danger" type="button" id="startCancel">
+                  <b aria-hidden="true">×</b><span><strong>Cancel booking</strong><small>Your refund is shown before you decide</small></span>
                 </button>
               </div>
               <div id="restoreWrap" hidden>
@@ -110,73 +105,58 @@
               </div>
             </section>
 
-            <!-- View: change dates -->
-            <section class="drawer-view" data-view="dates" hidden>
+            <!-- View: modify (reference pattern: pick what to change) -->
+            <section class="drawer-view" data-view="modify" hidden>
               <button class="drawer-back" type="button">← Back to booking</button>
-              <h3>Pick your new dates</h3>
-              <p class="drawer-note">Current stay: <strong id="datesCurrent"></strong></p>
-              <form id="datesForm" class="drawer-form">
-                <div class="form-row">
-                  <label><span>New check-in</span><input type="date" name="newIn" required /></label>
-                  <label><span>New check-out</span><input type="date" name="newOut" required /></label>
+              <h3>What would you like to modify?</h3>
+              <div class="modify-choices" id="modifyChoices">
+                <label><input type="checkbox" value="checkin" /> Check-in date</label>
+                <label><input type="checkbox" value="checkout" /> Check-out date</label>
+                <label><input type="checkbox" value="guests" /> Guests</label>
+                <label><input type="checkbox" value="room" /> Room type</label>
+                <label><input type="checkbox" value="plan" /> Rate plan</label>
+              </div>
+              <form id="modifyForm" class="drawer-form">
+                <div class="booking-field" data-field="checkin" hidden>
+                  <label><span>New check-in</span><input type="date" name="checkin" /></label>
                 </div>
-                <label><span>Guests</span>
-                  <select name="guests">
-                    <option value="1">1 guest</option>
-                    <option value="2">2 guests</option>
-                    <option value="3">3 guests</option>
-                    <option value="4">4 guests</option>
-                  </select>
-                </label>
-                <p class="calc" id="datesCalc" hidden></p>
-                <button class="button button-teal" type="submit">Confirm changes <span aria-hidden="true">→</span></button>
+                <div class="booking-field" data-field="checkout" hidden>
+                  <label><span>New check-out</span><input type="date" name="checkout" /></label>
+                </div>
+                <div class="booking-field" data-field="guests" hidden>
+                  <label><span>Guests</span>
+                    <select name="guests">
+                      <option value="1">1 guest</option>
+                      <option value="2">2 guests</option>
+                      <option value="3">3 guests</option>
+                      <option value="4">4 guests</option>
+                      <option value="5">5 guests</option>
+                    </select>
+                  </label>
+                </div>
+                <div class="booking-field" data-field="room" hidden>
+                  <label><span>Room type</span><select name="room" id="roomSelect"></select></label>
+                </div>
+                <div class="booking-field" data-field="plan" hidden>
+                  <label><span>Rate plan</span><select name="plan" id="planSelect"></select></label>
+                </div>
+                <p class="calc" id="modifyCalc" hidden></p>
+                <button class="button button-teal" id="modifyCta" type="submit" disabled>Update booking <span aria-hidden="true">→</span></button>
               </form>
             </section>
 
-            <!-- View: change room -->
-            <section class="drawer-view" data-view="rooms" hidden>
-              <button class="drawer-back" type="button">← Back to booking</button>
-              <h3>Choose a different room</h3>
-              <p class="drawer-note">Prices are per night for your current dates.</p>
-              <div class="choice-list" id="roomList"></div>
-            </section>
-
-            <!-- View: rate options -->
-            <section class="drawer-view" data-view="price" hidden>
-              <button class="drawer-back" type="button">← Back to booking</button>
-              <h3>Compare rate options</h3>
-              <p class="drawer-note">Switching a rate keeps your room and dates.</p>
-              <div class="choice-list" id="rateList"></div>
-            </section>
-
-            <!-- View: cancellation -->
-            <section class="drawer-view" data-view="cancel" hidden>
-              <button class="drawer-back" type="button">← Back to booking</button>
-              <h3>Cancel this booking</h3>
+            <!-- View: cancel confirmation (reference pattern + persuasive alternative) -->
+            <section class="drawer-view" data-view="confirmCancel" hidden>
+              <h3>Are you sure you want to cancel this reservation?</h3>
               <div class="refund-box" id="refundSummary"></div>
-              <form id="cancelForm" class="drawer-form">
-                <label><span>Reason (optional)</span>
-                  <select name="reason">
-                    <option value="">Prefer not to say</option>
-                    <option>My travel dates changed</option>
-                    <option>I found a different price</option>
-                    <option>My room requirements changed</option>
-                    <option>My plans are uncertain</option>
-                  </select>
-                </label>
-                <button class="button button-teal" type="button" data-open-view="dates">Change dates instead <span aria-hidden="true">→</span></button>
-                <button class="button button-red" type="submit">Confirm cancellation</button>
-                <small class="form-hint">You can restore a cancelled booking any time before check-in.</small>
-              </form>
+              <p class="drawer-note">Most stays can be moved instead — free until 48 hours before check-in.</p>
+              <div class="confirm-actions">
+                <button class="button button-teal" id="keepBooking" type="button">Keep my booking</button>
+                <button class="button button-outline-teal" id="cancelToModify" type="button">Change dates instead <span aria-hidden="true">→</span></button>
+                <button class="button button-red" id="confirmCancelBtn" type="button">Yes, cancel booking</button>
+              </div>
             </section>
 
-            <!-- View: confirmation -->
-            <section class="drawer-view" data-view="done" hidden>
-              <div class="done-icon" aria-hidden="true">✓</div>
-              <h3 id="doneTitle"></h3>
-              <p class="drawer-note" id="doneText"></p>
-              <button class="button button-teal" type="button" data-open-view="booking">Back to my booking</button>
-            </section>
           </div>
         </section>
 
@@ -210,20 +190,9 @@
     </div>
   </footer>
 
-  <!-- ============ EXIT PROMPT (shown when a guest starts cancelling) ============ -->
-  <div class="modal-backdrop" id="exitPrompt" role="presentation" hidden>
-    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="exit-title" aria-describedby="exit-text">
-      <button class="modal-close" id="exitClose" type="button" aria-label="Close">×</button>
-      <span class="modal-symbol" aria-hidden="true">↗</span>
-      <p class="eyebrow">ONE QUICK THOUGHT</p>
-      <h2 id="exit-title">Keep the trip.<br />Change the details.</h2>
-      <p id="exit-text">Different dates, another room, fewer guests — most things about this stay can be adjusted in under a minute, with the new price shown first.</p>
-      <button class="button button-teal modal-primary" id="exitChange" type="button">See what I can change <span aria-hidden="true">→</span></button>
-      <button class="continue-link" id="exitContinue" type="button">No thanks, continue</button>
-      <small>Your refund details are shown on the next step.</small>
-    </div>
-  </div>
+  <!-- Toast for confirmations, like the reference site -->
+  <div class="booking-toast" id="toast" role="status" hidden></div>
 
-  <script src="manage.js?v=11"></script>
+  <script src="manage.js?v=12"></script>
 </body>
 </html>

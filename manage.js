@@ -1,12 +1,14 @@
 /* ============================================
-   Zo Hotel — manage.js (My Bookings page)
-   Lists your bookings; selecting one opens a
-   panel to change dates, switch rooms, compare
-   rates, cancel, or restore. Changes persist
-   in localStorage.
+   ZO Hotel — manage.js (My Booking page)
+   Flow modelled on the reference site:
+   booking summary → "Modify details" with
+   pick-what-to-change checkboxes → update,
+   or "Cancel booking" → confirmation screen
+   ("Keep my booking" stays one click away).
+   Success/cancel actions confirm with a toast.
    ============================================ */
 
-/* ---------- Rooms and rate plans available to switch to ---------- */
+/* ---------- Rooms and rate plans ---------- */
 const rooms = [
   { name: "Deluxe Garden Room", perNight: 7800, blurb: "Quiet garden-side room for two, with lift access." },
   { name: "Family Room", perNight: 9200, blurb: "Sleeps four comfortably; an extra bed fits easily." },
@@ -21,39 +23,9 @@ const ratePlans = [
 
 /* ---------- Sample bookings (kept in localStorage) ---------- */
 const defaultBookings = [
-  {
-    ref: "ZH-48215",
-    hotel: "ZO Hotel Goa",
-    room: "Family Room",
-    checkIn: "2026-10-16",
-    checkOut: "2026-10-18",
-    guests: 4,
-    ratePlan: "Flexible",
-    perNight: 9200,
-    status: "confirmed",
-  },
-  {
-    ref: "ZH-46102",
-    hotel: "ZO Hotel Mumbai",
-    room: "Deluxe Garden Room",
-    checkIn: "2026-11-02",
-    checkOut: "2026-11-04",
-    guests: 2,
-    ratePlan: "Saver",
-    perNight: 7800,
-    status: "confirmed",
-  },
-  {
-    ref: "ZH-43877",
-    hotel: "ZO Hotel Goa",
-    room: "ZO Suite",
-    checkIn: "2026-08-14",
-    checkOut: "2026-08-16",
-    guests: 5,
-    ratePlan: "Member",
-    perNight: 13500,
-    status: "completed",
-  },
+  { ref: "ZH-48215", hotel: "ZO Hotel Goa", room: "Family Room", checkIn: "2026-10-16", checkOut: "2026-10-18", guests: 4, ratePlan: "Flexible", perNight: 9200, status: "confirmed" },
+  { ref: "ZH-46102", hotel: "ZO Hotel Mumbai", room: "Deluxe Garden Room", checkIn: "2026-11-02", checkOut: "2026-11-04", guests: 2, ratePlan: "Saver", perNight: 7800, status: "confirmed" },
+  { ref: "ZH-43877", hotel: "ZO Hotel Goa", room: "ZO Suite", checkIn: "2026-08-14", checkOut: "2026-08-16", guests: 5, ratePlan: "Member", perNight: 13500, status: "completed" },
 ];
 
 let bookings;
@@ -82,11 +54,11 @@ function nightsBetween(checkIn, checkOut) {
 }
 
 function prettyDate(iso) {
-  return new Date(iso + "T12:00:00").toLocaleDateString("en-IN", {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-  });
+  return new Date(iso + "T12:00:00").toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" });
+}
+
+function todayISO() {
+  return new Date().toISOString().slice(0, 10);
 }
 
 function totalFor(booking) {
@@ -98,6 +70,17 @@ const statusLabels = { confirmed: "Confirmed", cancelled: "Cancelled", completed
 /* Photo shown for each booking */
 function imageFor(booking) {
   return booking.hotel.includes("Goa") ? "zo-coastal-resort.jpg" : "zo-hotel-room.jpg";
+}
+
+/* ---------- Toast (reference pattern) ---------- */
+const toast = document.getElementById("toast");
+let toastTimer;
+
+function showToast(message) {
+  toast.textContent = "✓ " + message;
+  toast.hidden = false;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { toast.hidden = true; }, 3500);
 }
 
 /* ---------- Mobile menu ---------- */
@@ -135,8 +118,7 @@ function renderList() {
   bookings.forEach((booking) => {
     const item = document.createElement("button");
     item.type = "button";
-    item.className =
-      `booking-item ${booking.status}` + (selected && selected.ref === booking.ref ? " selected" : "");
+    item.className = `booking-item ${booking.status}` + (selected && selected.ref === booking.ref ? " selected" : "");
     item.setAttribute("aria-pressed", String(selected ? selected.ref === booking.ref : false));
     item.innerHTML = `
       <span class="thumb" aria-hidden="true"><img src="${imageFor(booking)}" alt="" loading="lazy" /></span>
@@ -164,80 +146,25 @@ function selectBooking(ref, view = "booking") {
 /* ---------- Panel views ---------- */
 const viewTitles = {
   booking: "Your booking",
-  dates: "Change dates",
-  rooms: "Change room",
-  price: "Rate options",
-  cancel: "Cancel booking",
-  done: "All done",
+  modify: "Modify booking",
+  confirmCancel: "Cancel your booking?",
 };
 
 function showView(name) {
-  panelViews.forEach((viewEl) => {
-    viewEl.hidden = viewEl.dataset.view !== name;
-  });
+  panelViews.forEach((viewEl) => { viewEl.hidden = viewEl.dataset.view !== name; });
   panelTitle.textContent = viewTitles[name] || "Your booking";
-
   if (name === "booking") renderBooking();
-  if (name === "dates") renderDatesForm();
-  if (name === "rooms") renderRooms();
-  if (name === "price") renderRates();
-  if (name === "cancel") renderRefund();
+  if (name === "modify") renderModify();
+  if (name === "confirmCancel") renderRefund();
 }
 
-/* In-panel navigation (back links and action buttons).
-   Starting a cancellation first shows the exit prompt (Part A):
-   an alternative is offered before the cancellation view opens. */
 panelContent.addEventListener("click", (event) => {
   const viewButton = event.target.closest("[data-open-view]");
-  if (viewButton) {
-    if (viewButton.dataset.openView === "cancel" && viewButton.closest(".drawer-actions")) {
-      openExitPrompt();
-      return;
-    }
-    showView(viewButton.dataset.openView);
-  }
+  if (viewButton) showView(viewButton.dataset.openView);
   if (event.target.closest(".drawer-back")) showView("booking");
 });
 
-/* ---------- Exit prompt ---------- */
-const exitPrompt = document.getElementById("exitPrompt");
-
-function openExitPrompt() {
-  exitPrompt.hidden = false;
-  document.body.style.overflow = "hidden";
-  document.getElementById("exitChange").focus();
-}
-
-function closeExitPrompt() {
-  exitPrompt.hidden = true;
-  document.body.style.overflow = "";
-}
-
-document.getElementById("exitClose").addEventListener("click", closeExitPrompt);
-document.getElementById("exitChange").addEventListener("click", () => {
-  closeExitPrompt();
-  showView("dates");
-});
-document.getElementById("exitContinue").addEventListener("click", () => {
-  closeExitPrompt();
-  showView("cancel");
-});
-exitPrompt.addEventListener("mousedown", (event) => {
-  if (event.target === exitPrompt) closeExitPrompt();
-});
-document.addEventListener("keydown", (event) => {
-  if (!exitPrompt.hidden && event.key === "Escape") closeExitPrompt();
-});
-
-function showDone(title, text) {
-  document.getElementById("doneTitle").textContent = title;
-  document.getElementById("doneText").textContent = text;
-  showView("done");
-  renderList();
-  panelTitle.focus({ preventScroll: true });
-}
-
-/* ---------- View: booking overview ---------- */
+/* ---------- View: booking summary ---------- */
 function renderBooking() {
   const photo = document.getElementById("bkPhoto");
   photo.src = imageFor(selected);
@@ -266,170 +193,182 @@ function renderBooking() {
     policy.textContent = "Free date changes and free cancellation until 48 hours before check-in.";
   }
 
-  document.getElementById("bookingActions").hidden = selected.status !== "confirmed";
+  const changeable = selected.status === "confirmed";
+  document.getElementById("bookingActions").hidden = !changeable;
+  document.querySelector(".panel-question").hidden = !changeable;
   document.getElementById("restoreWrap").hidden = selected.status !== "cancelled";
 }
 
 document.getElementById("restoreBooking").addEventListener("click", () => {
   selected.status = "confirmed";
   saveBookings();
-  showDone("Booking restored", "Welcome back! Your stay is confirmed again with the same dates, room, and rate.");
+  showView("booking");
+  renderList();
+  showToast("Your booking has been restored.");
 });
 
-/* ---------- View: change dates ---------- */
-const datesForm = document.getElementById("datesForm");
-const datesCalc = document.getElementById("datesCalc");
+/* ---------- View: modify (pick what to change) ---------- */
+const modifyForm = document.getElementById("modifyForm");
+const modifyCta = document.getElementById("modifyCta");
+const modifyCalc = document.getElementById("modifyCalc");
+const choiceBoxes = document.querySelectorAll("#modifyChoices input[type=checkbox]");
+const bookingFields = document.querySelectorAll(".booking-field");
 
-function nextDay(iso) {
-  const date = new Date(iso + "T12:00:00");
-  date.setDate(date.getDate() + 1);
-  return date.toISOString().slice(0, 10);
+function fillSelect(select, options, current) {
+  select.innerHTML = "";
+  options.forEach((option) => {
+    const el = document.createElement("option");
+    el.value = option.name;
+    el.textContent = `${option.name} · ${rupees(option.perNight)}/night`;
+    if (option.name === current) el.selected = true;
+    select.appendChild(el);
+  });
 }
 
-function renderDatesForm() {
-  document.getElementById("datesCurrent").textContent =
-    `${prettyDate(selected.checkIn)} → ${prettyDate(selected.checkOut)} (${rupees(totalFor(selected))})`;
-  const today = new Date().toISOString().slice(0, 10);
-  datesForm.newIn.min = today;
-  datesForm.newIn.value = selected.checkIn;
-  datesForm.newOut.value = selected.checkOut;
-  datesForm.newOut.min = nextDay(datesForm.newIn.value);
-  datesForm.guests.value = String(selected.guests);
-  previewDates();
+/* Show only the picked fields; hidden ones are disabled so validation skips them */
+function showFields(names) {
+  bookingFields.forEach((field) => {
+    const on = names.includes(field.dataset.field);
+    field.hidden = !on;
+    field.querySelector("input, select").disabled = !on;
+  });
+  modifyCta.disabled = names.length === 0;
+  updateCalc();
 }
 
-function previewDates() {
-  const { newIn, newOut } = datesForm;
-  if (!newIn.value || !newOut.value) return;
-  const nights = nightsBetween(newIn.value, newOut.value);
-  if (nights < 1) {
-    datesCalc.hidden = false;
-    datesCalc.textContent = "Check-out must be after check-in.";
+function renderModify() {
+  choiceBoxes.forEach((box) => { box.checked = false; });
+  modifyForm.checkin.value = selected.checkIn;
+  modifyForm.checkout.value = selected.checkOut;
+  modifyForm.checkin.min = todayISO();
+  modifyForm.checkout.min = todayISO();
+  modifyForm.guests.value = String(Math.min(5, selected.guests));
+  fillSelect(document.getElementById("roomSelect"), rooms, selected.room);
+  fillSelect(document.getElementById("planSelect"), ratePlans, selected.ratePlan);
+  showFields([]);
+}
+
+choiceBoxes.forEach((box) => {
+  box.addEventListener("change", () => {
+    const picked = [...choiceBoxes].filter((b) => b.checked).map((b) => b.value);
+    showFields(picked);
+  });
+});
+
+/* What the booking would look like with the on-screen edits applied */
+function draftBooking() {
+  const next = { ...selected };
+  if (!modifyForm.checkin.disabled) next.checkIn = modifyForm.checkin.value;
+  if (!modifyForm.checkout.disabled) next.checkOut = modifyForm.checkout.value;
+  if (!modifyForm.guests.disabled) next.guests = Number(modifyForm.guests.value);
+  if (!modifyForm.room.disabled) {
+    next.room = modifyForm.room.value;
+    next.perNight = rooms.find((r) => r.name === next.room).perNight;
+  }
+  if (!modifyForm.plan.disabled) {
+    next.ratePlan = modifyForm.plan.value;
+    if (modifyForm.room.disabled) next.perNight = ratePlans.find((p) => p.name === next.ratePlan).perNight;
+  }
+  return next;
+}
+
+function updateCalc() {
+  const next = draftBooking();
+  const nights = nightsBetween(next.checkIn, next.checkOut);
+  const priceChanged = next.perNight !== selected.perNight || next.checkIn !== selected.checkIn || next.checkOut !== selected.checkOut;
+  if (modifyCta.disabled || !priceChanged || nights < 1 || !next.checkIn || !next.checkOut) {
+    modifyCalc.hidden = true;
     return;
   }
-  const newTotal = nights * selected.perNight;
-  const diff = newTotal - totalFor(selected);
+  const diff = totalFor(next) - totalFor(selected);
   const diffText = diff === 0 ? "no change in price" : diff > 0 ? `${rupees(diff)} more` : `${rupees(-diff)} less`;
-  datesCalc.hidden = false;
-  datesCalc.textContent = `${nights} night${nights > 1 ? "s" : ""} × ${rupees(selected.perNight)} = ${rupees(newTotal)} (${diffText}).`;
+  modifyCalc.hidden = false;
+  modifyCalc.textContent = `${nights} night${nights > 1 ? "s" : ""} × ${rupees(next.perNight)} = ${rupees(totalFor(next))} (${diffText}).`;
 }
 
-datesForm.addEventListener("input", (event) => {
-  // Keep check-out after check-in: shift it forward when needed
-  if (event.target.name === "newIn" && datesForm.newIn.value) {
-    const minOut = nextDay(datesForm.newIn.value);
-    datesForm.newOut.min = minOut;
-    if (datesForm.newOut.value && datesForm.newOut.value < minOut) {
-      datesForm.newOut.value = minOut;
-    }
-  }
-  previewDates();
+modifyForm.addEventListener("input", (event) => {
+  event.target.setCustomValidity("");
+  updateCalc();
 });
 
-datesForm.addEventListener("submit", (event) => {
+/* Check-out must follow check-in, even when only one of them is being changed */
+function datesAreValid(next) {
+  const checkin = modifyForm.checkin;
+  const checkout = modifyForm.checkout;
+  checkin.setCustomValidity("");
+  checkout.setCustomValidity("");
+  if (!next.checkIn || !next.checkOut || next.checkOut > next.checkIn) return true;
+
+  const target = checkout.disabled ? checkin : checkout;
+  target.setCustomValidity(checkout.disabled
+    ? `Check-in must be before your check-out date (${prettyDate(next.checkOut)}).`
+    : "Check-out must be after the check-in date.");
+  target.reportValidity();
+  return false;
+}
+
+modifyForm.addEventListener("submit", (event) => {
   event.preventDefault();
-  const { newIn, newOut, guests } = datesForm;
-  if (nightsBetween(newIn.value, newOut.value) < 1) {
-    previewDates();
-    return;
-  }
-  selected.checkIn = newIn.value;
-  selected.checkOut = newOut.value;
-  selected.guests = Number(guests.value);
+  const next = draftBooking();
+  if (!datesAreValid(next) || !modifyForm.reportValidity()) return;
+
+  Object.assign(selected, next, { status: "confirmed" });
   saveBookings();
-  showDone(
-    "Booking updated",
-    `Your stay at ${selected.hotel} is now ${prettyDate(selected.checkIn)} → ${prettyDate(selected.checkOut)} for ${selected.guests} guest${selected.guests > 1 ? "s" : ""}. New total: ${rupees(totalFor(selected))}.`
-  );
+  renderList();
+  showView("booking");
+  showToast("Your booking has been updated successfully.");
 });
 
-/* ---------- View: change room ---------- */
-function renderRooms() {
-  const list = document.getElementById("roomList");
-  list.innerHTML = "";
-  rooms.forEach((room) => {
-    const current = room.name === selected.room;
-    const diff = (room.perNight - selected.perNight) * nightsBetween(selected.checkIn, selected.checkOut);
-    const diffText = current || diff === 0 ? "" : diff > 0 ? ` · ${rupees(diff)} more for your stay` : ` · ${rupees(-diff)} less for your stay`;
-    const card = document.createElement("article");
-    card.className = "choice-card" + (current ? " current" : "");
-    card.innerHTML = `
-      <div>
-        <strong>${room.name}</strong>
-        <small>${room.blurb}</small>
-        <em>${rupees(room.perNight)}/night${diffText}</em>
-      </div>
-      <button class="button ${current ? "button-deep" : "button-teal"}" type="button" ${current ? "disabled" : ""}>
-        ${current ? "Current room" : "Select"}
-      </button>`;
-    if (!current) {
-      card.querySelector("button").addEventListener("click", () => {
-        selected.room = room.name;
-        selected.perNight = room.perNight;
-        saveBookings();
-        showDone("Room updated", `You’re now staying in the ${room.name}. New total: ${rupees(totalFor(selected))}.`);
-      });
-    }
-    list.appendChild(card);
-  });
-}
-
-/* ---------- View: rate options ---------- */
-function renderRates() {
-  const list = document.getElementById("rateList");
-  list.innerHTML = "";
-  ratePlans.forEach((plan) => {
-    const current = plan.name === selected.ratePlan;
-    const card = document.createElement("article");
-    card.className = "choice-card" + (current ? " current" : "");
-    card.innerHTML = `
-      <div>
-        <strong>${plan.name}</strong>
-        <small>${plan.blurb}</small>
-        <em>${rupees(plan.perNight)}/night</em>
-      </div>
-      <button class="button ${current ? "button-deep" : "button-teal"}" type="button" ${current ? "disabled" : ""}>
-        ${current ? "Current rate" : "Switch"}
-      </button>`;
-    if (!current) {
-      card.querySelector("button").addEventListener("click", () => {
-        selected.ratePlan = plan.name;
-        selected.perNight = plan.perNight;
-        saveBookings();
-        showDone("Rate switched", `You’re on the ${plan.name} rate now. New total: ${rupees(totalFor(selected))}.`);
-      });
-    }
-    list.appendChild(card);
-  });
-}
-
-/* ---------- View: cancellation ---------- */
+/* ---------- View: cancel confirmation ---------- */
 function renderRefund() {
   document.getElementById("refundSummary").innerHTML = `
     <strong>Estimated refund: ${rupees(totalFor(selected))} (100%)</strong>
-    <p>You’re inside the free-cancellation window for your ${selected.ratePlan} rate.
-    Refunds usually reach you within 5–10 business days.</p>`;
+    <p>${selected.ref} · ${selected.room}, ${prettyDate(selected.checkIn)} → ${prettyDate(selected.checkOut)}.
+    You're inside the free-cancellation window for your ${selected.ratePlan} rate.
+    Refunds usually arrive within 5–10 business days.</p>`;
 }
 
-document.getElementById("cancelForm").addEventListener("submit", (event) => {
-  event.preventDefault();
+document.getElementById("startCancel").addEventListener("click", () => showView("confirmCancel"));
+document.getElementById("keepBooking").addEventListener("click", () => {
+  showView("booking");
+  showToast("Great — your booking stays exactly as it is.");
+});
+document.getElementById("cancelToModify").addEventListener("click", () => {
+  showView("modify");
+  const dateBoxes = [...choiceBoxes].filter((b) => b.value === "checkin" || b.value === "checkout");
+  dateBoxes.forEach((b) => { b.checked = true; });
+  showFields(["checkin", "checkout"]);
+  dateBoxes[0].focus();
+});
+document.getElementById("confirmCancelBtn").addEventListener("click", () => {
+  const refund = rupees(totalFor(selected));
   selected.status = "cancelled";
   saveBookings();
-  showDone(
-    "Booking cancelled",
-    `Your refund of ${rupees(totalFor(selected))} is on its way (5–10 business days). Changed your mind? You can restore this booking from the booking screen.`
-  );
+  renderList();
+  showView("booking");
+  showToast(`Your booking has been cancelled. Refund of ${refund} is on its way.`);
 });
 
 /* ---------- Start up ---------- */
 renderList();
 
-/* If the home page sent us here with an action (?action=dates etc.),
-   open the first changeable booking straight at that view. */
+/* Deep links from the landing page (?action=dates|rooms|price|cancel) */
 const requestedAction = new URLSearchParams(window.location.search).get("action");
-const validActions = ["dates", "rooms", "price", "cancel"];
+const actionMap = {
+  dates: ["checkin", "checkout"],
+  rooms: ["room"],
+  price: ["plan"],
+};
 
-if (requestedAction && validActions.includes(requestedAction)) {
+if (requestedAction) {
   const changeable = bookings.find((booking) => booking.status === "confirmed");
-  if (changeable) selectBooking(changeable.ref, requestedAction);
+  if (changeable) {
+    if (requestedAction === "cancel") {
+      selectBooking(changeable.ref, "confirmCancel");
+    } else if (actionMap[requestedAction]) {
+      selectBooking(changeable.ref, "modify");
+      choiceBoxes.forEach((box) => { box.checked = actionMap[requestedAction].includes(box.value); });
+      showFields(actionMap[requestedAction]);
+    }
+  }
 }
