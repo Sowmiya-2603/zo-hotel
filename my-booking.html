@@ -110,16 +110,12 @@
               <button class="drawer-back" type="button">← Back to booking</button>
               <h3>What would you like to modify?</h3>
               <div class="modify-choices" id="modifyChoices">
-                <label><input type="checkbox" value="checkin" /> Check-in date</label>
                 <label><input type="checkbox" value="checkout" /> Check-out date</label>
                 <label><input type="checkbox" value="guests" /> Guests</label>
                 <label><input type="checkbox" value="room" /> Room type</label>
                 <label><input type="checkbox" value="plan" /> Rate plan</label>
               </div>
               <form id="modifyForm" class="drawer-form">
-                <div class="booking-field" data-field="checkin" hidden>
-                  <label><span>New check-in</span><input type="date" name="checkin" /></label>
-                </div>
                 <div class="booking-field" data-field="checkout" hidden>
                   <label><span>New check-out</span><input type="date" name="checkout" /></label>
                 </div>
@@ -193,6 +189,6 @@
   <!-- Toast for confirmations, like the reference site -->
   <div class="booking-toast" id="toast" role="status" hidden></div>
 
-  <script src="manage.js?v=12"></script>
+  <script src="manage.js?v=13"></script>
 </body>
 </html>

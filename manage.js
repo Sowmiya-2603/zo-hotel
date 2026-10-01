@@ -238,10 +238,11 @@ function showFields(names) {
 
 function renderModify() {
   choiceBoxes.forEach((box) => { box.checked = false; });
-  modifyForm.checkin.value = selected.checkIn;
   modifyForm.checkout.value = selected.checkOut;
-  modifyForm.checkin.min = todayISO();
-  modifyForm.checkout.min = todayISO();
+  // Check-in is fixed; check-out can only move to after it (and never into the past)
+  const dayAfterCheckIn = new Date(selected.checkIn + "T12:00:00");
+  dayAfterCheckIn.setDate(dayAfterCheckIn.getDate() + 1);
+  modifyForm.checkout.min = [todayISO(), dayAfterCheckIn.toISOString().slice(0, 10)].sort().pop();
   modifyForm.guests.value = String(Math.min(5, selected.guests));
   fillSelect(document.getElementById("roomSelect"), rooms, selected.room);
   fillSelect(document.getElementById("planSelect"), ratePlans, selected.ratePlan);
@@ -258,7 +259,6 @@ choiceBoxes.forEach((box) => {
 /* What the booking would look like with the on-screen edits applied */
 function draftBooking() {
   const next = { ...selected };
-  if (!modifyForm.checkin.disabled) next.checkIn = modifyForm.checkin.value;
   if (!modifyForm.checkout.disabled) next.checkOut = modifyForm.checkout.value;
   if (!modifyForm.guests.disabled) next.guests = Number(modifyForm.guests.value);
   if (!modifyForm.room.disabled) {
@@ -291,19 +291,14 @@ modifyForm.addEventListener("input", (event) => {
   updateCalc();
 });
 
-/* Check-out must follow check-in, even when only one of them is being changed */
+/* Check-out must stay after the fixed check-in date */
 function datesAreValid(next) {
-  const checkin = modifyForm.checkin;
   const checkout = modifyForm.checkout;
-  checkin.setCustomValidity("");
   checkout.setCustomValidity("");
-  if (!next.checkIn || !next.checkOut || next.checkOut > next.checkIn) return true;
+  if (!next.checkOut || next.checkOut > next.checkIn) return true;
 
-  const target = checkout.disabled ? checkin : checkout;
-  target.setCustomValidity(checkout.disabled
-    ? `Check-in must be before your check-out date (${prettyDate(next.checkOut)}).`
-    : "Check-out must be after the check-in date.");
-  target.reportValidity();
+  checkout.setCustomValidity(`Check-out must be after your check-in date (${prettyDate(next.checkIn)}).`);
+  checkout.reportValidity();
   return false;
 }
 
@@ -335,10 +330,10 @@ document.getElementById("keepBooking").addEventListener("click", () => {
 });
 document.getElementById("cancelToModify").addEventListener("click", () => {
   showView("modify");
-  const dateBoxes = [...choiceBoxes].filter((b) => b.value === "checkin" || b.value === "checkout");
-  dateBoxes.forEach((b) => { b.checked = true; });
-  showFields(["checkin", "checkout"]);
-  dateBoxes[0].focus();
+  const dateBox = [...choiceBoxes].find((b) => b.value === "checkout");
+  dateBox.checked = true;
+  showFields(["checkout"]);
+  dateBox.focus();
 });
 document.getElementById("confirmCancelBtn").addEventListener("click", () => {
   const refund = rupees(totalFor(selected));
@@ -355,7 +350,7 @@ renderList();
 /* Deep links from the landing page (?action=dates|rooms|price|cancel) */
 const requestedAction = new URLSearchParams(window.location.search).get("action");
 const actionMap = {
-  dates: ["checkin", "checkout"],
+  dates: ["checkout"],
   rooms: ["room"],
   price: ["plan"],
 };
