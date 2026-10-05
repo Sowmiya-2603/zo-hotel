@@ -107,6 +107,17 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 500; letter-spacing:
 .manage-card-simple { align-items: center; }
 .manage-copy-simple > p { margin: 0 0 24px; color: #c6dde0; line-height: 1.75; }
 
+/* ---------- Trust band ---------- */
+.trust-band { padding: 58px 0; color: #fff; background: var(--deep); }
+.trust-band-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px; }
+.trust-band-grid span { display: grid; grid-template-columns: 64px 1fr; gap: 16px; align-items: baseline; color: #aac4c7; font-size: 13px; line-height: 1.6; }
+.trust-band-grid b { color: #f2c98c; font-family: var(--font-display); font-size: 30px; font-weight: 600; line-height: 1; }
+
+@media (max-width: 760px) {
+  .trust-band { padding: 44px 0; }
+  .trust-band-grid { grid-template-columns: 1fr; gap: 20px; }
+}
+
 /* ---------- Visual booking summary ---------- */
 .booking-card-visual { padding-bottom: 20px; }
 .booking-card-visual .panel-photo { position: relative; height: 180px; margin: 0 -26px 16px; }
