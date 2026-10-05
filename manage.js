@@ -165,6 +165,12 @@ panelContent.addEventListener("click", (event) => {
 });
 
 /* ---------- View: booking summary ---------- */
+function shortRange(a, b) {
+  const day = (iso) => new Date(iso + "T12:00:00").toLocaleDateString("en-IN", { day: "numeric", month: "short" });
+  const year = new Date(b + "T12:00:00").getFullYear();
+  return `${day(a)} – ${day(b)} ${year}`;
+}
+
 function renderBooking() {
   const photo = document.getElementById("bkPhoto");
   photo.src = imageFor(selected);
@@ -172,30 +178,22 @@ function renderBooking() {
   document.getElementById("bkRef").textContent = selected.ref;
   document.getElementById("bkHotel").textContent = selected.hotel;
   document.getElementById("bkRoom").textContent = selected.room;
+  const nights = nightsBetween(selected.checkIn, selected.checkOut);
   document.getElementById("bkDates").textContent =
-    `${prettyDate(selected.checkIn)} → ${prettyDate(selected.checkOut)} · ${nightsBetween(selected.checkIn, selected.checkOut)} nights`;
+    `${shortRange(selected.checkIn, selected.checkOut)} · ${nights} night${nights > 1 ? "s" : ""}`;
   document.getElementById("bkGuests").textContent = `${selected.guests} guest${selected.guests > 1 ? "s" : ""}`;
-  document.getElementById("bkRate").textContent = `${selected.ratePlan} · ${rupees(selected.perNight)}/night`;
+  document.getElementById("bkRate").textContent = `${selected.ratePlan} · ${rupees(selected.perNight)}/nt`;
   document.getElementById("bkTotal").textContent = rupees(totalFor(selected));
 
   const status = document.getElementById("bkStatus");
-  const policy = document.getElementById("bkPolicy");
   status.className = "booking-status " + selected.status;
+  status.textContent = {
+    confirmed: "Confirmed · free changes till 48 h",
+    cancelled: "Cancelled · refund on its way",
+    completed: "Completed",
+  }[selected.status];
 
-  if (selected.status === "cancelled") {
-    status.textContent = "Cancelled — your refund is on its way (5–10 business days).";
-    policy.textContent = "Changed your mind? You can restore this booking below.";
-  } else if (selected.status === "completed") {
-    status.textContent = "Completed — we hope you enjoyed your stay!";
-    policy.textContent = "This stay is in the past, so it can no longer be changed.";
-  } else {
-    status.textContent = "Confirmed — you can still change this booking for free.";
-    policy.textContent = "Free date changes and free cancellation until 48 hours before check-in.";
-  }
-
-  const changeable = selected.status === "confirmed";
-  document.getElementById("bookingActions").hidden = !changeable;
-  document.querySelector(".panel-question").hidden = !changeable;
+  document.getElementById("bookingActions").hidden = selected.status !== "confirmed";
   document.getElementById("restoreWrap").hidden = selected.status !== "cancelled";
 }
 
@@ -317,10 +315,8 @@ modifyForm.addEventListener("submit", (event) => {
 /* ---------- View: cancel confirmation ---------- */
 function renderRefund() {
   document.getElementById("refundSummary").innerHTML = `
-    <strong>Estimated refund: ${rupees(totalFor(selected))} (100%)</strong>
-    <p>${selected.ref} · ${selected.room}, ${prettyDate(selected.checkIn)} → ${prettyDate(selected.checkOut)}.
-    You're inside the free-cancellation window for your ${selected.ratePlan} rate.
-    Refunds usually arrive within 5–10 business days.</p>`;
+    <strong>${rupees(totalFor(selected))} refund — 100%</strong>
+    <p>${selected.ref} · ${shortRange(selected.checkIn, selected.checkOut)} · arrives in 5–10 business days.</p>`;
 }
 
 document.getElementById("startCancel").addEventListener("click", () => showView("confirmCancel"));

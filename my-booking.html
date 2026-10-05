@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:opsz,wght@9..40,100..1000&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=12" />
+  <link rel="stylesheet" href="styles.css?v=14" />
 </head>
 <body>
 
@@ -51,7 +51,7 @@
           <p class="eyebrow">MY BOOKINGS</p>
           <h1 id="page-title">Select a stay<br />to manage.</h1>
         </div>
-        <p>Choose a booking below to change dates, switch rooms, compare rates, or cancel. Every change shows its price before you confirm.</p>
+        <p>Pick a stay. Change what you need.</p>
       </div>
     </section>
 
@@ -79,25 +79,28 @@
 
             <!-- View: booking overview -->
             <section class="drawer-view" data-view="booking">
-              <div class="booking-card">
-                <div class="panel-photo"><img id="bkPhoto" src="zo-coastal-resort.jpg" alt="" /></div>
-                <div class="booking-row"><span>Booking ref</span><strong id="bkRef"></strong></div>
-                <div class="booking-row"><span>Hotel</span><strong id="bkHotel"></strong></div>
-                <div class="booking-row"><span>Room</span><strong id="bkRoom"></strong></div>
-                <div class="booking-row"><span>Dates</span><strong id="bkDates"></strong></div>
-                <div class="booking-row"><span>Guests</span><strong id="bkGuests"></strong></div>
-                <div class="booking-row"><span>Rate plan</span><strong id="bkRate"></strong></div>
-                <div class="booking-row total"><span>Total</span><strong id="bkTotal"></strong></div>
-                <p class="booking-status" id="bkStatus"></p>
+              <div class="booking-card booking-card-visual">
+                <div class="panel-photo">
+                  <img id="bkPhoto" src="zo-coastal-resort.jpg" alt="" />
+                  <div class="photo-label"><strong id="bkHotel"></strong><span id="bkRef"></span></div>
+                </div>
+                <div class="fact-chips">
+                  <span class="fact"><b>Dates</b><em id="bkDates"></em></span>
+                  <span class="fact"><b>Guests</b><em id="bkGuests"></em></span>
+                  <span class="fact"><b>Room</b><em id="bkRoom"></em></span>
+                  <span class="fact"><b>Rate</b><em id="bkRate"></em></span>
+                </div>
+                <div class="total-line">
+                  <span class="booking-status" id="bkStatus"></span>
+                  <strong id="bkTotal"></strong>
+                </div>
               </div>
-              <p class="drawer-note" id="bkPolicy">Free date changes and free cancellation until 48 hours before check-in.</p>
-              <p class="panel-question">What would you like to do with your booking?</p>
               <div class="drawer-actions" id="bookingActions">
                 <button class="drawer-action" type="button" data-open-view="modify">
-                  <b aria-hidden="true">✎</b><span><strong>Modify details</strong><small>Dates, guests, room type, or rate plan</small></span>
+                  <b aria-hidden="true">✎</b><span><strong>Modify details</strong></span>
                 </button>
                 <button class="drawer-action danger" type="button" id="startCancel">
-                  <b aria-hidden="true">×</b><span><strong>Cancel booking</strong><small>Your refund is shown before you decide</small></span>
+                  <b aria-hidden="true">×</b><span><strong>Cancel booking</strong></span>
                 </button>
               </div>
               <div id="restoreWrap" hidden>
@@ -145,7 +148,6 @@
             <section class="drawer-view" data-view="confirmCancel" hidden>
               <h3>Are you sure you want to cancel this reservation?</h3>
               <div class="refund-box" id="refundSummary"></div>
-              <p class="drawer-note">Most stays can be moved instead — free until 48 hours before check-in.</p>
               <div class="confirm-actions">
                 <button class="button button-teal" id="keepBooking" type="button">Keep my booking</button>
                 <button class="button button-outline-teal" id="cancelToModify" type="button">Change dates instead <span aria-hidden="true">→</span></button>
@@ -189,6 +191,6 @@
   <!-- Toast for confirmations, like the reference site -->
   <div class="booking-toast" id="toast" role="status" hidden></div>
 
-  <script src="manage.js?v=13"></script>
+  <script src="manage.js?v=14"></script>
 </body>
 </html>

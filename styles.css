@@ -107,6 +107,21 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 500; letter-spacing:
 .manage-card-simple { align-items: center; }
 .manage-copy-simple > p { margin: 0 0 24px; color: #c6dde0; line-height: 1.75; }
 
+/* ---------- Visual booking summary ---------- */
+.booking-card-visual { padding-bottom: 20px; }
+.booking-card-visual .panel-photo { position: relative; height: 180px; margin: 0 -26px 16px; }
+.booking-card-visual .panel-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(2,28,35,.72), transparent 55%); }
+.photo-label { position: absolute; z-index: 1; left: 22px; right: 22px; bottom: 13px; display: flex; justify-content: space-between; align-items: baseline; gap: 14px; color: #fff; }
+.photo-label strong { font-family: var(--font-display); font-size: 25px; font-weight: 600; line-height: 1; }
+.photo-label span { color: #cfe2e4; font-size: 10px; font-weight: 800; letter-spacing: .14em; }
+.fact-chips { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.fact { display: flex; flex-direction: column; gap: 3px; padding: 11px 14px; background: var(--paper); border: 1px solid var(--line); }
+.fact b { color: var(--muted); font-size: 9px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; }
+.fact em { font-style: normal; font-size: 13.5px; font-weight: 600; }
+.total-line { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line); }
+.total-line .booking-status { margin: 0; }
+.total-line > strong { font-family: var(--font-display); color: var(--teal); font-size: 26px; font-weight: 600; }
+
 /* ---------- Reference-style manage flow ---------- */
 .panel-question { margin: 20px 0 0; color: var(--muted); font-size: 13.5px; font-weight: 700; letter-spacing: .02em; }
 .panel-question[hidden] { display: none; }
