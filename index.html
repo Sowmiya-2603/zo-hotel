@@ -6,12 +6,10 @@
               their booking-confirmation email or a retargeting link) and are
               now second-guessing the choice.
   Their worries:
-    1. "Is the hotel actually close to the beach?"            -> Hero + concern 1
-    2. "We wanted a sea-view room."                           -> Concern 2 (honest: we can't
-       provide it; compensation = quiet garden side + 3-min walk to the sand)
-    3. "Will it work for kids and grandparents?"              -> Concern 3 + What's included
-    4. "Another hotel is cheaper."                            -> Concern 4 (value inside the
-       price, not a 'best hotel' claim)
+    1. "Is the hotel actually close to the beach?"            -> Hero badge (3-min walk)
+    2. "Will it work for kids and grandparents?"              -> Hero badge + What's included
+    3. "Another hotel is cheaper."                            -> What's included + trust band
+       (value inside the price, not a 'best hotel' claim)
   Hero addresses the guest's purpose (the beach) and the #1 concern (proximity),
   and states the value proposition in one line.
   The page never mentions cancellation: it gives useful information that builds
@@ -40,7 +38,6 @@
         <span class="brand-logo" aria-hidden="true"><img src="zo-hotel-logo.png" alt="" /></span>
       </a>
       <div class="nav-links">
-        <a href="#concerns">Your questions</a>
         <a href="#included">What's included</a>
         <a href="my-booking.html">My booking</a>
       </div>
@@ -51,9 +48,8 @@
     </nav>
     <div class="mobile-menu" id="mobile-menu">
       <div class="shell-wide">
-        <a href="#concerns">Your questions <span>01</span></a>
-        <a href="#included">What's included <span>02</span></a>
-        <a href="my-booking.html">My booking <span>03</span></a>
+        <a href="#included">What's included <span>01</span></a>
+        <a href="my-booking.html">My booking <span>02</span></a>
         <a class="button button-aqua mobile-manage" href="my-booking.html">View my booking →</a>
       </div>
     </div>
@@ -72,7 +68,7 @@
           <p>Three minutes from the sand. Breakfast till noon. Quiet nights after sunny days.</p>
           <div class="hero-actions">
             <a class="button button-aqua" href="my-booking.html">View my booking <span aria-hidden="true">→</span></a>
-            <a class="ghost-link" href="#concerns">Your questions, answered <span aria-hidden="true">↘</span></a>
+            <a class="ghost-link" href="#included">See what's included <span aria-hidden="true">↘</span></a>
           </div>
           <div class="hero-badges">
             <span><i aria-hidden="true">✓</i> 3-min walk to the beach</span>
@@ -81,40 +77,7 @@
           </div>
         </div>
       </div>
-      <a class="scroll-cue" href="#concerns" aria-label="Scroll to your questions"><span>SCROLL</span><i aria-hidden="true">↓</i></a>
-    </section>
-
-    <!-- ============ CONCERNS (problem → honest answer) ============ -->
-    <section class="section-pad" id="concerns" aria-labelledby="concerns-title">
-      <div class="shell">
-        <div class="split-heading">
-          <div>
-            <p class="eyebrow">BEFORE YOU ARRIVE</p>
-            <h2 id="concerns-title">Your questions,<br />answered.</h2>
-          </div>
-          <p>Short and honest.</p>
-        </div>
-
-        <div class="concern-grid">
-          <article class="concern-card">
-            <h3>“How close to the beach?”</h3>
-            <p>A 3-minute walk. Towels, mats, and a rinse shower at the gate.</p>
-          </article>
-          <article class="concern-card">
-            <h3>“Do the rooms face the sea?”</h3>
-            <p>No — that’s why nights are quiet. The waves are 3 minutes away.</p>
-          </article>
-          <article class="concern-card">
-            <h3>“Kids and grandparents?”</h3>
-            <p>Family rooms, lift access, veg &amp; Jain meals, doctor on call.</p>
-          </article>
-          <article class="concern-card">
-            <h3>“Found a lower price?”</h3>
-            <p>Ours includes breakfast, drop-offs, and no checkout surprises.</p>
-            <a class="button button-outline-teal" href="my-booking.html">Review my booking <span aria-hidden="true">→</span></a>
-          </article>
-        </div>
-      </div>
+      <a class="scroll-cue" href="#included" aria-label="Scroll to what's included"><span>SCROLL</span><i aria-hidden="true">↓</i></a>
     </section>
 
     <!-- ============ WHAT'S INCLUDED ============ -->
@@ -172,7 +135,6 @@
       </div>
       <div>
         <strong>Your stay</strong>
-        <a href="#concerns">Your questions</a>
         <a href="#included">What's included</a>
         <a href="my-booking.html">Manage a booking online</a>
       </div>
