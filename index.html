@@ -25,22 +25,28 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:opsz,wght@9..40,100..1000&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=16" />
+  <link rel="stylesheet" href="styles.css?v=17" />
 </head>
 <body>
 
   <a class="skip-link" href="#top">Skip to content</a>
 
-  <!-- ============ HEADER ============ -->
-  <header class="site-header">
+  <!-- ============ HEADER (overlay) ============ -->
+  <header class="site-header hero-header">
     <nav class="nav shell-wide" aria-label="Main navigation">
       <a class="brand" href="#top" aria-label="ZO Hotel home">
         <span class="brand-logo" aria-hidden="true"><img src="zo-hotel-logo.png" alt="" /></span>
       </a>
-      <div class="nav-links">
+      <div class="nav-links nav-pill">
+        <a href="#top">Home</a>
         <a href="my-booking.html">My booking</a>
+        <a href="#booking-tools">Your stay</a>
+        <a href="#support">Contact</a>
       </div>
-      <a class="button button-teal nav-cta" href="my-booking.html">View my booking</a>
+      <div class="nav-right">
+        <a class="nav-plain" href="tel:+918324000123">+91 832 400 0123</a>
+        <a class="button nav-cta nav-cta-glass" href="my-booking.html">View my booking</a>
+      </div>
       <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open navigation menu">
         <span></span><span></span><span></span>
       </button>
@@ -48,6 +54,8 @@
     <div class="mobile-menu" id="mobile-menu">
       <div class="shell-wide">
         <a href="my-booking.html">My booking <span>01</span></a>
+        <a href="#booking-tools">Your stay <span>02</span></a>
+        <a href="#support">Contact <span>03</span></a>
         <a class="button button-aqua mobile-manage" href="my-booking.html">View my booking →</a>
       </div>
     </div>
@@ -55,30 +63,27 @@
 
   <main id="top">
 
-    <!-- ============ HERO ============ -->
-    <section class="hero" aria-labelledby="hero-title">
+    <!-- ============ HERO (full-screen, stats + ghost prompt) ============ -->
+    <section class="hero hero-sv" aria-labelledby="hero-title">
       <img class="hero-bg" src="zo-coastal-resort.jpg" alt="ZO Hotel Goa by the coast, with palms and calm water" />
       <div class="hero-shade" aria-hidden="true"></div>
       <div class="hero-content shell-wide">
         <div class="hero-copy">
-          <p class="eyebrow light">ZO HOTEL · GOA · 3 MINUTES FROM THE BEACH</p>
+          <span class="hero-pill"><i aria-hidden="true">●</i> Free changes until <b>48 h</b> before check-in</span>
           <h1 id="hero-title">The beach is close.<br /><em>The crowd isn’t.</em></h1>
-          <p>Quiet garden rooms, three minutes from the sand.</p>
+          <p>Quiet garden rooms three minutes from the sand — breakfast till noon, family rooms, and a veg &amp; Jain kitchen.</p>
           <div class="hero-actions">
-            <a class="button button-aqua" href="my-booking.html">View my booking <span aria-hidden="true">→</span></a>
+            <a class="button button-light" href="my-booking.html">View my booking</a>
+            <a class="button button-ghost-light" href="#booking-tools">Explore your stay <span aria-hidden="true">→</span></a>
           </div>
         </div>
       </div>
-      <a class="scroll-cue" href="#promises" aria-label="Scroll to our promises"><span>SCROLL</span><i aria-hidden="true">↓</i></a>
-    </section>
-
-    <!-- ============ TRUST BAND (promises, not claims) ============ -->
-    <section class="trust-band" id="promises" aria-label="Our promises">
-      <div class="shell trust-band-grid">
-        <span><b>48h</b>Free changes until 48 hours before check-in</span>
-        <span><b>₹0</b>Fee to move your dates</span>
-        <span><b>100%</b>Rooms photographed as they are</span>
+      <div class="hero-stats shell-wide" aria-label="Our promises">
+        <span><strong>48h</strong><small>Free-change window</small></span>
+        <span><strong>₹0</strong><small>Fee to move dates</small></span>
+        <span><strong>100%</strong><small>Rooms as photographed</small></span>
       </div>
+      <p class="hero-ghost" aria-hidden="true">⌕ When are you<br />coming back?</p>
     </section>
 
     <!-- ============ FINAL CTA ============ -->

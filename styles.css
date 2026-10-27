@@ -559,3 +559,47 @@ footer { padding: 70px 0 24px; color: #d8e8e9; background: #062f3a; }
   .scroll-cue { display: none; }
   .flex-note, .hero-badges span { font-size: 11px; }
 }
+
+/* ---------- StayVerse-style hero layout ---------- */
+.hero-header { position: absolute; top: 0; left: 0; right: 0; background: transparent; border-bottom: 0; backdrop-filter: none; }
+.hero-header .brand-logo { background: #fff; border-radius: 10px; }
+.nav-pill { position: absolute; left: 50%; transform: translateX(-50%); margin: 0; display: flex; gap: 30px; padding: 11px 30px; border-radius: 999px; color: #e6eeee; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.22); backdrop-filter: blur(12px); }
+.nav-pill a { color: #e6eeee; font-size: 13px; }
+.nav-pill a::after { background: #fff; }
+.nav-right { display: flex; align-items: center; gap: 22px; margin-left: auto; }
+.nav-plain { color: #dfe9ea; font-size: 13px; font-weight: 600; }
+.nav-cta-glass { color: #fff; background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.4); border-radius: 999px; backdrop-filter: blur(10px); }
+.nav-cta-glass:hover { background: rgba(255,255,255,.28); }
+.hero-header .menu-toggle { margin-left: 14px; border-color: rgba(255,255,255,.45); }
+.hero-header .menu-toggle span { background: #fff; }
+
+.hero-sv { min-height: 100svh; }
+.hero-sv .hero-content { padding: clamp(90px, 14svh, 150px) 0 clamp(120px, 18svh, 170px); }
+.hero-pill { display: inline-flex; align-items: center; gap: 9px; margin-bottom: clamp(14px, 2.6svh, 24px); padding: 8px 15px 8px 13px; border-radius: 999px; color: #e9f1f1; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.24); backdrop-filter: blur(10px); font-size: 12px; }
+.hero-pill i { color: var(--aqua); font-style: normal; font-size: 8px; }
+.hero-pill b { padding: 2px 9px; border-radius: 999px; color: var(--ink); background: #fff; font-size: 11px; font-weight: 800; }
+.hero-sv .hero-actions .button { border-radius: 12px; min-height: 50px; padding: 14px 24px; }
+.button-light { color: var(--ink); background: #fff; box-shadow: 0 12px 30px rgba(0,0,0,.2); }
+.button-light:hover { background: var(--cream); }
+.hero-sv .button-ghost-light { border-radius: 12px; }
+
+.hero-stats { position: absolute; left: 0; right: 0; bottom: clamp(26px, 5svh, 46px); z-index: 2; display: flex; gap: clamp(20px, 3vw, 38px); color: #fff; }
+.hero-stats span { display: flex; flex-direction: column; gap: 3px; padding-left: clamp(20px, 3vw, 38px); border-left: 1px solid rgba(255,255,255,.35); }
+.hero-stats span:first-child { padding-left: 0; border-left: 0; }
+.hero-stats strong { font-size: clamp(22px, 2.6vw, 32px); font-weight: 700; line-height: 1; }
+.hero-stats small { color: #c9d9da; font-size: 12px; }
+.hero-ghost { position: absolute; right: clamp(20px, 4vw, 56px); bottom: clamp(26px, 5svh, 46px); z-index: 2; margin: 0; color: rgba(255,255,255,.4); font-size: clamp(24px, 3vw, 40px); font-weight: 300; line-height: 1.15; text-align: right; }
+
+@media (max-width: 1020px) {
+  .nav-pill { display: none; }
+  .nav-plain { display: none; }
+}
+@media (max-width: 900px) {
+  .hero-ghost { display: none; }
+  .hero-stats { flex-wrap: wrap; gap: 16px 24px; }
+  .hero-stats span { padding-left: 24px; }
+}
+@media (max-width: 560px) {
+  .nav-cta-glass { display: none; }
+  .hero-stats strong { font-size: 20px; }
+}
