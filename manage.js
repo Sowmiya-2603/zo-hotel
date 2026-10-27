@@ -324,13 +324,6 @@ document.getElementById("keepBooking").addEventListener("click", () => {
   showView("booking");
   showToast("Great — your booking stays exactly as it is.");
 });
-document.getElementById("cancelToModify").addEventListener("click", () => {
-  showView("modify");
-  const dateBox = [...choiceBoxes].find((b) => b.value === "checkout");
-  dateBox.checked = true;
-  showFields(["checkout"]);
-  dateBox.focus();
-});
 document.getElementById("confirmCancelBtn").addEventListener("click", () => {
   const refund = rupees(totalFor(selected));
   selected.status = "cancelled";
