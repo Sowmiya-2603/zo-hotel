@@ -603,3 +603,43 @@ footer { padding: 70px 0 24px; color: #d8e8e9; background: #062f3a; }
   .nav-cta-glass { display: none; }
   .hero-stats strong { font-size: 20px; }
 }
+
+/* ---------- StayVerse spec: moody cinematic treatment ---------- */
+.hero-sv { color: #fff; }
+.hero-sv .hero-bg { filter: brightness(.85) saturate(.8); }
+.hero-sv .hero-shade {
+  background:
+    linear-gradient(90deg, rgba(20,30,45,.6) 0%, rgba(20,30,45,.22) 55%, rgba(20,30,45,.04) 100%),
+    linear-gradient(0deg, rgba(20,30,45,.55) 0%, transparent 32%),
+    linear-gradient(0deg, rgba(30,42,58,.26), rgba(30,42,58,.26));
+}
+
+/* Type: soft humanist sans headline, Inter UI, per the breakdown */
+.hero-sv h1 { font-family: 'Outfit', var(--font-sans); font-weight: 500; letter-spacing: -.01em; line-height: 1.08; font-size: clamp(34px, min(5.6vw, 9.5svh), 80px); color: #fff; }
+.hero-sv .hero-copy > p:not(.eyebrow) { font-family: 'Inter', var(--font-sans); color: rgba(255,255,255,.75); font-size: clamp(14px, 2svh, 17px); max-width: 620px; line-height: 1.65; }
+.hero-header .nav-pill, .hero-header .nav-plain, .hero-header .nav-cta, .hero-pill, .hero-sv .hero-actions .button, .hero-stats, .hero-ghost { font-family: 'Inter', var(--font-sans); }
+
+/* Nav pill per spec */
+.hero-header .nav-pill { gap: clamp(26px, 4vw, 56px); padding: 15px 28px; border-radius: 16px; background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.3); }
+.hero-header .nav-pill a { color: #fff; font-size: 14px; font-weight: 400; }
+.hero-header .nav-cta-glass { background: rgba(255,255,255,.18); border-color: rgba(255,255,255,.4); border-radius: 12px; font-weight: 500; }
+
+/* Badge */
+.hero-pill { background: rgba(255,255,255,.15); border-color: rgba(255,255,255,.28); font-size: 13.5px; font-weight: 400; color: #fff; }
+.hero-pill i { color: #fff; }
+.hero-pill b { border-radius: 8px; padding: 3px 7px; font-weight: 600; }
+
+/* Buttons: one solid white, rest ghost */
+.hero-sv .hero-actions .button { padding: 17px 30px; min-height: 0; border-radius: 12px; font-size: 16px; font-weight: 500; }
+.hero-sv .button-light { color: #111; }
+.hero-sv .button-ghost-light { border-color: rgba(255,255,255,.5); }
+
+/* Stats: large, light-weight numbers */
+.hero-stats span { border-color: rgba(255,255,255,.4); gap: 6px; }
+.hero-stats strong { font-weight: 300; font-size: clamp(28px, 3.2vw, 44px); letter-spacing: -.01em; }
+.hero-stats small { color: rgba(255,255,255,.72); font-size: 13px; font-weight: 400; }
+
+/* Search prompt with track line and end dot */
+.hero-ghost { color: rgba(255,255,255,.55); font-weight: 300; font-size: clamp(24px, 2.6vw, 36px); }
+.ghost-track { display: block; position: relative; width: min(34vw, 430px); height: 1px; margin: 22px 0 4px auto; background: linear-gradient(90deg, transparent, rgba(255,255,255,.55)); }
+.ghost-track i { position: absolute; right: -1px; top: -3px; width: 7px; height: 7px; border-radius: 50%; background: #fff; }
