@@ -721,3 +721,7 @@ footer { color: #B9C6D1; background: #0C141F; }
 /* Modal (legacy) */
 .modal { background: var(--cream); }
 .modal-close { color: var(--ink); background: rgba(255,255,255,.12); }
+
+/* Danger button: deeper red for AA contrast with white text */
+.button-red { background: #A62B49; color: #fff; font-weight: 600; }
+.button-red:hover { background: #8E2140; box-shadow: 0 10px 26px rgba(166,43,73,.45); }
