@@ -643,3 +643,81 @@ footer { padding: 70px 0 24px; color: #d8e8e9; background: #062f3a; }
 .hero-ghost { color: rgba(255,255,255,.55); font-weight: 300; font-size: clamp(24px, 2.6vw, 36px); }
 .ghost-track { display: block; position: relative; width: min(34vw, 430px); height: 1px; margin: 22px 0 4px auto; background: linear-gradient(90deg, transparent, rgba(255,255,255,.55)); }
 .ghost-track i { position: absolute; right: -1px; top: -3px; width: 7px; height: 7px; border-radius: 50%; background: #fff; }
+
+/* ============================================
+   GLOBAL DARK RETHEME — the hero's cinematic
+   slate/white system applied site-wide.
+   ============================================ */
+:root {
+  --paper: #16202E;          /* page ground */
+  --cream: #1B2636;          /* alt sections / panels */
+  --ink: #F1F5F8;            /* primary text */
+  --muted: #9FB0BC;          /* secondary text */
+  --teal: #8CC7D8;           /* accent text/links on dark */
+  --deep: #0F1824;
+  --aqua: #5FC6D8;
+  --red: #D4536E;
+  --gold: #E3B877;
+  --line: rgba(255,255,255,.16);
+  --font-display: 'Outfit', 'DM Sans', sans-serif;
+  --font-sans: 'Inter', 'DM Sans', sans-serif;
+}
+h1, h2, h3 { font-weight: 500; letter-spacing: -.01em; }
+
+/* Header (standard pages) */
+.site-header:not(.hero-header) { background: rgba(22,32,46,.9); border-bottom: 1px solid rgba(255,255,255,.12); }
+.brand-logo { background: #fff; border-radius: 10px; }
+.nav-links { color: #CBD6DF; }
+.nav-links a::after { background: #fff; }
+.menu-toggle span { background: #fff; }
+.mobile-menu { box-shadow: 0 20px 40px rgba(0,0,0,.4); }
+.mobile-menu a span { color: var(--muted); }
+
+/* Buttons: one solid white primary; glass secondary */
+.button-teal { color: #111; background: #fff; }
+.button-teal:hover { background: #E6EBF1; box-shadow: 0 10px 26px rgba(0,0,0,.35); }
+.button-aqua { color: #fff; background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.38); box-shadow: none; backdrop-filter: blur(10px); }
+.button-aqua:hover { background: rgba(255,255,255,.28); }
+.button-red:hover { background: #B83D58; box-shadow: 0 10px 26px rgba(212,83,110,.3); }
+.button-outline-teal { color: var(--teal); }
+
+/* Cards & list (manage page) */
+.booking-item, .concern-card, .choice-card, .drawer-action, .booking-card { background: #223042; }
+.booking-item:hover, .drawer-action:hover { border-color: rgba(255,255,255,.45); box-shadow: 0 12px 28px rgba(0,0,0,.35); }
+.booking-item.selected { border-color: var(--aqua); box-shadow: inset 4px 0 0 var(--aqua), 0 12px 28px rgba(0,0,0,.3); }
+.booking-item::after { color: rgba(255,255,255,.3); }
+.booking-item:hover::after, .booking-item.selected::after { color: var(--aqua); }
+.status-badge.confirmed { color: #8FDCAC; background: rgba(78,170,114,.18); }
+.status-badge.cancelled { color: #FF9CB0; background: rgba(212,83,110,.2); }
+.status-badge.completed { color: #AAB7C2; background: rgba(255,255,255,.1); }
+.booking-status { color: #8FDCAC; }
+.manage-panel { background: var(--cream); }
+.panel-placeholder span { color: #fff; background: rgba(255,255,255,.14); }
+.fact { background: #1B2636; }
+.total-line > strong { color: var(--teal); }
+.drawer-action b { color: #fff; background: rgba(255,255,255,.16); }
+.drawer-action.danger b { background: var(--red); }
+
+/* Forms */
+.drawer-form input, .drawer-form select, .guest-fieldset input, .guest-fieldset select { color: var(--ink); background: #1B2636; border-color: var(--line); }
+.drawer-form input:hover, .drawer-form select:hover { border-color: var(--aqua); }
+.drawer-form label span, .guest-fieldset label span { color: var(--muted); }
+.modify-choices label { background: #223042; }
+.modify-choices label:hover { border-color: var(--aqua); }
+.modify-choices label:has(input:checked) { border-color: var(--aqua); box-shadow: inset 3px 0 0 var(--aqua); }
+.modify-choices input { accent-color: var(--aqua); }
+.calc { color: var(--ink); background: #1B2636; border-left-color: var(--aqua); }
+.refund-box { background: #223042; border-left-color: var(--aqua); }
+.booking-toast { background: #0C141F; border: 1px solid var(--line); }
+.done-icon { background: rgba(255,255,255,.14); }
+
+/* Final CTA band + footer */
+.manage-card { color: #fff; background: #1E2A3A; border: 1px solid var(--line); }
+.manage-copy-simple > p { color: var(--muted); }
+footer { color: #B9C6D1; background: #0C141F; }
+.footer-grid p, .footer-grid a { color: var(--muted); }
+.footer-bottom { color: #7E8EA0; }
+
+/* Modal (legacy) */
+.modal { background: var(--cream); }
+.modal-close { color: var(--ink); background: rgba(255,255,255,.12); }
