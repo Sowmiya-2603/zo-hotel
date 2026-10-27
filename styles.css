@@ -725,3 +725,18 @@ footer { color: #B9C6D1; background: #0C141F; }
 /* Danger button: deeper red for AA contrast with white text */
 .button-red { background: #A62B49; color: #fff; font-weight: 600; }
 .button-red:hover { background: #8E2140; box-shadow: 0 10px 26px rgba(166,43,73,.45); }
+
+/* De-emphasized destructive action: the quiet option on the cancel screen */
+.confirm-actions .button-red {
+  color: #CE8A98;
+  background: transparent;
+  border: 1px solid rgba(212,83,110,.32);
+  font-weight: 500;
+  box-shadow: none;
+}
+.confirm-actions .button-red:hover {
+  color: #ECA7B4;
+  background: rgba(212,83,110,.1);
+  border-color: rgba(212,83,110,.55);
+  box-shadow: none;
+}
