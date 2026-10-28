@@ -758,3 +758,15 @@ footer { color: #B9C6D1; background: #0C141F; }
   .brand-logo { width: 74px; height: 42px; }
   .brand-logo img { width: 74px; height: 74px; top: -16px; }
 }
+
+/* No-bubble nav: plain links on the hero */
+.nav-pill,
+.hero-header .nav-pill {
+  background: transparent;
+  border: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: none;
+  padding: 0;
+  border-radius: 0;
+}
