@@ -743,3 +743,18 @@ footer { color: #B9C6D1; background: #0C141F; }
 
 /* Full-width navbar: the header row spans the whole screen */
 .site-header .nav.shell-wide { width: 100%; max-width: none; margin: 0; padding: 0 clamp(20px, 3.5vw, 56px); }
+
+/* Balanced full-width navbar: one consistent 48px line */
+.brand-logo { width: 86px; height: 46px; border-radius: 10px; }
+.brand-logo img { width: 86px; height: 86px; left: 0; top: -20px; }
+.hero-header .nav-pill { height: 48px; align-items: center; padding: 0 28px; gap: clamp(20px, 2.4vw, 38px); border-radius: 14px; }
+.hero-header .nav-pill a { font-size: 13.5px; }
+.nav-right { gap: 18px; }
+.nav-plain { font-size: 13px; letter-spacing: .01em; }
+.hero-header .nav-cta-glass { min-height: 48px; padding: 0 22px; display: inline-flex; align-items: center; border-radius: 12px; font-size: 13.5px; }
+.site-header:not(.hero-header) .nav-cta { min-height: 44px; padding: 0 20px; }
+@media (max-width: 1200px) { .nav-plain { display: none; } }
+@media (max-width: 720px) {
+  .brand-logo { width: 74px; height: 42px; }
+  .brand-logo img { width: 74px; height: 74px; top: -16px; }
+}
