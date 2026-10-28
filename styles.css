@@ -740,3 +740,6 @@ footer { color: #B9C6D1; background: #0C141F; }
   border-color: rgba(212,83,110,.55);
   box-shadow: none;
 }
+
+/* Full-width navbar: the header row spans the whole screen */
+.site-header .nav.shell-wide { width: 100%; max-width: none; margin: 0; padding: 0 clamp(20px, 3.5vw, 56px); }
