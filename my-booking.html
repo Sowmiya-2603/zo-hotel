@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:opsz,wght@9..40,100..1000&family=Outfit:wght@500;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=24" />
+  <link rel="stylesheet" href="styles.css?v=25" />
 </head>
 <body>
 
@@ -138,9 +138,58 @@
               </form>
             </section>
 
-            <!-- View: cancel confirmation (reference pattern + persuasive alternative) -->
+            <!-- View: reason for cancelling (each reason gets a one-tap fix) -->
+            <section class="drawer-view" data-view="cancelReason" hidden>
+              <button class="drawer-back" type="button">← Back to booking</button>
+              <h3>What's changed?</h3>
+              <p class="reason-sub">If it's something we can fix, it takes one tap.</p>
+              <div class="reason-list" id="reasonList">
+                <div class="reason" data-reason="dates">
+                  <button class="reason-btn" type="button">My dates don't work anymore</button>
+                  <div class="rescue" hidden>
+                    <p>Move your stay instead — date changes are free until 48 hours before check-in.</p>
+                    <div class="rescue-actions">
+                      <button class="button button-teal" type="button" data-rescue="dates">Change my dates</button>
+                      <button class="link-quiet" type="button" data-continue-cancel>Cancel anyway</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="reason" data-reason="price">
+                  <button class="reason-btn" type="button">It's costing more than I planned</button>
+                  <div class="rescue" hidden>
+                    <p id="saverLine">Switch to a cheaper rate and keep the same room.</p>
+                    <div class="rescue-actions">
+                      <button class="button button-teal" type="button" data-rescue="price">See cheaper rates</button>
+                      <button class="link-quiet" type="button" data-continue-cancel>Cancel anyway</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="reason" data-reason="plans">
+                  <button class="reason-btn" type="button">The trip itself is off</button>
+                  <div class="rescue" hidden>
+                    <p>Push the stay to later in the year — your price stays locked, no fee.</p>
+                    <div class="rescue-actions">
+                      <button class="button button-teal" type="button" data-rescue="dates">Pick a later date</button>
+                      <button class="link-quiet" type="button" data-continue-cancel>Cancel anyway</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="reason" data-reason="other">
+                  <button class="reason-btn" type="button">Something else</button>
+                  <div class="rescue" hidden>
+                    <p>No problem — cancelling takes a moment and the refund is automatic.</p>
+                    <div class="rescue-actions">
+                      <button class="link-quiet" type="button" data-continue-cancel>Continue to cancel</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- View: cancel confirmation (specific question + stated consequence) -->
             <section class="drawer-view" data-view="confirmCancel" hidden>
-              <h3>Are you sure you want to cancel this reservation?</h3>
+              <h3>Cancel this reservation?</h3>
+              <p class="reason-sub">Your room will be released to other guests right away.</p>
               <div class="refund-box" id="refundSummary"></div>
               <div class="confirm-actions">
                 <button class="button button-teal" id="keepBooking" type="button">Keep my booking</button>
@@ -182,6 +231,6 @@
   <!-- Toast for confirmations, like the reference site -->
   <div class="booking-toast" id="toast" role="status" hidden></div>
 
-  <script src="manage.js?v=22"></script>
+  <script src="manage.js?v=23"></script>
 </body>
 </html>

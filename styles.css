@@ -770,3 +770,25 @@ footer { color: #B9C6D1; background: #0C141F; }
   padding: 0;
   border-radius: 0;
 }
+
+/* Reason-for-cancelling step */
+.reason-sub { margin: -6px 0 16px; color: var(--muted); font-size: 14px; }
+.reason-list { display: grid; gap: 10px; }
+.reason { border: 1px solid var(--line); border-radius: 14px; background: #1E2A3A; overflow: hidden; }
+.reason.open { border-color: rgba(140,199,216,.45); }
+.reason-btn {
+  width: 100%; text-align: left; background: none; border: none; cursor: pointer;
+  padding: 14px 18px; color: var(--ink); font-family: var(--font-sans);
+  font-size: 15px; font-weight: 500;
+}
+.reason-btn:hover { background: rgba(255,255,255,.04); }
+.rescue { padding: 2px 18px 16px; }
+.rescue p { margin: 0 0 12px; color: var(--muted); font-size: 14px; line-height: 1.5; }
+.rescue-actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.rescue-actions .button { padding: 10px 18px; font-size: 14px; }
+.link-quiet {
+  background: none; border: none; cursor: pointer; padding: 6px 2px;
+  color: var(--muted); font-family: var(--font-sans); font-size: 13.5px;
+  text-decoration: underline; text-underline-offset: 3px;
+}
+.link-quiet:hover { color: var(--ink); }

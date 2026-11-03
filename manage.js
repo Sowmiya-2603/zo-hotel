@@ -147,6 +147,7 @@ function selectBooking(ref, view = "booking") {
 const viewTitles = {
   booking: "Your booking",
   modify: "Modify booking",
+  cancelReason: "Before you cancel",
   confirmCancel: "Cancel your booking?",
 };
 
@@ -155,6 +156,7 @@ function showView(name) {
   panelTitle.textContent = viewTitles[name] || "Your booking";
   if (name === "booking") renderBooking();
   if (name === "modify") renderModify();
+  if (name === "cancelReason") renderReasons();
   if (name === "confirmCancel") renderRefund();
 }
 
@@ -312,6 +314,52 @@ modifyForm.addEventListener("submit", (event) => {
   showToast("Your booking has been updated successfully.");
 });
 
+/* ---------- View: reason for cancelling ----------
+   Confirmation-box practice: before the destructive step, ask what
+   went wrong and offer the fix for that exact reason. Only one tap
+   deep, and "Cancel anyway" is always available — never a trap. */
+const reasonList = document.getElementById("reasonList");
+let cancelReason = "";
+
+function renderReasons() {
+  cancelReason = "";
+  reasonList.querySelectorAll(".reason").forEach((item) => {
+    item.classList.remove("open");
+    item.querySelector(".rescue").hidden = true;
+  });
+  // Price rescue: name the real saving for this booking, not a vague claim
+  const cheapest = ratePlans.reduce((a, b) => (a.perNight < b.perNight ? a : b));
+  const saving = selected.perNight - cheapest.perNight;
+  document.getElementById("saverLine").textContent = saving > 0
+    ? `Switch to the ${cheapest.name} rate — ${rupees(saving)} less per night, same room.`
+    : "Compare rate plans — a different plan may suit this stay better.";
+}
+
+reasonList.addEventListener("click", (event) => {
+  const reasonBtn = event.target.closest(".reason-btn");
+  if (reasonBtn) {
+    const item = reasonBtn.closest(".reason");
+    cancelReason = item.dataset.reason;
+    reasonList.querySelectorAll(".reason").forEach((r) => {
+      const open = r === item;
+      r.classList.toggle("open", open);
+      r.querySelector(".rescue").hidden = !open;
+    });
+    return;
+  }
+  if (event.target.closest("[data-continue-cancel]")) {
+    showView("confirmCancel");
+    return;
+  }
+  const rescueBtn = event.target.closest("[data-rescue]");
+  if (rescueBtn) {
+    const fields = rescueBtn.dataset.rescue === "price" ? ["plan"] : ["checkout"];
+    showView("modify");
+    choiceBoxes.forEach((box) => { box.checked = fields.includes(box.value); });
+    showFields(fields);
+  }
+});
+
 /* ---------- View: cancel confirmation ---------- */
 function renderRefund() {
   document.getElementById("refundSummary").innerHTML = `
@@ -319,7 +367,7 @@ function renderRefund() {
     <p>${selected.ref} · ${shortRange(selected.checkIn, selected.checkOut)} · arrives in 5–10 business days.</p>`;
 }
 
-document.getElementById("startCancel").addEventListener("click", () => showView("confirmCancel"));
+document.getElementById("startCancel").addEventListener("click", () => showView("cancelReason"));
 document.getElementById("keepBooking").addEventListener("click", () => {
   showView("booking");
   showToast("Great — your booking stays exactly as it is.");
@@ -348,7 +396,7 @@ if (requestedAction) {
   const changeable = bookings.find((booking) => booking.status === "confirmed");
   if (changeable) {
     if (requestedAction === "cancel") {
-      selectBooking(changeable.ref, "confirmCancel");
+      selectBooking(changeable.ref, "cancelReason");
     } else if (actionMap[requestedAction]) {
       selectBooking(changeable.ref, "modify");
       choiceBoxes.forEach((box) => { box.checked = actionMap[requestedAction].includes(box.value); });
