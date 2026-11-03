@@ -895,3 +895,19 @@ footer { color: #B9C6D1; background: #0C141F; }
 @media (max-width: 860px) {
   .hero-trust { margin: 0 20px clamp(26px, 5svh, 44px); }
 }
+
+/* Trust band aligned with the hero copy (reference layout):
+   one left block — headline, subline, button, then the band */
+.hero-content .hero-trust {
+  margin: clamp(30px, 6svh, 56px) 0 0;
+  width: min(880px, 100%);
+  border-radius: 8px;
+}
+.hero-content .trust-cell { gap: 14px; padding: clamp(14px, 2.2svh, 22px) clamp(16px, 1.8vw, 26px); }
+.hero-content .trust-cell svg { width: 30px; height: 30px; }
+.hero-content .trust-cell strong { font-size: clamp(20px, 1.6vw, 24px); }
+.hero-content .trust-cell span { font-size: clamp(12.5px, 1vw, 14px); }
+.hero-sv .hero-content { padding-bottom: clamp(40px, 7svh, 80px); }
+@media (max-width: 860px) {
+  .hero-content .hero-trust { margin: 24px 0 0; width: 100%; }
+}
