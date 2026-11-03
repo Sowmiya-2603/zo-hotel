@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:opsz,wght@9..40,100..1000&family=Outfit:wght@500;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=34" />
+  <link rel="stylesheet" href="styles.css?v=35" />
 </head>
 <body>
 
@@ -98,7 +98,7 @@
                 </button>
               </div>
               <div id="restoreWrap" hidden>
-                <button class="button button-teal" id="restoreBooking" type="button">Restore this booking</button>
+                <button class="button button-teal" id="restoreBooking" type="button">Restore Booking</button>
               </div>
             </section>
 
@@ -134,7 +134,7 @@
                   <label><span>Rate plan</span><select name="plan" id="planSelect"></select></label>
                 </div>
                 <p class="calc" id="modifyCalc" hidden></p>
-                <button class="button button-teal" id="modifyCta" type="submit" disabled>Update booking <span aria-hidden="true">→</span></button>
+                <button class="button button-teal" id="modifyCta" type="submit" disabled>Update Booking <span aria-hidden="true">→</span></button>
               </form>
             </section>
 
@@ -149,8 +149,8 @@
                   <div class="rescue" hidden>
                     <p>Move your stay instead — date changes are free until 48 hours before check-in.</p>
                     <div class="rescue-actions">
-                      <button class="button button-teal" type="button" data-rescue="dates">Change my dates</button>
-                      <button class="link-quiet" type="button" data-continue-cancel>Cancel anyway</button>
+                      <button class="button button-teal" type="button" data-rescue="dates">Change My Dates</button>
+                      <button class="link-quiet" type="button" data-continue-cancel>Cancel Anyway</button>
                     </div>
                   </div>
                 </div>
@@ -159,8 +159,8 @@
                   <div class="rescue" hidden>
                     <p id="saverLine">Switch to a cheaper rate and keep the same room.</p>
                     <div class="rescue-actions">
-                      <button class="button button-teal" type="button" data-rescue="price">See cheaper rates</button>
-                      <button class="link-quiet" type="button" data-continue-cancel>Cancel anyway</button>
+                      <button class="button button-teal" type="button" data-rescue="price">See Cheaper Rates</button>
+                      <button class="link-quiet" type="button" data-continue-cancel>Cancel Anyway</button>
                     </div>
                   </div>
                 </div>
@@ -169,8 +169,8 @@
                   <div class="rescue" hidden>
                     <p>Push the stay to later in the year — your price stays locked, no fee.</p>
                     <div class="rescue-actions">
-                      <button class="button button-teal" type="button" data-rescue="dates">Pick a later date</button>
-                      <button class="link-quiet" type="button" data-continue-cancel>Cancel anyway</button>
+                      <button class="button button-teal" type="button" data-rescue="dates">Pick a Later Date</button>
+                      <button class="link-quiet" type="button" data-continue-cancel>Cancel Anyway</button>
                     </div>
                   </div>
                 </div>
@@ -179,22 +179,40 @@
                   <div class="rescue" hidden>
                     <p>No problem — cancelling takes a moment and the refund is automatic.</p>
                     <div class="rescue-actions">
-                      <button class="link-quiet" type="button" data-continue-cancel>Continue to cancel</button>
+                      <button class="link-quiet" type="button" data-continue-cancel>Continue to Cancel</button>
                     </div>
                   </div>
                 </div>
               </div>
             </section>
 
-            <!-- View: cancel confirmation (specific question + stated consequence) -->
+            <!-- View: cancel confirmation.
+                 Copy follows the UI Copy Guide: no "are you sure",
+                 title/desc/CTAs share the verb (cancel), the description
+                 states the consequence, CTAs in Title Case, toasts
+                 formatted {thing} {done}. -->
             <section class="drawer-view" data-view="confirmCancel" hidden>
-              <h3>Cancel this reservation?</h3>
-              <p class="reason-sub">Your room will be released to other guests right away.</p>
+              <p class="reason-sub">Cancelling releases your room to other guests and refunds your payment in full</p>
               <div class="refund-box" id="refundSummary"></div>
+              <ul class="assure-list" aria-label="How your refund is protected">
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="10.5" width="14" height="9.5" rx="2"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/><path d="M12 14.5v2"/></svg>
+                  <span>100% back — no deductions, no questions</span>
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 2.6v5.6c0 4.4-3 8.2-7 9.8-4-1.6-7-5.4-7-9.8V5.6z"/><path d="M9 12l2.2 2.2L15.5 10"/></svg>
+                  <span>Refunded securely to your original payment method</span>
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>
+                  <span>Reaches your account in 5–10 business days</span>
+                </li>
+              </ul>
               <div class="confirm-actions">
-                <button class="button button-teal" id="keepBooking" type="button">Keep my booking</button>
-                <button class="button button-red" id="confirmCancelBtn" type="button">Yes, cancel booking</button>
+                <button class="button button-teal" id="keepBooking" type="button">Keep Booking</button>
+                <button class="button button-red" id="confirmCancelBtn" type="button">Cancel Booking</button>
               </div>
+              <p class="restore-hint">Changed your mind later? You can restore this booking any time</p>
             </section>
 
           </div>
@@ -231,6 +249,6 @@
   <!-- Toast for confirmations, like the reference site -->
   <div class="booking-toast" id="toast" role="status" hidden></div>
 
-  <script src="manage.js?v=23"></script>
+  <script src="manage.js?v=24"></script>
 </body>
 </html>

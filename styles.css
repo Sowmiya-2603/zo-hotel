@@ -1020,3 +1020,16 @@ footer { color: #B9C6D1; background: #0C141F; }
   .included-grid li:nth-child(even) { border-left: none; }
   .included-grid li + li { border-top: 1px solid var(--line); }
 }
+
+/* Cancel confirmation: secure, reassuring layout */
+.assure-list {
+  list-style: none; margin: 18px 0 22px; padding: 14px 18px;
+  display: grid; gap: 12px;
+  background: rgba(140, 199, 216, .06);
+  border: 1px solid rgba(140, 199, 216, .22);
+  border-radius: 12px;
+}
+.assure-list li { display: flex; align-items: center; gap: 12px; padding: 0; }
+.assure-list svg { width: 21px; height: 21px; flex: 0 0 auto; color: var(--teal); }
+.assure-list span { color: #D5DEE6; font-size: 14.5px; line-height: 1.45; }
+.restore-hint { margin: 16px 0 0; text-align: center; color: var(--muted); font-size: 13.5px; }

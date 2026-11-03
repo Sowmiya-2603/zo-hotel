@@ -148,7 +148,7 @@ const viewTitles = {
   booking: "Your booking",
   modify: "Modify booking",
   cancelReason: "Before you cancel",
-  confirmCancel: "Cancel your booking?",
+  confirmCancel: "Cancel this booking?",
 };
 
 function showView(name) {
@@ -204,7 +204,7 @@ document.getElementById("restoreBooking").addEventListener("click", () => {
   saveBookings();
   showView("booking");
   renderList();
-  showToast("Your booking has been restored.");
+  showToast("Booking restored");
 });
 
 /* ---------- View: modify (pick what to change) ---------- */
@@ -311,7 +311,7 @@ modifyForm.addEventListener("submit", (event) => {
   saveBookings();
   renderList();
   showView("booking");
-  showToast("Your booking has been updated successfully.");
+  showToast("Booking updated");
 });
 
 /* ---------- View: reason for cancelling ----------
@@ -363,14 +363,14 @@ reasonList.addEventListener("click", (event) => {
 /* ---------- View: cancel confirmation ---------- */
 function renderRefund() {
   document.getElementById("refundSummary").innerHTML = `
-    <strong>${rupees(totalFor(selected))} refund — 100%</strong>
-    <p>${selected.ref} · ${shortRange(selected.checkIn, selected.checkOut)} · arrives in 5–10 business days.</p>`;
+    <strong>${rupees(totalFor(selected))} refunded in full</strong>
+    <p>${selected.hotel} · ${selected.ref} · ${shortRange(selected.checkIn, selected.checkOut)}</p>`;
 }
 
 document.getElementById("startCancel").addEventListener("click", () => showView("cancelReason"));
 document.getElementById("keepBooking").addEventListener("click", () => {
   showView("booking");
-  showToast("Great — your booking stays exactly as it is.");
+  showToast("Booking kept — nothing's changed");
 });
 document.getElementById("confirmCancelBtn").addEventListener("click", () => {
   const refund = rupees(totalFor(selected));
@@ -378,7 +378,7 @@ document.getElementById("confirmCancelBtn").addEventListener("click", () => {
   saveBookings();
   renderList();
   showView("booking");
-  showToast(`Your booking has been cancelled. Refund of ${refund} is on its way.`);
+  showToast(`Booking cancelled — ${refund} refund on its way`);
 });
 
 /* ---------- Start up ---------- */
