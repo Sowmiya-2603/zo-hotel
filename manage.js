@@ -148,7 +148,7 @@ const viewTitles = {
   booking: "Your booking",
   modify: "Modify booking",
   cancelReason: "Before you cancel",
-  confirmCancel: "Cancel this booking?",
+  confirmCancel: "Cancel for a full refund?",
 };
 
 function showView(name) {
