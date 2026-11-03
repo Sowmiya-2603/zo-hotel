@@ -792,3 +792,13 @@ footer { color: #B9C6D1; background: #0C141F; }
   text-decoration: underline; text-underline-offset: 3px;
 }
 .link-quiet:hover { color: var(--ink); }
+
+/* Readability pass: brighter secondary text and quiet actions */
+:root { --muted: #B9C6D0; }
+.reason-sub, .rescue p { color: #C6D2DB; font-size: 15px; }
+.reason-btn { font-size: 15.5px; }
+.link-quiet { color: #D9E2E9; font-size: 14.5px; font-weight: 500; }
+.link-quiet:hover { color: #ffffff; }
+.confirm-actions .button-red { color: #E8A2B2; border-color: rgba(232,130,152,.5); }
+.booking-item small, .booking-item em { color: #B9C6D0; }
+.calc { color: #C6D2DB; }
