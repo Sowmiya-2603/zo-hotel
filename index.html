@@ -25,7 +25,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:opsz,wght@9..40,100..1000&family=Outfit:wght@500;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=27" />
+  <link rel="stylesheet" href="styles.css?v=28" />
 </head>
 <body>
 
@@ -90,6 +90,37 @@
           <div><strong>Transparent</strong><span>Every charge shown before you pay</span></div>
         </li>
       </ul>
+    </section>
+
+    <!-- ============ TIMELINE: booked → covered → arrival ============
+         Different take on the same goal as the reference site's
+         reassurance sections: instead of listing included value, we
+         remove the "should I keep this?" anxiety between booking and
+         check-in — price locked, changes self-serve in a minute,
+         arrival expectations clear. Never mentions cancellation. -->
+    <section class="journey" aria-labelledby="journey-title">
+      <div class="shell">
+        <p class="eyebrow">BETWEEN NOW AND CHECK-IN</p>
+        <h2 id="journey-title">Booked once. Covered till you arrive.</h2>
+        <ol class="journey-steps">
+          <li class="journey-step">
+            <span class="step-dot" aria-hidden="true">1</span>
+            <strong>Today</strong>
+            <p>Your price is locked. Nothing more to pay, no surprises later.</p>
+          </li>
+          <li class="journey-step">
+            <span class="step-dot" aria-hidden="true">2</span>
+            <strong>Any day before 48 h</strong>
+            <p>Plans shift? Move dates, room or rate yourself — it takes under a minute.</p>
+            <a class="step-link" href="my-booking.html?action=dates">Make a change →</a>
+          </li>
+          <li class="journey-step">
+            <span class="step-dot" aria-hidden="true">3</span>
+            <strong>Check-in day</strong>
+            <p>Room ready at 2 pm, breakfast till noon the next morning.</p>
+          </li>
+        </ol>
+      </div>
     </section>
 
     <!-- ============ FINAL CTA ============ -->

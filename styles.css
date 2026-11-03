@@ -835,3 +835,49 @@ footer { color: #B9C6D1; background: #0C141F; }
   .trust-cell { padding: 15px 20px; }
   .trust-cell svg { width: 30px; height: 30px; }
 }
+
+/* Journey timeline (between booking and check-in) */
+.journey { padding: clamp(60px, 10vh, 110px) 0; background: var(--paper); }
+.journey .eyebrow { color: var(--gold); letter-spacing: .16em; }
+.journey h2 {
+  margin: 10px 0 clamp(30px, 5vh, 48px);
+  font-family: 'Outfit', var(--font-display); font-weight: 500;
+  font-size: clamp(26px, 3.4vw, 40px); color: var(--ink);
+}
+.journey-steps {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(20px, 3vw, 40px);
+  position: relative;
+}
+.journey-steps::before {
+  content: ""; position: absolute; top: 19px; left: 6%; right: 6%;
+  height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,.28), rgba(255,255,255,.28), transparent);
+}
+.journey-step { position: relative; }
+.step-dot {
+  position: relative; z-index: 1;
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 38px; height: 38px; border-radius: 50%;
+  background: #223042; border: 1px solid rgba(227,184,119,.55);
+  color: var(--gold); font-family: 'Outfit', var(--font-display); font-weight: 600; font-size: 15px;
+}
+.journey-step strong {
+  display: block; margin: 14px 0 6px;
+  font-family: 'Outfit', var(--font-display); font-weight: 600;
+  font-size: 17px; color: var(--ink);
+}
+.journey-step p { margin: 0; color: #C6D2DB; font-size: 15px; line-height: 1.6; max-width: 300px; }
+.step-link {
+  display: inline-block; margin-top: 10px;
+  color: var(--teal); font-size: 14.5px; font-weight: 600;
+  text-decoration: underline; text-underline-offset: 4px;
+}
+.step-link:hover { color: #fff; }
+
+@media (max-width: 760px) {
+  .journey-steps { grid-template-columns: 1fr; gap: 26px; }
+  .journey-steps::before { display: none; }
+  .journey-step { display: grid; grid-template-columns: 38px 1fr; column-gap: 16px; }
+  .journey-step strong { grid-column: 2; margin: 8px 0 4px; }
+  .journey-step p, .journey-step .step-link { grid-column: 2; }
+}
