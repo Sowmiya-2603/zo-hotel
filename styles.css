@@ -1033,3 +1033,19 @@ footer { color: #B9C6D1; background: #0C141F; }
 .assure-list svg { width: 21px; height: 21px; flex: 0 0 auto; color: var(--teal); }
 .assure-list span { color: #D5DEE6; font-size: 14.5px; line-height: 1.45; }
 .restore-hint { margin: 16px 0 0; text-align: center; color: var(--muted); font-size: 13.5px; }
+
+/* Cancel Booking: true red, higher contrast, firmer type */
+.confirm-actions .button-red {
+  color: #EA5A70;
+  border: 1px solid rgba(234, 90, 112, .6);
+  background: rgba(234, 90, 112, .08);
+  font-family: 'Outfit', var(--font-display);
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: .01em;
+}
+.confirm-actions .button-red:hover {
+  color: #FF7589;
+  border-color: rgba(255, 117, 137, .8);
+  background: rgba(234, 90, 112, .14);
+}
