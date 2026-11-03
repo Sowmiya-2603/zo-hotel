@@ -911,3 +911,95 @@ footer { color: #B9C6D1; background: #0C141F; }
 @media (max-width: 860px) {
   .hero-content .hero-trust { margin: 24px 0 0; width: 100%; }
 }
+
+/* Shared flourishes for the reassurance sections */
+.fancy-eyebrow {
+  margin: 0 0 10px; color: var(--gold);
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: clamp(17px, 1.4vw, 20px); letter-spacing: .02em;
+}
+.center-title { text-align: center; }
+.center-title::after {
+  content: ""; display: block; width: 64px; height: 1px;
+  margin: 18px auto 0; background: rgba(227,184,119,.6);
+}
+
+/* Included: hairline grid of what the price covers */
+.included { padding: clamp(60px, 10vh, 110px) 0; background: var(--paper); }
+.included .fancy-eyebrow { text-align: center; }
+.included h2 {
+  margin: 0 0 clamp(30px, 5vh, 52px);
+  font-family: 'Outfit', var(--font-display); font-weight: 500;
+  font-size: clamp(26px, 3.4vw, 40px); color: var(--ink);
+}
+.included-grid {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  border: 1px solid var(--line); border-radius: 10px; overflow: hidden;
+}
+.included-grid li { padding: clamp(22px, 3vh, 32px) clamp(20px, 2vw, 30px); background: rgba(255,255,255,.02); }
+.included-grid li + li { border-left: 1px solid var(--line); }
+.included-grid svg { width: 28px; height: 28px; color: var(--gold); }
+.included-grid strong {
+  display: block; margin: 14px 0 6px;
+  font-family: 'Outfit', var(--font-display); font-weight: 600;
+  font-size: 16.5px; color: var(--ink);
+}
+.included-grid p { margin: 0; color: #C6D2DB; font-size: 14px; line-height: 1.55; }
+.included-note {
+  margin: 26px 0 0; text-align: center;
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: clamp(16px, 1.4vw, 19px); color: #C6D2DB;
+}
+
+/* Glance: photo + facts + the honest trade-off */
+.glance { padding: clamp(60px, 10vh, 110px) 0; background: var(--cream); }
+.glance-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(28px, 4vw, 64px); align-items: center; }
+.glance-photo { margin: 0; }
+.glance-photo img { width: 100%; height: 100%; min-height: 320px; max-height: 520px; object-fit: cover; border-radius: 12px; display: block; }
+.glance-body h2 {
+  margin: 0 0 clamp(22px, 3.5vh, 34px);
+  font-family: 'Outfit', var(--font-display); font-weight: 500;
+  font-size: clamp(26px, 3vw, 38px); color: var(--ink); line-height: 1.15;
+}
+.glance-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+.glance-list li {
+  display: flex; gap: 16px; align-items: flex-start;
+  padding: 14px 0; border-top: 1px solid var(--line);
+}
+.glance-list li:last-child { border-bottom: 1px solid var(--line); }
+.glance-list svg { width: 26px; height: 26px; flex: 0 0 auto; color: var(--gold); margin-top: 2px; }
+.glance-list strong { display: block; font-family: 'Outfit', var(--font-display); font-weight: 600; font-size: 16px; color: var(--ink); }
+.glance-list span { display: block; margin-top: 2px; color: #C6D2DB; font-size: 14px; }
+.honest-note {
+  margin: 24px 0 0; padding: 4px 0 4px 18px;
+  border-left: 2px solid rgba(227,184,119,.65);
+  color: #C6D2DB; font-size: 15px; line-height: 1.65;
+}
+
+/* One guest, one line */
+.word { padding: clamp(46px, 7vh, 80px) 0; background: var(--paper); }
+.word-quote { margin: 0; text-align: center; }
+.word-stars { color: var(--gold); font-size: 15px; letter-spacing: .3em; }
+.word-quote p {
+  margin: 14px auto 12px; max-width: 760px;
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: clamp(21px, 2.4vw, 30px); line-height: 1.4; color: var(--ink);
+}
+.word-quote footer { color: #B9C6D0; font-size: 14px; }
+
+@media (max-width: 960px) {
+  .included-grid { grid-template-columns: 1fr 1fr; }
+  .included-grid li + li { border-left: none; }
+  .included-grid li:nth-child(even) { border-left: 1px solid var(--line); }
+  .included-grid li:nth-child(n+3) { border-top: 1px solid var(--line); }
+  .glance-grid { grid-template-columns: 1fr; }
+  .glance-photo img { max-height: 340px; }
+}
+@media (max-width: 560px) {
+  .included-grid { grid-template-columns: 1fr; }
+  .included-grid li:nth-child(even) { border-left: none; }
+  .included-grid li + li { border-top: 1px solid var(--line); }
+}
+.included-grid li { display: block; }
+.word-quote footer { background: transparent; padding: 0; margin: 0; }
