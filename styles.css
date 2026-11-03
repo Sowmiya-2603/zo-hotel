@@ -802,3 +802,36 @@ footer { color: #B9C6D1; background: #0C141F; }
 .confirm-actions .button-red { color: #E8A2B2; border-color: rgba(232,130,152,.5); }
 .booking-item small, .booking-item em { color: #B9C6D0; }
 .calc { color: #C6D2DB; }
+
+/* Hero trust band (glass strip across the hero's lower third) */
+.hero-trust {
+  position: absolute; z-index: 2; left: 50%; transform: translateX(-50%);
+  bottom: clamp(26px, 6svh, 56px);
+  width: min(1120px, calc(100% - clamp(40px, 7vw, 112px)));
+  margin: 0; padding: 0; list-style: none;
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  background: rgba(255, 255, 255, .07);
+  border: 1px solid rgba(255, 255, 255, .24);
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.trust-cell { display: flex; align-items: center; gap: 18px; padding: clamp(16px, 2.6svh, 26px) clamp(18px, 2.4vw, 34px); }
+.trust-cell + .trust-cell { border-left: 1px solid rgba(255, 255, 255, .22); }
+.trust-cell svg { width: 36px; height: 36px; flex: 0 0 auto; color: var(--gold); }
+.trust-cell strong {
+  display: block; font-family: 'Cormorant Garamond', serif; font-weight: 600;
+  font-size: clamp(21px, 2vw, 27px); line-height: 1.15; color: #fff;
+}
+.trust-cell span { display: block; margin-top: 2px; color: #D9E2E9; font-size: clamp(13px, 1.1vw, 15px); line-height: 1.45; }
+
+@media (max-width: 860px) {
+  .hero-sv .hero-content { padding-bottom: clamp(30px, 6svh, 60px); }
+  .hero-trust {
+    position: static; transform: none; grid-template-columns: 1fr;
+    width: auto; margin: 0 20px clamp(26px, 5svh, 44px);
+  }
+  .trust-cell + .trust-cell { border-left: none; border-top: 1px solid rgba(255, 255, 255, .22); }
+  .trust-cell { padding: 15px 20px; }
+  .trust-cell svg { width: 30px; height: 30px; }
+}
