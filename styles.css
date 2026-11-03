@@ -881,3 +881,17 @@ footer { color: #B9C6D1; background: #0C141F; }
   .journey-step strong { grid-column: 2; margin: 8px 0 4px; }
   .journey-step p, .journey-step .step-link { grid-column: 2; }
 }
+
+/* Hero layout fix: copy centered in leftover space, trust band in flow
+   at the bottom (no overlap at any viewport), headline on two lines */
+.hero-sv { display: flex; flex-direction: column; }
+.hero-sv .hero-content { margin-top: auto; margin-bottom: auto; padding: clamp(100px, 15svh, 160px) 0 clamp(20px, 4svh, 40px); }
+.hero-copy { max-width: 1000px; }
+.hero-sv h1 { max-width: 1000px; }
+.hero-trust { position: static; transform: none; }
+@media (min-width: 861px) {
+  .hero-trust { margin: 0 auto clamp(26px, 6svh, 56px); }
+}
+@media (max-width: 860px) {
+  .hero-trust { margin: 0 20px clamp(26px, 5svh, 44px); }
+}
