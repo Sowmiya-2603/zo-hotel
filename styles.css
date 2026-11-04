@@ -1061,3 +1061,15 @@ footer { color: #B9C6D1; background: #0C141F; }
   border-color: #FFE9ED;
   color: #A82440;
 }
+.confirm-actions .button-red {
+  background: rgba(255, 255, 255, .08);
+  border: 1px solid rgba(255, 255, 255, .38);
+  color: #FFFFFF;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.confirm-actions .button-red:hover {
+  background: rgba(255, 255, 255, .16);
+  border-color: rgba(255, 255, 255, .6);
+  color: #FFFFFF;
+}
