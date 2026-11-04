@@ -333,6 +333,9 @@ function renderReasons() {
   document.getElementById("saverLine").textContent = saving > 0
     ? `Switch to the ${cheapest.name} rate — ${rupees(saving)} less per night, same room.`
     : "Compare rate plans — a different plan may suit this stay better.";
+  document.getElementById("dealLine").textContent = saving > 0
+    ? `Before you go — our ${cheapest.name} rate brings this room to ${rupees(cheapest.perNight)} a night, refund rules included in writing.`
+    : "You're already on our lowest rate — and it comes with free changes till 48 hours before check-in.";
 }
 
 reasonList.addEventListener("click", (event) => {
@@ -353,7 +356,8 @@ reasonList.addEventListener("click", (event) => {
   }
   const rescueBtn = event.target.closest("[data-rescue]");
   if (rescueBtn) {
-    const fields = rescueBtn.dataset.rescue === "price" ? ["plan"] : ["checkout"];
+    const rescueFields = { price: ["plan"], dates: ["checkout"], room: ["room"], guests: ["guests"] };
+    const fields = rescueFields[rescueBtn.dataset.rescue] || ["checkout"];
     showView("modify");
     choiceBoxes.forEach((box) => { box.checked = fields.includes(box.value); });
     showFields(fields);
