@@ -1124,3 +1124,7 @@ footer { color: #B9C6D1; background: #0C141F; }
   .review-grid { grid-template-columns: 1fr; }
   .review-card p { flex: none; }
 }
+
+/* Hero rhythm without a subline: clear gaps headline > button > band */
+.hero-sv .hero-actions { margin-top: clamp(26px, 5svh, 46px); }
+.hero-content .hero-trust { margin-top: clamp(40px, 8svh, 72px); }
