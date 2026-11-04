@@ -25,7 +25,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:opsz,wght@9..40,100..1000&family=Outfit:wght@500;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=41" />
+  <link rel="stylesheet" href="styles.css?v=42" />
 </head>
 <body>
 
@@ -172,14 +172,28 @@
       </div>
     </section>
 
-    <!-- ============ ONE GUEST, ONE LINE ============ -->
-    <section class="word" aria-label="A guest's words">
+    <!-- ============ REVIEWS ============ -->
+    <section class="word" aria-labelledby="word-title">
       <div class="shell">
-        <blockquote class="word-quote">
-          <span class="word-stars" aria-hidden="true">★★★★★</span>
-          <p>“The room was exactly the photos, and the bill was exactly the booking.”</p>
-          <footer>Anjali R. · family of four · stayed May 2026</footer>
-        </blockquote>
+        <p class="fancy-eyebrow center-eyebrow">From recent stays</p>
+        <h2 class="center-title" id="word-title">Guests, in their own words</h2>
+        <div class="review-grid">
+          <article class="review-card">
+            <span class="word-stars" aria-hidden="true">★★★★★</span>
+            <p>“The room was exactly the photos, and the bill was exactly the booking.”</p>
+            <footer><strong>Anjali R.</strong><span>Family of four · ZO Hotel Goa · May 2026</span></footer>
+          </article>
+          <article class="review-card">
+            <span class="word-stars" aria-hidden="true">★★★★★</span>
+            <p>“We moved our dates twice before the trip. Two taps each time, no phone calls, no fees.”</p>
+            <footer><strong>Rahul &amp; Megha</strong><span>Couple · ZO Hotel Goa · March 2026</span></footer>
+          </article>
+          <article class="review-card">
+            <span class="word-stars" aria-hidden="true">★★★★★</span>
+            <p>“Jain meals for my mother at every sitting, without us reminding anyone twice.”</p>
+            <footer><strong>Dhruv S.</strong><span>Family of five · ZO Hotel Mumbai · January 2026</span></footer>
+          </article>
+        </div>
       </div>
     </section>
 
