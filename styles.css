@@ -1050,3 +1050,4 @@ footer { color: #B9C6D1; background: #0C141F; }
   background: rgba(234, 90, 112, .14);
 }
 .confirm-actions .button-red, .confirm-actions .button-red:hover { color: #FFFFFF; }
+.booking-item strong { color: var(--ink); }
