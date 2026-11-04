@@ -1128,3 +1128,17 @@ footer { color: #B9C6D1; background: #0C141F; }
 /* Hero rhythm without a subline: clear gaps headline > button > band */
 .hero-sv .hero-actions { margin-top: clamp(26px, 5svh, 46px); }
 .hero-content .hero-trust { margin-top: clamp(40px, 8svh, 72px); }
+
+/* Reusable translucent glass button */
+.button-glass {
+  background: rgba(255, 255, 255, .08);
+  border: 1px solid rgba(255, 255, 255, .38);
+  color: #FFFFFF;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.button-glass:hover {
+  background: rgba(255, 255, 255, .16);
+  border-color: rgba(255, 255, 255, .6);
+  color: #FFFFFF;
+}
