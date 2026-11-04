@@ -12,7 +12,7 @@
 const rooms = [
   { name: "Deluxe Garden Room", perNight: 7800, blurb: "Quiet garden-side room for two, with lift access." },
   { name: "Family Room", perNight: 9200, blurb: "Sleeps four comfortably; an extra bed fits easily." },
-  { name: "ZO Suite", perNight: 13500, blurb: "Separate living space for larger families." },
+  { name: "ZO Suite", perNight: 11200, blurb: "Separate living space for larger families." },
 ];
 
 const ratePlans = [
@@ -25,20 +25,51 @@ const ratePlans = [
 const defaultBookings = [
   { ref: "ZH-48215", hotel: "ZO Hotel Goa", room: "Family Room", checkIn: "2026-10-16", checkOut: "2026-10-18", guests: 4, ratePlan: "Flexible", perNight: 9200, status: "confirmed" },
   { ref: "ZH-46102", hotel: "ZO Hotel Mumbai", room: "Deluxe Garden Room", checkIn: "2026-11-02", checkOut: "2026-11-04", guests: 2, ratePlan: "Saver", perNight: 7800, status: "confirmed" },
-  { ref: "ZH-43877", hotel: "ZO Hotel Goa", room: "ZO Suite", checkIn: "2026-08-14", checkOut: "2026-08-16", guests: 5, ratePlan: "Member", perNight: 13500, status: "completed" },
+  { ref: "ZH-43877", hotel: "ZO Hotel Goa", room: "ZO Suite", checkIn: "2026-08-14", checkOut: "2026-08-16", guests: 5, ratePlan: "Member", perNight: 11200, status: "completed" },
 ];
+
+/* Versioned key: older keys carried rates and stay lengths that no
+   longer exist, so they are ignored and the seed data takes over. */
+const STORAGE_KEY = "zoBookings_v2";
+
+/* Keep stored bookings believable: demo stays run 1 to 10 nights,
+   guests 1 to 5, and the nightly rate must come from the live
+   room or plan tables above. Anything off gets repaired. */
+function sanitizeBookings(list) {
+  if (!Array.isArray(list)) return null;
+  const knownRates = rooms.map((r) => r.perNight).concat(ratePlans.map((p) => p.perNight));
+  const out = [];
+  for (const b of list) {
+    if (!b || !b.ref || !b.checkIn || !b.checkOut) continue;
+    if (!rooms.some((r) => r.name === b.room)) b.room = rooms[0].name;
+    if (!ratePlans.some((p) => p.name === b.ratePlan)) b.ratePlan = ratePlans[0].name;
+    const nights = nightsBetween(b.checkIn, b.checkOut);
+    if (!(nights >= 1)) continue;
+    if (nights > 10) {
+      const trimmed = new Date(b.checkIn + "T12:00:00");
+      trimmed.setDate(trimmed.getDate() + 3);
+      b.checkOut = trimmed.toISOString().slice(0, 10);
+    }
+    b.guests = Math.min(5, Math.max(1, Number(b.guests) || 2));
+    if (!knownRates.includes(b.perNight)) {
+      b.perNight = rooms.find((r) => r.name === b.room).perNight;
+    }
+    out.push(b);
+  }
+  return out;
+}
 
 let bookings;
 try {
-  bookings = JSON.parse(localStorage.getItem("zoBookings"));
-  if (!Array.isArray(bookings) || !bookings.length) bookings = structuredClone(defaultBookings);
+  bookings = sanitizeBookings(JSON.parse(localStorage.getItem(STORAGE_KEY)));
 } catch {
-  bookings = structuredClone(defaultBookings);
+  bookings = null;
 }
+if (!bookings || !bookings.length) bookings = structuredClone(defaultBookings);
 
 function saveBookings() {
   try {
-    localStorage.setItem("zoBookings", JSON.stringify(bookings));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(bookings));
   } catch {
     /* storage unavailable; the page still works for this visit */
   }
