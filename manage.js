@@ -1,5 +1,5 @@
 /* ============================================
-   ZO Hotel — manage.js (My Booking page)
+   ZO Hotel / manage.js (My Booking page)
    Flow modelled on the reference site:
    booking summary → "Modify details" with
    pick-what-to-change checkboxes → update,
@@ -40,7 +40,7 @@ function saveBookings() {
   try {
     localStorage.setItem("zoBookings", JSON.stringify(bookings));
   } catch {
-    /* storage unavailable — the page still works for this visit */
+    /* storage unavailable; the page still works for this visit */
   }
 }
 
@@ -176,7 +176,7 @@ function shortRange(a, b) {
 function renderBooking() {
   const photo = document.getElementById("bkPhoto");
   photo.src = imageFor(selected);
-  photo.alt = `${selected.hotel} — ${selected.room}`;
+  photo.alt = `${selected.hotel} · ${selected.room}`;
   document.getElementById("bkRef").textContent = selected.ref;
   document.getElementById("bkHotel").textContent = selected.hotel;
   document.getElementById("bkRoom").textContent = selected.room;
@@ -317,7 +317,7 @@ modifyForm.addEventListener("submit", (event) => {
 /* ---------- View: reason for cancelling ----------
    Confirmation-box practice: before the destructive step, ask what
    went wrong and offer the fix for that exact reason. Only one tap
-   deep, and "Cancel anyway" is always available — never a trap. */
+   deep, and "Cancel anyway" is always available, never a trap. */
 const reasonList = document.getElementById("reasonList");
 let cancelReason = "";
 
@@ -331,11 +331,11 @@ function renderReasons() {
   const cheapest = ratePlans.reduce((a, b) => (a.perNight < b.perNight ? a : b));
   const saving = selected.perNight - cheapest.perNight;
   document.getElementById("saverLine").textContent = saving > 0
-    ? `Switch to the ${cheapest.name} rate — ${rupees(saving)} less per night, same room.`
-    : "Compare rate plans — a different plan may suit this stay better.";
+    ? `Switch to the ${cheapest.name} rate and pay ${rupees(saving)} less per night for the same room.`
+    : "Compare rate plans. A different plan may suit this stay better.";
   document.getElementById("dealLine").textContent = saving > 0
-    ? `Before you go — our ${cheapest.name} rate brings this room to ${rupees(cheapest.perNight)} a night, refund rules included in writing.`
-    : "You're already on our lowest rate — and it comes with free changes till 48 hours before check-in.";
+    ? `Before you go: our ${cheapest.name} rate brings this room to ${rupees(cheapest.perNight)} a night, refund rules included in writing.`
+    : "You're already on our lowest rate, and it comes with free changes till 48 hours before check-in.";
 }
 
 reasonList.addEventListener("click", (event) => {
@@ -374,7 +374,7 @@ function renderRefund() {
 document.getElementById("startCancel").addEventListener("click", () => showView("cancelReason"));
 document.getElementById("keepBooking").addEventListener("click", () => {
   showView("booking");
-  showToast("Booking kept — nothing's changed");
+  showToast("Booking kept, nothing's changed");
 });
 document.getElementById("confirmCancelBtn").addEventListener("click", () => {
   const refund = rupees(totalFor(selected));
@@ -382,7 +382,7 @@ document.getElementById("confirmCancelBtn").addEventListener("click", () => {
   saveBookings();
   renderList();
   showView("booking");
-  showToast(`Booking cancelled — ${refund} refund on its way`);
+  showToast(`Booking cancelled · ${refund} refund on its way`);
 });
 
 /* ---------- Start up ---------- */
